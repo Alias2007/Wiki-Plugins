@@ -151,6 +151,129 @@ La carpeta de trabajo es plugins/ApoloRankUp/. El plugin requiere Paper y Java 2
 
 
 <a id="yaml"></a>
+
+### Ejemplo real: config.yml
+
+```yaml
+default-level: 1
+storage:
+  type: sqlite
+  autosave-ticks: 6000
+  sync-interval-seconds: 20
+  table-prefix: "apolorankup_"
+  sqlite:
+    file: "players.db"
+  mysql:
+    host: "127.0.0.1"
+    port: 3306
+    database: "apolomc"
+    username: "apolorankup"
+    password: "CHANGE_ME"
+    use-ssl: false
+    pool-size: 5
+top:
+  cache-seconds: 30
+locks:
+  hide-locked-commands: true
+  eject-on-join: true
+barrier:
+  enabled: true
+  material: RED_STAINED_GLASS
+  radius: 8
+  update-ticks: 10
+notifications:
+  chat-for: [COMMAND, ITEM_CRAFT]
+  action-bar-for: [REGION_ENTER, REGION_BREAK, REGION_PLACE, WORLD]
+  cooldown-ms: 1500
+rankup-effects:
+  title:
+    enabled: true
+    fade-in-ticks: 10
+    stay-ticks: 50
+    fade-out-ticks: 20
+  sound:
+    enabled: true
+  particles:
+    enabled: true
+  broadcast:
+    enabled: true
+    min-level: 2
+```
+
+**Cómo funciona:** `default-level` debe existir en levels.yml; `storage.type` elige sqlite/yaml/mysql; los parámetros mysql solo se usan con MySQL; `top.cache-seconds` guarda temporalmente el top; `locks` decide cómo se muestran/aplican bloqueos; `barrier` dibuja una barrera visual por jugador; `notifications` decide canal y espera entre avisos; `rankup-effects` controla título, sonido, partículas y anuncio. No publiques credenciales.
+
+### Ejemplo real: levels.yml
+
+```yaml
+levels:
+  '1':
+    name: Novato
+    cost: 0
+    requirements:
+      items: {}
+    rewards: []
+  '2':
+    name: Minero
+    cost: 0
+    requirements:
+      items:
+        COBBLESTONE: 32
+    rewards:
+      - "give %player% coal 8"
+    reward-display:
+      - "8x Carbón"
+  '3':
+    name: Explorador
+    cost: 500
+    requirements:
+      items:
+        IRON_INGOT: 16
+    rewards:
+      - "give %player% diamond 2"
+    reward-display:
+      - "2x Diamante"
+```
+
+**Cómo funciona:** cada clave numérica define un nivel; `name` es el nombre visible; `cost` requiere Vault y economía; `requirements.items` son materiales requeridos; `rewards` son comandos de consola; `reward-display` muestra el premio en el menú. El ascenso usa el siguiente ID existente.
+
+### Ejemplo real: unlocks.yml
+
+```yaml
+enabled: true
+commands:
+  shop:
+    level: 3
+  ah:
+    level: 5
+    name: "/ah (subastas)"
+regions:
+  mina_a:
+    name: "Mina A"
+    level: 1
+  mina_b:
+    name: "Mina B"
+    level: 3
+worlds:
+  world_nether:
+    name: "El Nether"
+    level: 3
+blocks:
+  break:
+    DIAMOND_ORE: 4
+  place:
+    TNT: 4
+items:
+  use:
+    ENDER_PEARL: 3
+  craft:
+    ENCHANTING_TABLE: 3
+entities:
+  attack:
+    WARDEN: 5
+```
+
+**Cómo funciona:** `enabled` activa el sistema; `commands`, `regions`, `worlds`, `blocks`, `items` y `entities` establecen nivel mínimo por acción. Los IDs de regiones deben coincidir con WorldGuard; los materiales y entidades usan nombres Bukkit; se admiten comodines según la guía.
+
 ## Archivos YAML — referencia de configuración
 
 Ruta: plugins/ApoloRankUp/. Esta página cubre los cinco archivos configurables del proyecto; excluye plugin.yml.
