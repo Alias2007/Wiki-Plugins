@@ -1,0 +1,12 @@
+title: "ApoloEvent Wiki | ApoloMC Network"
+description: "Guía oficial de instalación, comandos, eventos y configuración de ApoloEvent."
+theme: jekyll-theme-hacker
+lang: es
+markdown: kramdown
+permalink: pretty
+kramdown:
+  input: GFM
+  hard_wrap: false
+url: "https://alias2007.github.io"
+baseurl: "/Wiki-Plugins"
+show_downloads: false
