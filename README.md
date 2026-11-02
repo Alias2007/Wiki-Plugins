@@ -7,7 +7,7 @@ Centro de documentación técnica de cinco plugins de la red **ApoloMC Network**
 1. [ApoloEvent](https://github.com/Alias2007/ApoloEvent-v2.0) — eventos, minijuegos, bosses y AirDrops.
 2. [KitPvP-Core](https://github.com/Alias2007/KitPvP) — kits, combate, arenas, economía y competición.
 3. [ApoloRankUp](https://github.com/Alias2007/ApoloRankUp) — niveles, requisitos y desbloqueos.
-4. [ApoloRR](https://github.com/Alias2007/ApoloRR) — minijuegos y sus sistemas.
+4. **ApoloRR** — minijuegos e interfaces de entretenimiento.
 5. [ApoloPractice](https://github.com/Alias2007/Practice-Core) — duelos, colas, parties, torneos y replays.
 
 La web está diseñada como una referencia de uso: comandos, argumentos, permisos, variables/placeholders, subfunciones y archivos de configuración. No es un catálogo de descargas.

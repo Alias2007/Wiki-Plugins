@@ -199,104 +199,31 @@
       "id": "apolorr",
       "name": "ApoloRR",
       "type": "Minijuegos",
-      "description": "Minijuegos, mesas y estadísticas.",
-      "repository": "https://github.com/Alias2007/ApoloRR",
+      "description": "Minijuegos e interfaces de entretenimiento.",
       "pages": [
         {
           "id": "overview",
           "title": "Resumen",
-          "description": "Catálogo de juegos y estado documentado",
-          "tags": "apolorr minijuegos"
+          "description": "Descripción general y alcance de la documentación",
+          "tags": "apolorr plugin resumen"
         },
         {
-          "id": "ruletarusa",
-          "title": "Ruleta Rusa",
-          "description": "Mesas y modo individual",
-          "tags": "ruleta rusa rr"
+          "id": "interfaces",
+          "title": "Interfaces y menús",
+          "description": "Organización visual de las interfaces",
+          "tags": "interfaz menu inventario visual"
         },
         {
-          "id": "coinflip",
-          "title": "Coinflip",
-          "description": "Apuestas cara o cruz y estadísticas",
-          "tags": "coinflip cf"
+          "id": "technical",
+          "title": "Información técnica",
+          "description": "Compatibilidad y notas generales",
+          "tags": "version java paper vault placeholderapi"
         },
         {
-          "id": "blackjack",
-          "title": "Blackjack",
-          "description": "Partidas y apuesta",
-          "tags": "blackjack bj"
-        },
-        {
-          "id": "roulette",
-          "title": "Ruleta de casino",
-          "description": "Apuestas de ruleta europea",
-          "tags": "roulette ruleta casino"
-        },
-        {
-          "id": "mines",
-          "title": "Mines",
-          "description": "Tablero, minas y cobro",
-          "tags": "mines minas"
-        },
-        {
-          "id": "memory",
-          "title": "Memory",
-          "description": "Salas y rondas de memoria",
-          "tags": "memory memoria"
-        },
-        {
-          "id": "ppt",
-          "title": "Piedra, Papel o Tijera",
-          "description": "Modo solo y desafíos PvP",
-          "tags": "ppt rps"
-        },
-        {
-          "id": "echo",
-          "title": "Eco Arcano",
-          "description": "Secuencias de runas",
-          "tags": "eco arcano runas"
-        },
-        {
-          "id": "scratch",
-          "title": "Raspa y Gana",
-          "description": "Cartas, símbolos y premios",
-          "tags": "raspa scratch"
-        },
-        {
-          "id": "crash",
-          "title": "Crash",
-          "description": "Multiplicador y cobro",
-          "tags": "crash"
-        },
-        {
-          "id": "arcade",
-          "title": "Arcade",
-          "description": "Races, Pyramid y Tres en Raya",
-          "tags": "arcade races pyramid tictactoe"
-        },
-        {
-          "id": "slot",
-          "title": "Tragamonedas visual",
-          "description": "Interfaz visual y estado actual",
-          "tags": "slot tragamonedas"
-        },
-        {
-          "id": "commands",
-          "title": "Comandos y permisos",
-          "description": "Sintaxis y permisos de cada modo",
-          "tags": "comandos permisos aplorr"
-        },
-        {
-          "id": "variables",
-          "title": "Variables y placeholders",
-          "description": "Variables de Coinflip y mesas",
-          "tags": "variables placeholders papi"
-        },
-        {
-          "id": "config",
-          "title": "Configuración",
-          "description": "Archivos, probabilidades y dificultad",
-          "tags": "config yaml probabilidad difficulty"
+          "id": "scope",
+          "title": "Alcance de la guía",
+          "description": "Qué información técnica contiene esta sección",
+          "tags": "documentación guia alcance"
         }
       ]
     },
