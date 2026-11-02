@@ -66,6 +66,12 @@
           "title": "Configuración",
           "description": "Archivos, opciones e integraciones",
           "tags": "config yaml worldguard ultimateclans vault"
+        },
+        {
+          "id": "yaml",
+          "title": "Archivos YAML",
+          "description": "Referencia por archivo: claves, opciones y aplicación de cambios",
+          "tags": "yaml yml config configuration settings archivos parámetros"
         }
       ]
     },
@@ -153,6 +159,12 @@
           "title": "Configuración y API",
           "description": "Archivos, almacenamiento, integraciones y API",
           "tags": "config yaml sqlite mysql api"
+        },
+        {
+          "id": "yaml",
+          "title": "Archivos YAML",
+          "description": "Referencia por archivo: claves, opciones y aplicación de cambios",
+          "tags": "yaml yml config configuration settings archivos parámetros"
         }
       ]
     },
@@ -192,6 +204,12 @@
           "title": "Configuración y datos",
           "description": "YAML, SQL, Vault y WorldGuard",
           "tags": "config storage sqlite mysql vault worldguard"
+        },
+        {
+          "id": "yaml",
+          "title": "Archivos YAML",
+          "description": "Referencia por archivo: claves, opciones y aplicación de cambios",
+          "tags": "yaml yml config configuration settings archivos parámetros"
         }
       ]
     },
@@ -305,6 +323,12 @@
           "title": "Configuración y compatibilidad",
           "description": "YAML, SQLite, MySQL y versiones",
           "tags": "config storage sqlite mysql viaversion"
+        },
+        {
+          "id": "yaml",
+          "title": "Archivos YAML",
+          "description": "Referencia por archivo: claves, opciones y aplicación de cambios",
+          "tags": "yaml yml config configuration settings archivos parámetros"
         }
       ]
     }
