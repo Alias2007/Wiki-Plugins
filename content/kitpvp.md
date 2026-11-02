@@ -3213,3 +3213,362 @@ commands:
 
 ```
 
+
+
+## Contenido YAML — continuación
+
+### `rewards/menus/default.yml`
+
+Contenido fuente con comentarios originales:
+
+```yaml
+title: "&8&lRecompensas"
+rows: 3
+close:
+  slot: 22
+  material: BARRIER
+  name: "&cCerrar"
+items:
+  daily:
+    slot: 11
+    cooldown: 86400
+    claim-coins: 100
+    claim-items:
+      - material: GOLD_INGOT
+        amount: 2
+    claimable:
+      material: CHEST_MINECART
+      name: "&e&lRecompensa diaria"
+      lore: ["", "&7Incluye 100 monedas y 2 lingotes de oro.", "", "&aHaz clic para reclamar"]
+    unclaimable:
+      material: MINECART
+      name: "&e&lRecompensa diaria"
+      lore: ["", "&7Disponible en &f%time%"]
+    no-permission:
+      material: BARRIER
+      name: "&cRecompensa diaria"
+      lore: ["&cNo tienes permiso."]
+  weekly:
+    slot: 15
+    cooldown: 604800
+    claim-coins: 750
+    claim-items:
+      - material: DIAMOND
+        amount: 3
+    claimable:
+      material: ENDER_CHEST
+      name: "&b&lRecompensa semanal"
+      lore: ["", "&7Incluye 750 monedas y 3 diamantes.", "", "&aHaz clic para reclamar"]
+    unclaimable:
+      material: CHEST
+      name: "&b&lRecompensa semanal"
+      lore: ["", "&7Disponible en &f%time%"]
+    no-permission:
+      material: BARRIER
+      name: "&cRecompensa semanal"
+      lore: ["&cNo tienes permiso."]
+
+```
+
+### `server-items.yml`
+
+Contenido fuente con comentarios originales:
+
+```yaml
+items: {}
+
+```
+
+### `spawns.yml`
+
+Contenido fuente con comentarios originales:
+
+```yaml
+# KitPvP-Core 0.9.0 — puntos fijos de aparición PvP.
+# Crea cada punto con /kitpvp spawn set <id>. No se generan ubicaciones improvisadas.
+settings:
+  required-spawns: 15
+  max-spawns: 30
+  allow-more-spawns: true
+  avoid-consecutive-repeat: true
+  require-solid-floor: true
+  require-two-air-blocks: true
+  reject-liquid: true
+  minimum-y: 1
+  fallback-to-lobby: true
+spawns: {}
+
+```
+
+### `storage.yml`
+
+Contenido fuente con comentarios originales:
+
+```yaml
+# Profile storage backend: yaml, sqlite, mysql, or mariadb.
+# YAML remains enabled as a backup/export while SQL is active.
+type: yaml
+autosave-seconds: 60
+
+sqlite:
+  # Relative to the plugin data folder, or use an absolute path.
+  file: profiles.db
+
+mysql:
+  host: 127.0.0.1
+  port: 3306
+  database: kitpvp
+  username: root
+  password: "REDACTED"
+  use-ssl: false
+
+```
+
+### `strings.yml`
+
+Contenido fuente con comentarios originales:
+
+```yaml
+# CHAT DE KITPVP-CORE
+# Edita este archivo y ejecuta /strings reload para aplicar los cambios.
+# Los comentarios explican cada opción. No borres espacios al comienzo de las líneas: YAML depende de la indentación.
+
+chat:
+  # Prefijo general del core. Solo aparece en el chat si el formato incluye %chatprefix%.
+  prefix: "&5&lAPOLO &8» &r"
+
+  # Formato de respaldo si un canal no define su propio "format".
+  # Variables disponibles: %tag%, %clan%, %rank%, %prefix%, %player%, %name%, %message%.
+  # %tag% es tu etiqueta activa; %clan% usa el placeholder de clan y %rank% el prefijo de LuckPerms/PAPI.
+  # Cambia el orden para mover los elementos. El formato predeterminado NO muestra "Global".
+  format: "%tag%%clan% %rank%%player%&8: &f%message%"
+
+  # Canal que usa un jugador al hablar por primera vez (global, world o local).
+  default-channel: global
+
+  # Tiempo mínimo entre mensajes, en milisegundos. 800 = 0,8 segundos; 0 lo desactiva.
+  cooldown-ms: 800
+
+  # Si es true, impide enviar exactamente el mismo mensaje dos veces seguidas.
+  block-repeated-messages: true
+
+  # Palabras o fragmentos bloqueados. Ejemplo: ["palabra1", "palabra2"]. [] significa ninguno.
+  blocked-words: []
+
+  # Placeholders para clan y rango. Requieren PlaceholderAPI y las expansiones correspondientes.
+  # clan: placeholder que devuelve el nombre/tag del clan del jugador.
+  # rank: placeholder que devuelve el prefijo/rango del jugador (por ejemplo, LuckPerms).
+  # fallback: texto mostrado si el placeholder no existe, queda vacío o no puede cargarse.
+  # Puedes cambiar [x] por otro texto/color. Se aplica por separado a clan y rango.
+  placeholders:
+    clan: "%kitpvp_clan%"
+    rank: "%luckperms_prefix%"
+    fallback: "&7[x]"
+
+  # Prefijos propios por permiso kitpvp.chat.prefix.<clave>. Son opcionales y no sustituyen LuckPerms.
+  # Si quieres usar estos prefijos en el chat, agrega %prefix% al formato.
+  group-prefixes:
+    default: ""
+    vip: "&6[VIP] "
+    staff: "&c[STAFF] "
+
+# Formato y alcance de cada canal. Puedes quitar las etiquetas Global/Mundo/Local del texto
+# sin desactivar los canales ni cambiar quién recibe los mensajes.
+channels:
+  global:
+    # Formato del chat global. %clan% %rank% %player% %message% se sustituyen automáticamente.
+    format: "%tag%%clan% %rank%%player%&8: &f%message%"
+    # false permite recibir mensajes desde cualquier mundo; true limita al mismo mundo.
+    same-world: false
+    # true limita los mensajes por distancia usando "radius".
+    proximity: false
+    # Distancia máxima en bloques cuando proximity: true.
+    radius: 100
+  world:
+    # Formato del canal de mundo; no muestra la palabra "Mundo".
+    format: "%tag%%clan% %rank%%player%&8: &f%message%"
+    # true limita la recepción al mundo del emisor.
+    same-world: true
+    # false significa que no se aplica límite de proximidad.
+    proximity: false
+    # Radio utilizado solamente si proximity: true.
+    radius: 100
+  local:
+    # Formato del canal local; no muestra la palabra "Local".
+    format: "%tag%%clan% %rank%%player%&8: &f%message%"
+    # El canal local siempre se limita al mismo mundo.
+    same-world: true
+    # true entrega el mensaje solo a jugadores dentro del radio.
+    proximity: true
+    # Radio local en bloques.
+    radius: 80
+
+# Avisos cuando alguien escribe @Nombre.
+mentions:
+  # Activa o desactiva globalmente las menciones.
+  enabled: true
+  # Texto de la actionbar; %player% es quien te mencionó.
+  actionbar: "&dFuiste mencionado por &f%player%"
+  # Sonido de Minecraft que se reproduce al ser mencionado.
+  sound: ENTITY_EXPERIENCE_ORB_PICKUP
+
+# Sustituciones de códigos como :heart: por símbolos.
+emojis:
+  # Activa o desactiva los códigos de emoji.
+  enabled: true
+  # La clave se escribe entre dos puntos en el chat; el valor es lo que aparece.
+  codes:
+    smile: "☺"
+    heart: "❤"
+    star: "★"
+    check: "✔"
+    x: "✖"
+    fire: "🔥"
+    gg: "GG"
+
+# Anuncios automáticos. interval-seconds: 0 desactiva el envío automático.
+broadcasts:
+  # Intervalo entre anuncios en segundos. 0 = desactivado.
+  interval-seconds: 0
+  # Lista de mensajes que se enviarán en orden. Ejemplo: ["&dBienvenido", "&aVisita /discord"].
+  messages: []
+
+# Mensajes mostrados cuando alguien entra o sale. Usa %player% para el nick.
+# Deja el valor como "" para ocultar ese aviso.
+join-leave:
+  join: "&8[&a+&8] &f%player%"
+  leave: "&8[&c-&8] &f%player%"
+
+# Colores disponibles para /chatcolor. Las claves son los argumentos del comando.
+chat-color-options:
+  white: "&f"
+  gray: "&7"
+  green: "&a"
+  aqua: "&b"
+  purple: "&d"
+  gold: "&6"
+
+# Líneas que muestra /rules.
+rules:
+  - "&d&lREGLAS DE APOLOMC"
+  - "&7Respeta al resto de jugadores y al equipo."
+  - "&7No uses trampas, exploits ni spam."
+
+# Textos de error/confirmación usados por el sistema de chat.
+messages:
+  chat-cooldown: "&cEspera un momento antes de volver a escribir."
+  repeated-message: "&cNo puedes repetir el mismo mensaje."
+  blocked-message: "&cTu mensaje contiene una palabra bloqueada."
+  chat-cleared: "&cEl chat fue limpiado por el staff."
+  msg-sender: "&dTú &8→ &f%player%&8: &7%message%"
+  msg-target: "&d%player% &8→ &fTú&8: &7%message%"
+
+```
+
+### `tags.yml`
+
+Contenido fuente con comentarios originales:
+
+```yaml
+# Sistema de tags de KitPvP-Core integrado con permisos de LuckPerms.
+# Puedes agregar cientos o miles de entradas bajo "tags"; el menú crea páginas automáticamente.
+# permission: "kitpvp.tag.vip" restringe el uso a quienes tengan ese nodo en LuckPerms.
+# permission: "public" permite usarlo a cualquier jugador con kitpvp.tag.use.
+# Crear desde el juego: /tag create <id> <permiso|public> <nombre>
+# Dar permiso a un grupo: /lp group vip permission set kitpvp.tag.vip true
+# El tag activo se guarda por UUID en tags-data.yml y no se pierde al reiniciar.
+
+menu:
+  title: "&5&lApoloMC Tags &8| &f%page%/%pages%"
+  page-size: 45
+  show-locked: true
+  locked-material: BARRIER
+  filler-material: GRAY_STAINED_GLASS_PANE
+  no-active-text: "Ninguno"
+  items:
+    previous:
+      material: ARROW
+      name: "&ePágina anterior"
+    next:
+      material: ARROW
+      name: "&ePágina siguiente"
+    clear:
+      material: BARRIER
+      name: "&cQuitar tag"
+      lore:
+        - "&7Deja tu nombre sin tag."
+    active:
+      material: NAME_TAG
+      name: "&6Tag activo: &f%active%"
+      lore:
+        - "&7Este es el tag que estás usando."
+    close:
+      material: OAK_DOOR
+      name: "&cCerrar"
+  lore:
+    click: "&eClic para equipar"
+    selected: "&a✓ Tag equipado"
+    locked: "&cBloqueado. Requiere: &f%permission%"
+
+messages:
+  player-only: "&cSolo los jugadores pueden abrir el menú de tags."
+  no-permission: "&cNo tienes permiso para hacer eso."
+  locked: "&cNo tienes permiso para usar ese tag. Nodo: &f%permission%"
+  selected: "&aTu tag activo ahora es %display%&a."
+  cleared: "&aQuitaste tu tag activo."
+  no-active-tag: "&7No tienes ningún tag activo."
+  tag-missing: "&cEse tag ya no existe. Abre el menú otra vez."
+  create-usage: "&cUso: /tag create <id> <permiso|public> <nombre del tag>"
+  delete-usage: "&cUso: /tag delete <id>"
+  list-usage: "&cUso: /tag list [página]"
+  invalid-id: "&cID inválido. Usa letras, números, _ o - (máximo 48 caracteres)."
+  invalid-permission: "&cPermiso inválido. Usa un nodo como kitpvp.tag.vip o la palabra public."
+  invalid-display: "&cEl nombre del tag debe tener entre 1 y 100 caracteres."
+  tag-exists: "&cYa existe un tag con ese ID: &f%id%"
+  tag-not-found: "&cNo existe el tag &f%id%&c."
+  created: "&aTag &f%id% &acreado. Permiso: &f%permission%&a."
+  deleted: "&aTag &f%id% &aeliminado."
+  reloaded: "&aTags recargados. Configurados: &f%total%&a."
+  save-error: "&cNo se pudo guardar el cambio. Revisa los permisos de archivos y la consola."
+  usage: "&e/tag &7— Abrir menú. &e/tag clear &7— Quitar tu tag. &e/tag create|delete|list|reload &7— Administración."
+
+tags:
+  vip:
+    display: "&6[VIP]&r "
+    permission: "kitpvp.tag.vip"
+    material: NAME_TAG
+    order: 10
+    lore:
+      - "&7Etiqueta VIP."
+      - "&8Puedes cambiarla cuando quieras."
+  mvp:
+    display: "&b[MVP]&r "
+    permission: "kitpvp.tag.mvp"
+    material: DIAMOND
+    order: 20
+    lore:
+      - "&7Etiqueta MVP."
+  legend:
+    display: "&d[LEGEND]&r "
+    permission: "kitpvp.tag.legend"
+    material: NETHER_STAR
+    order: 30
+    lore:
+      - "&7Etiqueta Legend."
+  creator:
+    display: "&c[CREATOR]&r "
+    permission: "kitpvp.tag.creator"
+    material: REDSTONE
+    order: 40
+    lore:
+      - "&7Etiqueta para creadores."
+  staff:
+    display: "&4[STAFF]&r "
+    permission: "kitpvp.tag.staff"
+    material: REDSTONE_BLOCK
+    order: 50
+    lore:
+      - "&7Etiqueta del equipo."
+
+```
+
