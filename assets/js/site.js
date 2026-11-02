@@ -89,7 +89,7 @@ function homeHtml(){
 async function getDoc(plugin,page){const key=plugin+'/'+page;if(docCache[key])return docCache[key];const path='content/pages/'+plugin+'/'+page+'.md';const response=await fetch(path+'?v=8');if(!response.ok)throw new Error('No se pudo cargar '+path+' ('+response.status+')');return docCache[key]=await response.text();}
 function activeNav(plugin,page){
  document.querySelectorAll('.plugin-page').forEach(a=>a.classList.toggle('active',a.dataset.route===plugin+'/'+page));
- document.querySelectorAll('.plugin-group').forEach(g=>{g.classList.add('collapsed');const b=g.querySelector('.plugin-heading');if(b)b.setAttribute('aria-expanded','false');});
+ document.querySelectorAll('.plugin-group').forEach(g=>{const expanded=!!plugin&&g.dataset.plugin===plugin;g.classList.toggle('collapsed',!expanded);const b=g.querySelector('.plugin-heading');if(b)b.setAttribute('aria-expanded',String(expanded));});
  $('#homeLink').classList.toggle('active',!plugin);
 }
 function setStatus(message,kind){let el=root.querySelector('.translation-status');if(!el){el=document.createElement('div');el.className='translation-status';root.prepend(el);}el.textContent=message;el.dataset.state=kind||'info';}
