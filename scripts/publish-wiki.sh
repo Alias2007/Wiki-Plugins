@@ -76,7 +76,15 @@ declare -A PAGES=(
 )
 
 for source_file in "${!PAGES[@]}"; do
-  strip_front_matter "$TMP_DIR/source/docs/$source_file" > "$TMP_DIR/wiki/${PAGES[$source_file]}"
+  strip_front_matter "$TMP_DIR/source/docs/$source_file" | sed -E \
+    -e 's/\]\(instalacion\)/](Instalacion)/g' \
+    -e 's/\]\(eventos\)/](Eventos)/g' \
+    -e 's/\]\(comandos\)/](Comandos)/g' \
+    -e 's/\]\(configuracion\)/](Configuracion)/g' \
+    -e 's/\]\(integraciones\)/](Integraciones)/g' \
+    -e 's/\]\(desarrollo\)/](Desarrollo)/g' \
+    -e 's/\]\(soporte\)/](Soporte)/g' \
+    > "$TMP_DIR/wiki/${PAGES[$source_file]}"
 done
 
 echo "[4/4] Publicando páginas en GitHub Wiki..."
