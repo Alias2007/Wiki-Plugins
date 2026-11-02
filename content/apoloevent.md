@@ -209,7 +209,7 @@ Tipos clásicos: 1 Warden, 2 Wither, 3 Ravager, 4 Zombie grande, 5 Piglin Brute.
 /evento eclipse start
 /evento eclipse forcestart
 /evento eclipse stop
-/evento eclipse setspawn
+/evento eclipse setspawn <jugadores|staff|meta|spectator>
 ~~~
 
 El spawn se establece desde la ubicación actual del administrador. El evento utiliza las opciones de events/eclipse.yml y el mapa registrado en maps.yml.
@@ -248,7 +248,7 @@ Preparación y administración:
 /evento colormatch setroundtime <segundos>
 /evento colormatch setbreak <segundos>
 /evento colormatch setregionlimit <bloques>
-/evento colormatch setreward <puesto|ganador> <valor>
+/evento colormatch setreward [puesto|participacion] <cantidad>
 /evento colormatch setmode <modo>
 /evento colormatch setdifficulty <easy|normal|hard>
 /evento colormatch start
@@ -259,7 +259,7 @@ Preparación y administración:
 /evento colormatch arena load <nombre>
 ~~~
 
-Los perfiles se guardan en events/colormatch-arenas/<nombre>.yml. El perfil guarda lobby, esquinas, modo, cantidad de jugadores, rondas, tiempos, tamaño de región y dificultad. Solo se pueden cambiar o cargar perfiles cuando no hay partida ni participantes.
+Los perfiles se guardan en events/colormatch-arenas/<nombre>.yml. El perfil guarda lobby, esquinas, modo, cantidad de jugadores, rondas, tiempos, tamaño de región y dificultad. Solo se pueden cambiar o cargar perfiles cuando no hay partida ni participantes. setreward <cantidad> modifica el dinero del ganador; setreward <2-100> <cantidad> define premio de puesto; setreward participacion <cantidad> define el premio de participación. También acepta ganador, winner o 1 para el primer puesto. El pago requiere Vault o una economía compatible.
 
 ### MiniGames
 
