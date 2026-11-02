@@ -585,6 +585,7 @@ Ruta base: plugins/KitPvP-Core/. Este inventario excluye plugin.yml. También di
 | inventario/habilidades.yml | Botones del menú de habilidades con slot, material, nombre y lore. |
 | inventario/duelos.yml, inventario/eventos.yml, inventario/estadisticas.yml, inventario/admin.yml | Plantillas de GUI; title, size e items. Comprueba qué botones están implementados en la versión del core antes de añadir identificadores propios. |
 | inventario/cosmeticos.yml | main.title/size y slots por categoría; main.buttons configura cerrar; category.sizes/titles permite sobrescribir tamaño/título; category.items permite fijar slot por artículo; buttons controla volver, desactivar y cerrar. |
+| rewards/menus/default.yml | Menú de recompensas: title, rows, close.slot/material/name e items.<id>. Cada recompensa define slot, cooldown, claim-coins, claim-items y presentaciones claimable, unclaimable y no-permission con material/name/lore. |
 
 ### Combate, progreso, economía, clanes y eventos
 
@@ -599,6 +600,7 @@ Ruta base: plugins/KitPvP-Core/. Este inventario excluye plugin.yml. También di
 | tournaments.yml | settings.max-players, format y require-duel-spawns; rewards.winner-coins y runner-up-coins. |
 | missions.yml | daily.enabled/reset-hour-utc; weekly.enabled/reset-day; missions contiene las definiciones de misiones. |
 | rewards.yml | settings.enabled, kill-reward, assist-reward, environmental-death-reward, suicide-reward, reward-victim-self y duplicate-event-window-ms; anti-farm controla ventana y límite de kills repetidas; streaks define premios por racha; first-kill-of-day controla el primer premio diario; messages define textos de premio. |
+| rewards/lang.yml | Textos de ayuda, recarga, errores, permisos, cooldown, confirmación de reclamo y reset; puedes cambiar mensajes sin alterar la lógica de premio. |
 | reports.yml | enabled, cooldown-seconds, max-reason-length; staff-notifications.enabled/permission y textos; discord.webhook-url/username/message-template. La URL de webhook es secreta y no debe publicarse. |
 
 ### Utilidades, moderación y sistemas automáticos
