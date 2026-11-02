@@ -554,6 +554,96 @@ También está documentado el evento Bukkit `KitPvPKillEvent`, con acceso a kill
 
 
 <a id="yaml"></a>
+
+### Ejemplo real: config.yml
+
+```yaml
+prefix: "&5&lAPOLO &8» &r"
+combat:
+  tag-seconds: 15
+  prevent-quit: false
+  quit-penalty: false
+  kill-reward: 10
+  death-loss: 0
+  assist-reward: 2
+  killstreak-rewards:
+    "5": {coins: 50, xp: 25}
+    "10": {coins: 150, xp: 100}
+progression:
+  xp-per-kill: 25
+  xp-per-assist: 10
+  base-xp: 100
+  xp-per-level: 50
+economy:
+  starting-balance: 0
+missions:
+  daily-kills:
+    goal: 5
+    reward-coins: 100
+    reward-xp: 50
+storage:
+  type: yaml
+  autosave-seconds: 60
+settings:
+  default-kit: starter
+  friendly-fire: true
+  debug: false
+pvp:
+  spawn-protection-seconds: 3
+arenas:
+  restore-blocks: false
+  restore-delay-seconds: 30
+```
+
+**Cómo funciona:** `combat` ajusta el tiempo de combate y recompensas; `progression` calcula experiencia; `economy` fija el saldo inicial; `missions` define metas; `storage.type` selecciona yaml/sqlite/mysql/mariadb según la versión; `settings` establece kit y fuego amigo; `pvp` controla protección de spawn; `arenas` activa rollback opcional. No publiques la clave de licencia ni contraseñas.
+
+### Ejemplo real: storage.yml
+
+```yaml
+type: yaml
+autosave-seconds: 60
+sqlite:
+  file: profiles.db
+mysql:
+  host: 127.0.0.1
+  port: 3306
+  database: kitpvp
+  username: root
+  password: ""
+  use-ssl: false
+```
+
+**Cómo funciona:** `type` selecciona el backend; `autosave-seconds` define el intervalo de guardado; `sqlite.file` es el archivo local; `mysql` contiene conexión remota. No compartas contraseñas reales. El cambio de backend debe hacerse con copia de seguridad y según las instrucciones de la versión instalada.
+
+### Ejemplo real: abilities.yml
+
+```yaml
+global-cooldown-seconds: 10
+abilities:
+  speed:
+    enabled: true
+    action: speed
+    duration-seconds: 5
+    cooldown-seconds: 30
+    amplifier: 1
+    item:
+      enabled: true
+      material: FEATHER
+      name: "&b&lImpulso Veloz"
+      consume-on-use: false
+  heal:
+    enabled: true
+    action: heal
+    cooldown-seconds: 30
+    amount: 6
+    item:
+      enabled: true
+      material: GOLDEN_APPLE
+      consume-on-use: false
+```
+
+**Cómo funciona:** cada ID bajo `abilities` es una habilidad; `enabled` la habilita; `action` selecciona la acción implementada; duración, enfriamiento y amplificador/cantidad controlan el efecto; `item` configura el objeto que la activa. Los nombres de acción deben coincidir con los admitidos por el plugin.
+
 ## Archivos YAML — referencia de configuración
 
 Ruta base: plugins/KitPvP-Core/. Este inventario excluye plugin.yml. También distingue archivos que administra el desarrollador de datos que el plugin genera y actualiza en funcionamiento. Realiza copias de seguridad antes de modificar configuraciones y conserva las rutas originales.
