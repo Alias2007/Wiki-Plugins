@@ -434,3 +434,126 @@ Los comandos arena list y arena setspawn consultan/actualizan esta información.
 - Cambios de kit/arena deben probarse con una partida privada antes de abrir colas ranked.
 - Los cambios de NMS/entrenamiento, replay y compatibilidad necesitan validación en un servidor Paper real; una compilación de Maven no verifica estas funciones en juego.
 
+
+
+## Contenido íntegro de los archivos YAML
+
+### `compatibility.yml`
+
+Contenido fuente del repositorio, con comentarios originales. Los secretos se sustituyen por marcadores.
+
+```yaml
+compatibility:
+  enabled: true
+  server:
+    minimum-supported-client: "1.8"
+    maximum-supported-client: "1.26+"
+  integrations:
+    viaversion: { enabled: true, required: false }
+    viabackwards: { enabled: true, required: false }
+    viarewind: { enabled: true, required: false }
+  default-policy:
+    allow-older-clients: true
+    allow-newer-clients: true
+    deny-unsupported-clients: true
+  checks:
+    on-join: true
+    on-queue: true
+    on-duel: true
+    on-arena-entry: true
+    on-mode-change: true
+  modes:
+    no-debuff:
+      enabled: true
+      min: "1.8"
+      max: "1.26+"
+      allow-older-clients: true
+      allow-newer-clients: true
+      incompatible-versions: []
+      deny-message: "<red>Tu versión no es compatible con NoDebuff."
+    modern-practice:
+      enabled: true
+      min: "1.20"
+      max: "1.26+"
+      allow-older-clients: false
+      allow-newer-clients: true
+      incompatible-versions: []
+      deny-message: "<red>Este modo requiere un cliente 1.20 o superior."
+
+```
+
+### `config.yml`
+
+Contenido fuente del repositorio, con comentarios originales. Los secretos se sustituyen por marcadores.
+
+```yaml
+language: es
+debug: false
+storage:
+  type: sqlite # sqlite, mysql o yaml
+  # Cada kit puede limitar clientes con minimum-client-version y maximum-client-version.
+  mysql:
+    host: 127.0.0.1
+    port: 3306
+    database: apolopractice
+    username: root
+    password: "REDACTED"
+modules:
+  profiles: true
+  kits: true
+  arenas: true
+  duels: true
+  queues: true
+  ranked: true
+  parties: true
+  spectators: true
+  statistics: true
+  training: true
+  compatibility: true
+replay:
+  interval-ticks: 5
+  max-duration-seconds: 600
+scoreboard:
+  enabled: true
+training:
+  default-difficulty: normal
+rewards:
+  money-per-win: 0.0 # Requires Vault and a registered economy.
+combat:
+  countdown-seconds: 3
+  duel-request-expiry-seconds: 30
+  restore-player-state: true
+  boxing-hits-to-win: 100
+
+```
+
+### `messages.yml`
+
+Contenido fuente del repositorio, con comentarios originales. Los secretos se sustituyen por marcadores.
+
+```yaml
+prefix: "<gradient:#8b5cf6:#c4b5fd>[ApoloPractice]</gradient> "
+no-permission: "<red>No tienes permiso para ejecutar esto."
+usage: "<gray>Uso: /practice <status|debug|compatibility|reload>"
+reloaded: "<green>Configuraciones recargadas. Las partidas activas no se reiniciaron."
+status: "<gray>ApoloPractice <white>%version% <gray>| Servidor: <white>%server_version% <gray>| Compatibilidad: <white>%compatibility%"
+debug-enabled: "<yellow>Diagnóstico activado: %state%"
+compatibility-header: "<light_purple>Diagnóstico multiversional"
+compatibility-client: "<gray>Cliente: <white>%client%"
+compatibility-server: "<gray>Servidor nativo: <white>%server%"
+compatibility-via: "<gray>ViaVersion: <white>%state%"
+
+```
+
+### `permissions.yml`
+
+Contenido fuente del repositorio, con comentarios originales. Los secretos se sustituyen por marcadores.
+
+```yaml
+permissions:
+  use: apolopractice.use
+  admin: apolopractice.admin
+  compatibility: apolopractice.compatibility
+
+```
+
