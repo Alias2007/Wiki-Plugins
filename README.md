@@ -1,21 +1,30 @@
 # ApoloEvent Wiki · ApoloMC Network
 
-Documentación oficial de **ApoloEvent**. Este repositorio contiene únicamente la documentación del plugin ApoloEvent; no incluye documentación de otros plugins de la red.
+Sitio web oficial de documentación de **ApoloEvent**.
 
-## Abrir la wiki
+🌐 **Web:** https://alias2007.github.io/Wiki-Plugins/
 
-- [Entrar a la documentación](https://alias2007.github.io/Wiki-Plugins/)
-- [Ver páginas Markdown](docs/)
-- [Repositorio del plugin](https://github.com/Alias2007/ApoloEvent-v2.0)
-- [Releases](https://github.com/Alias2007/ApoloEvent-v2.0/releases)
-- [Reportar un problema](https://github.com/Alias2007/ApoloEvent-v2.0/issues)
+La web incluye una portada gaming adaptable a móviles, buscador de guías, accesos a descargas y enlaces al repositorio.
 
-## Contenido
+## Publicación con GitHub Pages
 
-Instalación, comandos, permisos, eventos, minijuegos, configuración YAML, integraciones, compilación y solución de problemas.
+1. Abre **Settings → Pages**.
+2. En **Build and deployment → Source**, selecciona **GitHub Actions**.
+3. Abre **Actions** y espera a que termine el flujo **Deploy ApoloEvent Website**.
 
-## Publicación
+El sitio se publica automáticamente al actualizar `index.html`, `assets/` o `docs/`.
 
-El sitio se construye desde `docs/` mediante GitHub Actions y GitHub Pages. Para activarlo, entra en **Settings → Pages** y selecciona **GitHub Actions** como fuente de publicación.
+## Documentación
 
-> La documentación debe contrastarse con el código y los archivos de configuración de la versión instalada. Algunas funciones pueden cambiar entre versiones.
+- [Introducción](docs/inicio.md)
+- [Instalación](docs/instalacion.md)
+- [Eventos](docs/eventos.md)
+- [Comandos y permisos](docs/comandos.md)
+- [Configuración](docs/configuracion.md)
+- [Integraciones](docs/integraciones.md)
+- [Desarrollo](docs/desarrollo.md)
+- [Soporte](docs/soporte.md)
+
+La Wiki nativa de GitHub se mantiene aparte: https://github.com/Alias2007/Wiki-Plugins/wiki
+
+Este repositorio documenta exclusivamente ApoloEvent.
