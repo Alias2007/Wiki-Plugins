@@ -752,3 +752,722 @@ Estos archivos los escribe el plugin y no conviene tratarlos como configuración
 - /npc reload y /hologram reload reconstruyen sus datos administrados sin duplicar entidades.
 - Cambiar backend en storage.yml requiere plan de migración y reinicio. Conserva copia de perfiles.db y YAML antes de cambiar type.
 
+
+
+## Contenido íntegro de los archivos YAML del repositorio
+
+### `ScorebordLs/animations.yml`
+
+Fuente del repositorio; se conservan comentarios y estructura. Credenciales y URLs privadas se ocultan.
+
+```yaml
+# Configuración independiente de animaciones.
+# STATIC usa el diseño de scoreboard.yml y tablist.yml.
+# Frames laterales con caracteres ASCII para evitar glifos inconsistentes en Geyser/Bedrock.
+scoreboard:
+  mode: STATIC
+  animation:
+    frame-interval-updates: 2
+    frames:
+      - title: "<light_purple><bold>APOLO KITPVP</bold></light_purple>"
+        lines:
+          - "<dark_gray>----------------"
+          - "<light_purple><bold>%player%</bold></light_purple>"
+          - "<gray>Rango: <white>%rank%"
+          - "<gray>Kills: <red>%kills%"
+          - "<gray>Muertes: <gold>%deaths%"
+          - "<gray>Asistencias: <yellow>%assists%"
+          - "<gray>Nivel: <yellow>%level%"
+          - "<gray>Racha: <green>%streak%"
+          - "<gray>Monedas: <gold>%coins%"
+          - "<gray>Ping: <aqua>%ping%ms"
+          - "<gray>Online: <light_purple>%online%<dark_gray>/<white>%max_players%"
+          - "<dark_gray>----------------"
+      - title: "<white><bold>APOLO KITPVP</bold></white>"
+        lines:
+          - "<dark_gray>----------------"
+          - "<light_purple><bold>%player%</bold></light_purple>"
+          - "<gray>Rango: <white>%rank%"
+          - "<gray>Kills: <red>%kills%"
+          - "<gray>Muertes: <gold>%deaths%"
+          - "<gray>Asistencias: <yellow>%assists%"
+          - "<gray>Nivel: <yellow>%level%"
+          - "<gray>Racha: <green>%streak%"
+          - "<gray>Monedas: <gold>%coins%"
+          - "<gray>Ping: <aqua>%ping%ms"
+          - "<gray>Online: <light_purple>%online%<dark_gray>/<white>%max_players%"
+          - "<dark_gray>----------------"
+tablist:
+  mode: STATIC
+  animation:
+    frame-interval-updates: 2
+    frames:
+      - header:
+          - ""
+          - "<gradient:#a855f7:#ffffff><bold>APOLOMC NETWORK</bold></gradient>"
+          - "<gray>¡Bienvenido, <#e9d5ff>%player%<gray>!"
+          - "<dark_gray>━━━━━━━━━━━━━━━━━━━━━━━━"
+        footer:
+          - "<gray>Rango: <#c084fc>%rank% <dark_gray>| <gray>Ping: <#38bdf8>%ping%ms"
+          - "<gray>Jugadores: <#c084fc>%online%<dark_gray>/<white>%max_players%"
+          - "<gradient:#a855f7:#ffffff>ApoloMC Network</gradient>"
+          - ""
+        player-name-format: "%prefix%<#e9d5ff>%player%"
+      - header:
+          - ""
+          - "<gradient:#ffffff:#a855f7><bold>ＡＰＯＬＯＭＣ ＮＥＴＷＯＲＫ</bold></gradient>"
+          - "<gray>¡Bienvenido, <#c084fc>%player%<gray>!"
+          - "<dark_gray>━━━━━━━━━━━━━━━━━━━━━━━━"
+        footer:
+          - "<gray>Rango: <#e9d5ff>%rank% <dark_gray>| <gray>Ping: <#7dd3fc>%ping%ms"
+          - "<gray>Jugadores: <#e9d5ff>%online%<dark_gray>/<white>%max_players%"
+          - "<gradient:#ffffff:#a855f7>ApoloMC Network</gradient>"
+          - ""
+        player-name-format: "%prefix%<#ffffff>%player%"
+
+# ----------------------------------------------------------------------------
+#  Animaciones de texto reutilizables: úsalas en cualquier línea con %animation:nombre%
+#  interval-ticks = ticks entre frames (20 = 1 s). Evita puntos en el nombre.
+#  Los frames pueden contener otros placeholders (%player%, %condition:x%...).
+# ----------------------------------------------------------------------------
+text-animations:
+  brillo:
+    interval-ticks: 6
+    frames:
+      - "<#a855f7><bold>APOLOMC"
+      - "<#c084fc><bold>APOLOMC"
+      - "<#e9d5ff><bold>APOLOMC"
+      - "<white><bold>APOLOMC"
+      - "<#e9d5ff><bold>APOLOMC"
+      - "<#c084fc><bold>APOLOMC"
+  consejos:
+    interval-ticks: 100
+    frames:
+      - "<gray>Usa <white>/kit<gray> para elegir tu kit"
+      - "<gray>Únete a un <white>/clan<gray> con tus amigos"
+      - "<gray>Oculta este panel con <white>/sb"
+
+
+```
+
+### `ScorebordLs/placeholders.yml`
+
+Fuente del repositorio; se conservan comentarios y estructura. Credenciales y URLs privadas se ocultan.
+
+```yaml
+# ============================================================================
+#  Placeholders del scoreboard y tablist - KitPvP-Core
+# ============================================================================
+#  Internos disponibles (todos con % a cada lado):
+#   Jugador:   %player% %uuid% %world% %gamemode% %ping% %ping_color% %health% %health_int% %max_health% %health_bar%
+#              %food% %x% %y% %z% %kit% %combat% (true/false) %combat_time% (segundos)
+#   Progreso:  %kills% %deaths% %assists% %level% %coins% %streak% %maxstreak% %xp% %koth_wins% %kdr%
+#              (las cifras grandes se abrevian: 9M; usa la versión _raw para el valor exacto: %kills_raw%...)
+#              %xp_needed% %xp_remaining% %xp_percent% %xp_bar%
+#   Rango:     %rank% (grupo) %rank_display% (capitalizado) %prefix% %suffix% %group_weight%
+#   Clan:      %clan% %clan_tag% %clan_rank%
+#   Servidor:  %online% %online_world% %max_players% %staff_online% %server_name% %tps% %tps_color% %mspt%
+#              %memory_used% %memory_max% %memory_percent% (MB / %) %time% %date%
+#   Propios:   %custom:nombre%  %condition:nombre%  %animation:nombre%  (definidos en este archivo / animations.yml)
+#   Además funciona cualquier placeholder de PlaceholderAPI si está instalado.
+#  Los nombres que usas en %custom:x%, %condition:x% y %animation:x% no deben llevar puntos.
+# ============================================================================
+
+server-name: "ApoloMC"
+# Zona horaria y formatos para %time% y %date%.
+timezone: "America/Argentina/Buenos_Aires"
+time-format: "HH:mm"
+date-format: "dd/MM/yyyy"
+# Permiso que cuenta a un jugador como staff en %staff_online%.
+staff-permission: "kitpvp.staff"
+# true = los jugadores en vanish (metadata "vanished") no cuentan en %online%.
+hide-vanished-from-count: true
+
+# Textos cuando algo no existe.
+texts:
+  no-clan: ""
+  no-kit: "Ninguno"
+
+# Colores de %ping_color% y %tps_color% (se usan como etiquetas MiniMessage).
+colors:
+  good: "<green>"
+  medium: "<yellow>"
+  bad: "<red>"
+  ping-good: 80
+  ping-medium: 160
+  tps-good: 18
+  tps-medium: 15
+
+# Barras de %health_bar% y %xp_bar%. Usa un carácter ASCII para que Bedrock lo muestre bien.
+bars:
+  length: 10
+  char: "|"
+  health-color: "<red>"
+  xp-color: "<green>"
+  empty-color: "<dark_gray>"
+
+# Reemplazos del valor de un placeholder. Claves: valor exacto, "<empty>" (vacío) o "*" (cualquier otro).
+# En el texto nuevo, %value% es el valor original. Las claves del placeholder deben ir entre comillas.
+output-replacements:
+  "%rank_display%":
+    "<empty>": "Jugador"
+    "Default": "Jugador"
+  # "%ping%":
+  #   "*": "%value% ms"
+
+# Placeholders propios: %custom:saludo%
+custom:
+  saludo: "<gray>Hola, <white>%player%"
+
+# Condiciones reutilizables. type: AND | OR. El resultado de %condition:nombre% es if-true / if-false.
+# Cada condición admite: permission:nodo, world:mundo, %p%=valor, !=, >, >=, <, <=, <- (contiene), |= (uno de a,b,c),
+# prefijo ! para negar y el nombre de otra condición.
+conditions:
+  has-clan:
+    type: AND
+    conditions:
+      - "%clan_tag%!="
+    if-true: "<gray>Clan: <aqua>%clan%"
+    if-false: ""
+  is-staff:
+    type: OR
+    conditions:
+      - "permission:kitpvp.staff"
+      - "permission:kitpvp.admin"
+    if-true: "<red>[Staff]"
+    if-false: ""
+  high-ping:
+    type: AND
+    conditions:
+      - "%ping%>150"
+    if-true: "<red>Ping alto"
+    if-false: ""
+
+```
+
+### `ScorebordLs/scoreboard.yml`
+
+Fuente del repositorio; se conservan comentarios y estructura. Credenciales y URLs privadas se ocultan.
+
+```yaml
+# ============================================================================
+#  Scoreboard lateral (sidebar) - KitPvP-Core
+# ============================================================================
+#  - Compatible con Java y Bedrock (Geyser): texto en las entradas, separadores ASCII y colores estándar.
+#  - Actualización por diferencias: solo se reenvían las líneas que cambian (sin parpadeo).
+#  - Placeholders: ver ScorebordLs/placeholders.yml (internos, %condition:x%, %animation:x%, %custom:x% y PlaceholderAPI).
+#  - Una línea vacía (o que resuelve a vacío) se oculta. Para forzar una línea en blanco usa {space}.
+#  - Los jugadores pueden ocultarlo con /sb (permiso kitpvp.scoreboard.toggle).
+# ============================================================================
+enabled: true
+# Cada cuántos ticks se refresca (20 ticks = 1 s). Al ser por diferencias puede ser bajo sin parpadeo.
+update-ticks: 10
+# Mundos donde no se muestra.
+disabled-worlds: []
+# Oculta los números rojos de la derecha (clientes 1.20.3+; Bedrock puede seguir mostrándolos).
+hide-scores: true
+# false = colores legacy más cercanos (más compatible con Bedrock); true = hex/degradados completos en Java.
+hex-colors: false
+# Longitud máxima de cada línea (con códigos de color).
+max-line-length: 128
+# Título: texto simple o lista de frames (animado). Intervalo entre frames en ticks.
+title: "<light_purple><bold>APOLO KITPVP</bold></light_purple>"
+title-interval-ticks: 20
+# Mostrar el bloque de Combate (cooldowns y combat tag) bajo las líneas. Máximo de filas del diseño (1-15).
+show-combat: true
+max-lines: 15
+lines:
+  - "<dark_gray>----------------"
+  - "<light_purple><bold>%player%</bold></light_purple>"
+  - "<gray>Rango: <white>%rank_display%"
+  - "<gray>Kills: <red>%kills% <dark_gray>(<gray>KDR <white>%kdr%<dark_gray>)"
+  - "<gray>Muertes: <gold>%deaths%"
+  - "<gray>Asistencias: <yellow>%assists%"
+  - "<gray>Nivel: <yellow>%level% <dark_gray>(<gray>%xp_percent%%<dark_gray>)"
+  - "<gray>Racha: <green>%streak%"
+  - "<gray>Monedas: <gold>%coins%"
+  - "%condition:has-clan%"
+  - "<gray>Ping: %ping_color%%ping%ms"
+  - "<gray>Online: <light_purple>%online%<dark_gray>/<white>%max_players%"
+  - "<dark_gray>----------------"
+
+# ----------------------------------------------------------------------------
+#  Diseños adicionales con condición (como los scoreboards de TAB).
+#  Se evalúan por prioridad (mayor primero); el primero cuya condición se cumpla reemplaza al diseño de arriba.
+#  Condiciones: permission:nodo | world:nombre | %placeholder%=valor | != | > | >= | < | <= | <- (contiene) | |= (uno de a,b,c)
+#  Puedes negar con ! y reutilizar condiciones de placeholders.yml por su nombre.
+# ----------------------------------------------------------------------------
+scoreboards:
+  staff:
+    enabled: false
+    priority: 10
+    display-condition: "permission:kitpvp.staff"
+    title: "<red><bold>STAFF</bold>"
+    lines:
+      - "<dark_gray>----------------"
+      - "<gray>Staff online: <white>%staff_online%"
+      - "<gray>TPS: %tps_color%%tps% <dark_gray>| <gray>MSPT: <white>%mspt%"
+      - "<gray>RAM: <white>%memory_used%<dark_gray>/<white>%memory_max% MB"
+      - "<gray>Jugadores: <white>%online%<dark_gray>/<white>%max_players%"
+      - "<gray>Ping: %ping_color%%ping%ms"
+      - "<dark_gray>----------------"
+    show-combat: false
+  en-combate:
+    enabled: false
+    priority: 5
+    display-condition: "%combat%=true"
+    title: "<red><bold>EN COMBATE</bold>"
+    lines:
+      - "<dark_gray>----------------"
+      - "<gray>Vida: <white>%health_int%<dark_gray>/<white>20"
+      - "%health_bar%"
+      - "<gray>Racha: <green>%streak%"
+      - "<gray>Combate: <white>%combat_time%s"
+      - "<dark_gray>----------------"
+    show-combat: false
+
+# Sobrescribir título/líneas por mundo (solo para el diseño principal):
+# worlds:
+#   arena:
+#     title: "<red><bold>ARENA</bold>"
+#     lines:
+#       - "<gray>Kills: <red>%kills%"
+
+combat-display:
+  enabled: true
+  header: "<gold><bold>COMBATE</bold>"
+  separator: "<dark_gray>----------------"
+  tag-format: "<gray>En combate: <white>{time}"
+  cooldowns:
+    line-format: "<gray>{label}: <aqua>{time}"
+    global-line-format: "<gray>Cooldown Global: <yellow>{time}"
+    # Agrega entradas con un id único. Triggers: consume, projectile, interact.
+    items:
+      apple:
+        enabled: true
+        material: GOLDEN_APPLE
+        trigger: consume
+        label: "Manzana"
+        seconds: 60
+      ender-pearl:
+        enabled: true
+        material: ENDER_PEARL
+        trigger: projectile
+        label: "Perla"
+        seconds: 15
+
+```
+
+### `ScorebordLs/tablist.yml`
+
+Fuente del repositorio; se conservan comentarios y estructura. Credenciales y URLs privadas se ocultan.
+
+```yaml
+# ============================================================================
+#  Tablist (lista de jugadores) - KitPvP-Core
+# ============================================================================
+#  Incluye: cabecera/pie, formato del nombre, diseños con condición, nametags (prefijo/sufijo sobre la cabeza),
+#  orden de la lista, vida bajo el nombre y objetivo numérico junto al jugador (como la pestaña de TAB).
+#  Las animaciones por frames se configuran en ScorebordLs/animations.yml.
+#  Placeholders: ver ScorebordLs/placeholders.yml.
+# ============================================================================
+# Interruptor general de este archivo (header/footer, nombres, nametags, orden y objetivos).
+enabled: true
+update-ticks: 10
+disabled-worlds: []
+header:
+  - ""
+  - "<gradient:#a855f7:#ffffff><bold>APOLOMC NETWORK</bold></gradient>"
+  - "<gray>¡Bienvenido, <#e9d5ff>%player%<gray>!"
+  - "<dark_gray>━━━━━━━━━━━━━━━━━━━━━━━━"
+footer:
+  - "<gray>Rango: <#c084fc>%rank_display% <dark_gray>| <gray>Ping: %ping_color%%ping%ms"
+  - "<gray>Jugadores: <#c084fc>%online%<dark_gray>/<white>%max_players% <dark_gray>| <gray>TPS: %tps_color%%tps%"
+  - "<gradient:#a855f7:#ffffff>ApoloMC Network</gradient>"
+  - ""
+# Nombre en la lista. Prioridad: frame animado > diseño > mundo (worlds.<mundo>.player-name-format) > grupo > este valor.
+player-name-format: "%tag%%prefix%&f%player%"
+# Formato por grupo de LuckPerms (opcional):
+# player-name-formats:
+#   admin: "&c[Admin] &f%player%"
+
+# ----------------------------------------------------------------------------
+#  Diseños con condición (cabecera/pie/nombre distintos según permiso, mundo, combate...).
+#  El primero (mayor prioridad) cuya condición se cumpla se aplica; lo que no defina usa los valores de arriba.
+# ----------------------------------------------------------------------------
+designs:
+  staff:
+    enabled: false
+    priority: 10
+    display-condition: "permission:kitpvp.staff"
+    header:
+      - "<red><bold>PANEL STAFF</bold>"
+    footer:
+      - "<gray>TPS: %tps_color%%tps% <dark_gray>| <gray>MSPT: <white>%mspt% <dark_gray>| <gray>RAM: <white>%memory_percent%%"
+      - "<gray>Staff online: <white>%staff_online%"
+
+# ----------------------------------------------------------------------------
+#  Nametag: prefijo/sufijo sobre la cabeza (usa equipos del scoreboard, por jugador).
+#  name-color: WHITE | AUTO (último color del prefijo) | NONE | cualquier color (RED, GOLD...)
+#  visibility: ALWAYS | NEVER | HIDE_FOR_OTHER_TEAMS | HIDE_FOR_OWN_TEAM
+#  collision: false = los jugadores no se empujan entre sí.
+# ----------------------------------------------------------------------------
+nametag:
+  enabled: true
+  prefix: "%tag%%prefix%"
+  suffix: ""
+  name-color: WHITE
+  visibility: ALWAYS
+  collision: false
+  # Valores distintos por grupo de LuckPerms:
+  # groups:
+  #   admin:
+  #     prefix: "&c[Admin] "
+  #     name-color: RED
+
+# ----------------------------------------------------------------------------
+#  Orden de la lista de jugadores (aplica a Java). Los criterios se aplican en orden:
+#    GROUP_WEIGHT                      peso del grupo de LuckPerms (mayor primero)
+#    GROUPS:owner,admin,mod            orden explícito de grupos
+#    PERMISSION:kitpvp.owner,kitpvp.admin   primero quien tenga el primer permiso
+#    PLACEHOLDER_HIGH_TO_LOW:%kills_raw%   número de mayor a menor (LOW_TO_HIGH al revés)
+#    PLACEHOLDER_A_TO_Z:%clan%         alfabético por placeholder
+#    NAME                              alfabético por nombre (siempre desempata al final)
+# ----------------------------------------------------------------------------
+sorting:
+  enabled: true
+  types:
+    - GROUP_WEIGHT
+    - NAME
+
+# ----------------------------------------------------------------------------
+#  Texto bajo el nombre del jugador. mode: HEALTH | PING | KILLS | DEATHS | ASSISTS | LEVEL | STREAK | COINS | PLACEHOLDER
+#  Con mode PLACEHOLDER define "placeholder: %kills_raw%" (debe dar un número).
+# ----------------------------------------------------------------------------
+belowname:
+  enabled: false
+  mode: HEALTH
+  title: "<red>HP"
+  placeholder: "%ping%"
+
+# Número (o corazones con HEALTH) junto al nombre dentro de la lista de jugadores.
+playerlist-objective:
+  enabled: false
+  mode: PING
+  title: ""
+  placeholder: "%ping%"
+
+```
+
+### `abilities-shop.yml`
+
+Fuente del repositorio; se conservan comentarios y estructura. Credenciales y URLs privadas se ocultan.
+
+```yaml
+# Catálogo de habilidades y mejoras. Mantén las ventajas equilibradas.
+settings:
+  enabled: true
+  permanent-unlocks: true
+  default-max-level: 3
+  require-combat-permission: false
+abilities:
+  speed:
+    enabled: true
+    price: 250
+    max-level: 3
+    duration-seconds: 5
+    cooldown-seconds: 30
+  strength:
+    enabled: true
+    price: 350
+    max-level: 2
+    duration-seconds: 4
+    cooldown-seconds: 45
+  heal:
+    enabled: true
+    price: 200
+    max-level: 3
+    cooldown-seconds: 60
+  jump:
+    enabled: true
+    price: 200
+    max-level: 3
+    duration-seconds: 6
+    cooldown-seconds: 35
+  shield:
+    enabled: true
+    price: 500
+    max-level: 2
+    cooldown-seconds: 60
+
+```
+
+### `abilities.yml`
+
+Fuente del repositorio; se conservan comentarios y estructura. Credenciales y URLs privadas se ocultan.
+
+```yaml
+# Cooldown compartido: ninguna ability puede activarse mientras este temporizador esté activo.
+global-cooldown-seconds: 10
+cooldown-display:
+  global-actionbar-format: "&6Cooldown Global: &f{seconds}s"
+  ability-actionbar-format: "&d{name}&7: &f{seconds}s"
+
+abilities:
+  speed:
+    enabled: true
+    action: speed
+    duration-seconds: 5
+    cooldown-seconds: 30
+    amplifier: 1
+    success-message: "&b¡Velocidad activada!"
+    item:
+      enabled: true
+      material: FEATHER
+      name: "&b&lImpulso Veloz"
+      lore:
+        - "&7Aumenta tu velocidad durante 5 segundos."
+        - ""
+        - "&eClic derecho para activar"
+      consume-on-use: false
+  strength:
+    enabled: true
+    action: strength
+    duration-seconds: 5
+    cooldown-seconds: 45
+    amplifier: 0
+    success-message: "&c¡Fuerza activada!"
+    item:
+      enabled: true
+      material: BLAZE_POWDER
+      name: "&c&lFuria"
+      lore:
+        - "&7Aumenta tu fuerza durante 5 segundos."
+        - ""
+        - "&eClic derecho para activar"
+      consume-on-use: false
+  heal:
+    enabled: true
+    action: heal
+    cooldown-seconds: 30
+    amount: 6
+    success-message: "&a¡Has recuperado salud!"
+    item:
+      enabled: true
+      material: GOLDEN_APPLE
+      name: "&a&lPulso Vital"
+      lore:
+        - "&7Recupera 6 puntos de salud."
+        - ""
+        - "&eClic derecho para activar"
+      consume-on-use: false
+  jump:
+    enabled: true
+    action: jump
+    duration-seconds: 6
+    cooldown-seconds: 30
+    amplifier: 1
+    success-message: "&d¡Salto mejorado activado!"
+    item:
+      enabled: true
+      material: RABBIT_FOOT
+      name: "&d&lSalto Lunar"
+      lore:
+        - "&7Mejora tu salto durante 6 segundos."
+        - ""
+        - "&eClic derecho para activar"
+      consume-on-use: false
+  shield:
+    enabled: true
+    action: shield
+    duration-seconds: 4
+    cooldown-seconds: 40
+    amplifier: 1
+    success-message: "&6¡Escudo activado!"
+    item:
+      enabled: true
+      material: SHIELD
+      name: "&6&lBarrera"
+      lore:
+        - "&7Otorga absorción temporal."
+        - ""
+        - "&eClic derecho para activar"
+      consume-on-use: false
+  dash:
+    enabled: true
+    action: dash
+    cooldown-seconds: 12
+    power: 1.8
+    vertical-power: 0.35
+    success-message: "&e¡Impulso ejecutado!"
+    item:
+      enabled: true
+      material: SUGAR
+      name: "&e&lDash"
+      lore:
+        - "&7Impúlsate en la dirección que miras."
+        - ""
+        - "&eClic derecho para activar"
+      consume-on-use: false
+  fireball:
+    enabled: true
+    action: fireball
+    cooldown-seconds: 20
+    incendiary: false
+    yield: 0.0
+    success-message: "&c¡Bola de fuego lanzada!"
+    item:
+      enabled: true
+      material: FIRE_CHARGE
+      name: "&c&lEsfera Ígnea"
+      lore:
+        - "&7Lanza un proyectil hacia donde miras."
+        - "&7No destruye bloques por defecto."
+        - ""
+        - "&eClic derecho para activar"
+      consume-on-use: false
+
+  switcher:
+    enabled: true
+    action: switcher
+    cooldown-seconds: 22
+    success-message: "&e¡Bola Switcher lanzada! Acertá a un enemigo para intercambiar posiciones."
+    success-hit-message: "&d¡Intercambiaste posición con &f{player}&d!"
+    target-message: "&c¡{player} intercambió posición contigo!"
+    item:
+      enabled: true
+      material: SNOWBALL
+      name: "&e&lSwitcher"
+      lore:
+        - "&7Lanza una bola que intercambia"
+        - "&7tu posición con la del rival."
+        - ""
+        - "&eClic derecho para lanzar"
+      consume-on-use: false
+
+  rocket:
+    enabled: true
+    action: rocket
+    cooldown-seconds: 18
+    vertical-power: 1.25
+    success-message: "&e¡Cohete lanzado! Acertá a un enemigo para impulsarlo."
+    success-hit-message: "&e¡Lanzaste a &f{player}&e por los aires!"
+    target-message: "&c¡{player} te lanzó por los aires!"
+    item:
+      enabled: true
+      material: FIREWORK_ROCKET
+      name: "&6&lRocket"
+      lore:
+        - "&7Lanza un proyectil que impulsa"
+        - "&7al enemigo hacia arriba."
+        - ""
+        - "&eClic derecho para lanzar"
+      consume-on-use: false
+
+  debuff:
+    enabled: true
+    action: debuff
+    cooldown-seconds: 25
+    effect-duration-seconds: 4
+    effect-amplifier: 0
+    success-message: "&5¡Proyectil de debilitamiento lanzado!"
+    success-hit-message: "&5¡Debilitaste a &f{player}&5!"
+    target-message: "&c¡{player} te aplicó un debilitamiento!"
+    item:
+      enabled: true
+      material: FERMENTED_SPIDER_EYE
+      name: "&5&lDebuff"
+      lore:
+        - "&7Aplica Lentitud y Debilidad"
+        - "&7si el proyectil golpea al rival."
+        - ""
+        - "&eClic derecho para lanzar"
+      consume-on-use: false
+
+  cleanse:
+    enabled: true
+    action: cleanse
+    cooldown-seconds: 30
+    remove-effect-keys:
+      - poison
+      - wither
+      - slowness
+      - weakness
+      - blindness
+      - hunger
+      - mining_fatigue
+      - darkness
+      - levitation
+    success-message: "&a¡Limpiaste tus efectos negativos!"
+    item:
+      enabled: true
+      material: MILK_BUCKET
+      name: "&f&lCleanse"
+      lore:
+        - "&7Elimina efectos negativos comunes."
+        - ""
+        - "&eClic derecho para activar"
+      consume-on-use: false
+
+  ninja:
+    enabled: true
+    action: ninja
+    cooldown-seconds: 30
+    range: 20
+    no-target-message: "&cApunta directamente a un jugador a menos de 20 bloques."
+    unsafe-target-message: "&cNo se encontró una posición segura detrás del objetivo."
+    success-message: "&d¡Te teletransportaste detrás del objetivo!"
+    target-message: "&c¡{player} apareció detrás de ti!"
+    item:
+      enabled: true
+      material: ENDER_EYE
+      name: "&d&lNinja"
+      lore:
+        - "&7Te teletransporta detrás del jugador"
+        - "&7al que estés apuntando."
+        - ""
+        - "&eClic derecho para activar"
+      consume-on-use: false
+
+  vampire:
+    enabled: true
+    action: vampire_on_hit
+    cooldown-seconds: 18
+    heal-amount: 2.0
+    success-message: "&c¡Vampiro! Recuperaste vida al golpear a &f{player}&c."
+    no-heal-message: "&7Ya tienes la vida al máximo."
+    cooldown-message: "&eEspera {seconds}s para volver a usar esta habilidad."
+    hit-message: "&eGolpea a un jugador con este objeto para recuperar vida."
+    item:
+      enabled: true
+      material: GHAST_TEAR
+      name: "&c&lVampiro"
+      lore:
+        - "&7Recupera 1 corazón al golpear"
+        - "&7a un enemigo (con cooldown)."
+        - ""
+        - "&eGolpea a un jugador para activar"
+      consume-on-use: false
+
+  inventory-scrambler:
+    enabled: true
+    action: shuffle_inventory
+    cooldown-seconds: 25
+    success-message: "&d¡Revolviste el inventario de &f{player}&d!"
+    target-message: "&c¡{player} revolvió tu inventario!"
+    cooldown-message: "&eEspera {seconds}s para volver a usar esta habilidad."
+    no-items-message: "&7Ese jugador no tiene suficientes objetos para revolver."
+    hit-message: "&eGolpea a otro jugador con este objeto para revolver su inventario."
+    item:
+      enabled: true
+      material: ENDER_EYE
+      name: "&5&lCaos de Mochila"
+      lore:
+        - "&7Revuelve los objetos de un enemigo."
+        - "&7Se activa al golpear con el objeto."
+        - ""
+        - "&eGolpea a un jugador para activar"
+      consume-on-use: false
+
+```
+
