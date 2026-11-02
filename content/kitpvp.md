@@ -2232,3 +2232,94 @@ category:
 
 ```
 
+
+
+## Contenido YAML — continuación
+
+### `inventario/duelos.yml`
+
+Contenido fuente con comentarios originales:
+
+```yaml
+title: "&8Duelos"
+size: 27
+items: {}
+
+```
+
+### `inventario/estadisticas.yml`
+
+Contenido fuente con comentarios originales:
+
+```yaml
+title: "&8Estadísticas"
+size: 27
+items: {}
+
+```
+
+### `inventario/eventos.yml`
+
+Contenido fuente con comentarios originales:
+
+```yaml
+title: "&8Eventos"
+size: 27
+items: {}
+
+```
+
+### `inventario/habilidades.yml`
+
+Contenido fuente con comentarios originales:
+
+```yaml
+title: "&8Habilidades"
+size: 27
+items:
+  speed: {slot: 10, material: FEATHER, name: "&bVelocidad", lore: ["&7Aumenta tu velocidad temporalmente", "&eClic para activar"]}
+  strength: {slot: 12, material: BLAZE_POWDER, name: "&cFuerza", lore: ["&7Aumenta tu daño temporalmente", "&eClic para activar"]}
+  heal: {slot: 14, material: GOLDEN_APPLE, name: "&aCuración", lore: ["&7Recupera salud", "&eClic para activar"]}
+  jump: {slot: 16, material: RABBIT_FOOT, name: "&dSalto mejorado", lore: ["&7Mejora tu salto temporalmente", "&eClic para activar"]}
+  shield: {slot: 22, material: SHIELD, name: "&6Escudo", lore: ["&7Otorga absorción temporal", "&eClic para activar"]}
+  dash: {slot: 20, material: SUGAR, name: "&eDash", lore: ["&7Impúlsate hacia donde miras", "&eClic para activar"]}
+  fireball: {slot: 24, material: FIRE_CHARGE, name: "&cEsfera Ígnea", lore: ["&7Lanza un proyectil", "&eClic para activar"]}
+
+```
+
+### `inventario/kits.yml`
+
+Contenido fuente con comentarios originales:
+
+```yaml
+title: "&8Selector de Kits"
+size: 27
+items:
+  starter:
+    slot: 13
+    material: IRON_SWORD
+    name: "&aKit Starter"
+    lore:
+      - "&7Un kit equilibrado para comenzar."
+      - "&eClic para equipar"
+
+```
+
+### `inventario/menu-principal.yml`
+
+Contenido fuente con comentarios originales:
+
+```yaml
+title: "&8KitPvP-Core"
+size: 27
+items:
+  kits: {slot: 11, material: IRON_SWORD, name: "&dKits", lore: ["&7Selecciona tu equipamiento"]}
+  stats: {slot: 13, material: BOOK, name: "&eEstadísticas", lore: ["&7Consulta tu progreso"]}
+  coins: {slot: 15, material: GOLD_INGOT, name: "&6Economía", lore: ["&7Consulta tus monedas"]}
+  missions: {slot: 20, material: BOOK, name: "&bMisiones", lore: ["&7Consulta tu misión diaria"]}
+  duels: {slot: 22, material: IRON_SWORD, name: "&cDuelos", lore: ["&7Consulta las opciones de duelo"]}
+  clans: {slot: 24, material: NAME_TAG, name: "&dClanes", lore: ["&7Administra tu clan"]}
+  abilities: {slot: 26, material: BLAZE_POWDER, name: "&eHabilidades", lore: ["&7Activa una habilidad"]}
+
+```
+
