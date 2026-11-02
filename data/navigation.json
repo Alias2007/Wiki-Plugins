@@ -319,6 +319,12 @@
           "tags": "comandos permisos practice"
         },
         {
+          "id": "variables",
+          "title": "Variables y placeholders",
+          "description": "Placeholders propios y datos disponibles para mostrar",
+          "tags": "variables placeholders papi estadísticas"
+        },
+        {
           "id": "config",
           "title": "Configuración y compatibilidad",
           "description": "YAML, SQLite, MySQL y versiones",
