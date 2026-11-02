@@ -422,6 +422,102 @@ Los cambios de configuración deben probarse en una copia del servidor. La sinta
 
 
 <a id="yaml"></a>
+
+### Ejemplo real: config.yml
+
+Este bloque corresponde al archivo de recursos del repositorio. Cambia únicamente los valores que necesites; conserva la estructura y la indentación.
+
+```yaml
+language: es
+version: 1
+lobby:
+  enabled: false
+  world: world
+  x: 0.5
+  y: 80
+  z: 0.5
+  yaw: 0
+  pitch: 0
+defaults:
+  max-players: 32
+  countdown-seconds: 10
+  min-players: 2
+restore:
+  return-to-previous-location: true
+debug: false
+integrations:
+  ultimateclans:
+    enabled: true
+    same-clan: true
+    allies: true
+tops:
+  rewards:
+    weekly:
+      enabled: false
+      announcement: "&6[Tops] &eSe entregaron las recompensas semanales."
+      commands:
+        horse_wins:
+          1: []
+          2: []
+          3: []
+        backroom_wins:
+          1: []
+          2: []
+          3: []
+auto-update-texts: true
+audit:
+  enabled: true
+```
+
+**Cómo leerlo:** `defaults` define valores comunes para eventos; `lobby` configura el destino opcional; `restore` devuelve al jugador a su ubicación anterior; `integrations.ultimateclans` evita daño entre miembros/aliados cuando la integración está disponible; `tops.rewards.weekly` ejecuta comandos por posición al cambiar la semana; `auto-update-texts` actualiza textos predeterminados sin sobrescribir los que el administrador personalizó; `audit` registra acciones administrativas.
+
+### Ejemplo real: events/backroom.yml
+
+```yaml
+pvp:
+  enabled: false
+  block-indirect-damage-when-disabled: true
+elimination:
+  void-and-death: true
+  spectator-mode: true
+countdown-seconds: 10
+min-players: 2
+max-players: 32
+rewards:
+  first:
+    enabled: true
+    commands: []
+    experience: 100
+    items: ['DIAMOND:3']
+  second:
+    enabled: true
+    commands: []
+    experience: 50
+    items: ['GOLD_INGOT:5']
+kit:
+  helmet: LEATHER_HELMET
+  chestplate: LEATHER_CHESTPLATE
+  leggings: LEATHER_LEGGINGS
+  boots: LEATHER_BOOTS
+  sword: WOODEN_SWORD
+  sword-slot: 0
+abilities:
+  goal-trail:
+    enabled: true
+    after-minutes: 20
+    duration-seconds: 4
+  items:
+    cooldown-seconds: 30
+    tracker:
+      enabled: true
+      material: COMPASS
+      slot: 3
+      cooldown-seconds: 50
+      range: 32
+```
+
+**Cómo funciona:** `pvp.enabled` activa el combate; `elimination` decide eliminación y espectador; `min-players/max-players/countdown-seconds` controlan el inicio; `rewards` define premios por puesto; `kit` fija el equipo; `abilities` configura el rastro y objetos especiales. Las demás claves de este archivo (mensajes del menú, efectos y habilidades) se explican en la tabla de arriba.
+
 ## Archivos YAML — referencia de configuración
 
 Ruta base: plugins/ApoloEvent/. Los archivos de esta página son recursos configurables del proyecto; no incluye plugin.yml. Haz una copia antes de editar. YAML depende de la indentación: usa espacios, no tabuladores.
