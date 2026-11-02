@@ -609,3 +609,335 @@ Estos archivos no son plantillas de configuración equivalentes a los anteriores
 - Cambiar coordenadas en juego con los comandos /evento set* es más seguro que introducir ubicaciones manualmente.
 - Después de modificar configuraciones, revisa la consola y ejecuta pruebas en un mundo de ensayo antes de habilitar el mapa para jugadores.
 
+
+
+## Contenido íntegro de configuración: archivos restantes
+
+### `events/colormatch.yml`
+
+Este bloque es el contenido del recurso del repositorio. Los comentarios YAML originales se conservan como guía. Ajusta los valores según las opciones documentadas en el propio archivo.
+
+```yaml
+# ColorMatch nativo para Paper 1.21.4 / Java 21.
+# Configura lobby, marca pos1 y pos2 a la misma altura y ejecuta /evento colormatch setup.
+# Arenas normales: hasta 32x32 (region-limit). Se pueden agrandar hasta 128x128; las grandes se construyen por partes.
+# Los perfiles small usan un cuadrado central de 8x8; los demás usan el área seleccionada.
+# Los bloques originales se restauran al finalizar o detener la partida.
+settings:
+  enabled: true # /evento colormatch enable|disable
+  min-players: 2
+  max-players: 16
+  rounds: 10
+  countdown-seconds: 15
+  round-seconds: 5 # /evento colormatch setroundtime <2-60>
+  break-seconds: 2 # /evento colormatch setbreak <0-30>
+  region-limit: 32 # lado máximo de la arena en bloques (8-128); /evento colormatch setregionlimit <n>
+  blocks-per-tick: 2048 # bloques que se construyen/rompen por tick; las arenas más grandes se reparten en varios ticks
+  difficulty: normal # easy, normal, hard
+  arena-mode: wool # wool, glass, clay, small, small_glass, small_clay
+  announce-join-leave: true
+  clear-effects: true
+  # Efectos opcionales: TIPO:AMPLIFICADOR:DURACION_TICKS. Ejemplo: SPEED:0:1200
+  kit-effects: []
+  # Los estados de inventario se guardan en colormatch-player-recovery.yml para poder recuperarlos tras reinicios inesperados.
+  # Clases seleccionables antes de entrar. Los efectos usan TIPO:AMPLIFICADOR:DURACION_TICKS.
+  kits:
+    normal:
+      name: '&7Normal'
+      effects: []
+    runner:
+      name: '&aCorredor'
+      effects: ['SPEED:0:1200']
+    jumper:
+      name: '&bSaltador'
+      effects: ['JUMP_BOOST:1:1200']
+  # Sonidos Bukkit configurables. Usa NONE para desactivar uno.
+  sound-volume: 1.0
+  sound-pitch: 1.0
+  sounds:
+    join: ENTITY_EXPERIENCE_ORB_PICKUP
+    leave: BLOCK_NOTE_BLOCK_BASS
+    countdown: BLOCK_NOTE_BLOCK_PLING
+    start: ENTITY_PLAYER_LEVELUP
+    target: BLOCK_NOTE_BLOCK_PLING
+    eliminated: ENTITY_ITEM_BREAK
+    winner: UI_TOAST_CHALLENGE_COMPLETE
+    end: BLOCK_ANVIL_LAND
+  # Pago opcional mediante Vault o una economía compatible. 0 desactiva el pago directo.
+  winner-money: 0.0
+  # Comandos de consola al ganador. Placeholders: {player}, {uuid}, {place}
+  winner-commands: []
+  # Recompensas extra (además de winner-money / winner-commands, que son las del 1º).
+  # places.<n>: premio del puesto n (2, 3, 4...). Para dar también un premio al 1º añade places.1.
+  # participation: lo recibe quien jugó y no tiene premio de puesto.
+  # money: pago por Vault. commands: comandos de consola con {player}, {uuid} y {place}.
+  # min-players: mínimo de jugadores al empezar para entregar estas recompensas (evita regalar premios en partidas de 1).
+  rewards:
+    min-players: 2
+    places:
+      2:
+        money: 0.0
+        commands: []
+      3:
+        money: 0.0
+        commands: []
+    participation:
+      money: 0.0
+      commands: []
+  # Comandos permitidos durante la partida (el resto se bloquea)
+  allowed-commands:
+    - /evento colormatch leave
+    - /evento cm leave
+# Títulos en pantalla (usa {seconds}, {round}, {color}, {player}). Pon enabled: false para desactivarlos.
+titles:
+  enabled: true
+  countdown:
+    title: '&e&l{seconds}'
+    subtitle: '&7¡Prepárate!'
+  round:
+    title: '&d&lRonda {round}'
+    subtitle: '&7Párate sobre {color}'
+  winner:
+    title: '&6&l★ VICTORIA ★'
+    subtitle: '&e{player}'
+messages:
+  prefix: '&8[&d&lColorMatch&8] &r'
+  join: '&a✔ Te uniste a &d&lColorMatch&a. &7Jugadores: &f{players}&7/&f{max}'
+  join-broadcast: '&d{player} &7entró a ColorMatch &8(&f{players}&7/&f{max}&8)'
+  leave-broadcast: '&d{player} &7salió de ColorMatch.'
+  already-joined: '&c✖ Ya estás en la partida.'
+  not-joined: '&c✖ No estás en ColorMatch.'
+  need-arena: '&c✖ El administrador debe configurar y construir la arena de ColorMatch.'
+  need-lobby: '&c✖ El lobby no está configurado. Un administrador debe usar &e/evento colormatch setlobby&c.'
+  countdown: '&e» ColorMatch comienza en &f&l{seconds}&e segundos.'
+  target: '&8» &eRonda &f{round}&7/&f{rounds} &8| &e¡Párate sobre: {color}&e!'
+  eliminated: '&c✖ &f{player} &cquedó eliminado.'
+  winner: '&6&l★ &e¡{player} ganó ColorMatch! &6&l★'
+  no-winner: '&7La partida terminó sin ganador.'
+  stopped: '&c✖ La partida de ColorMatch fue detenida.'
+  disabled: '&c✖ ColorMatch está desactivado actualmente.'
+  already-running: '&c✖ La partida ya comenzó. Espera a la siguiente.'
+  full: '&c✖ La partida está llena. Máximo: &f{max}&c jugadores.'
+  left: '&a✔ Saliste de ColorMatch.'
+  command-blocked: '&c✖ No puedes usar ese comando durante ColorMatch.'
+  kit-selected: '&a✔ Clase seleccionada: {kit}&a. Entra con &e/evento colormatch join&a.'
+  kit-not-found: '&c✖ Esa clase no existe. Usa &e/evento colormatch kits&c.'
+  kit-locked: '&c✖ Solo puedes cambiar de clase antes de entrar y mientras no haya una partida en curso.'
+  kits-list: '&dClases disponibles: &f{kits}'
+  spectator-bounds: '&7Como espectador no puedes alejarte de la arena.'
+  money-reward: '&a✔ &f{player} &arecibió &6{amount} &apor ganar.'
+# Estadísticas persistentes: events/colormatch-stats.yml
+
+```
+
+### `events/eclipse.yml`
+
+Este bloque es el contenido del recurso del repositorio. Los comentarios YAML originales se conservan como guía. Ajusta los valores según las opciones documentadas en el propio archivo.
+
+```yaml
+# Evento Eclipse de Sangre — evento nocturno de supervivencia PvP.
+# Los jugadores aparecen en una arena oscura, PvP activado, mobs aparecen en oleadas.
+# Gana el último sobreviviente.
+enabled: true
+max-players: 24
+min-players: 2
+map: eclipse
+countdown-seconds: 15
+# PvP siempre activo en Eclipse
+pvp:
+  enabled: true
+# Oleadas de mobs
+waves:
+  enabled: true
+  interval-seconds: 45
+  max-mobs: 8
+  types: [ZOMBIE, SKELETON, CREEPER, SPIDER, ENDERMAN]
+# Oscuridad (forzar noche en el mundo del mapa)
+darkness:
+  enabled: true
+  time: 18000 # medianoche
+# Kit inicial
+kit:
+  helmet: IRON_HELMET
+  chestplate: IRON_CHESTPLATE
+  leggings: IRON_LEGGINGS
+  boots: IRON_BOOTS
+  sword: IRON_SWORD
+  sword-slot: 0
+  food: 20
+# Recompensas por puesto (el último en pie es el 1.º). Con enabled: false no se entrega nada.
+rewards:
+  first:
+    enabled: true
+    commands: []
+    experience: 150
+    items: ['DIAMOND:5']
+  second:
+    enabled: true
+    commands: []
+    experience: 75
+    items: ['GOLD_INGOT:8']
+  third:
+    enabled: true
+    commands: []
+    experience: 40
+    items: ['IRON_INGOT:8']
+# Habilidades
+abilities:
+  tracker:
+    enabled: true
+    name: "&e&lRastreador de Eclipse"
+    material: COMPASS
+    slot: 7
+    cooldown-seconds: 60
+    range: 100
+# Menú del ganador
+winner-menu:
+  title: "&5&l¡Has ganado el Eclipse!"
+  exit:
+    slot: 11
+    name: "&cSalir del evento"
+    material: BARRIER
+  spectate:
+    slot: 15
+    name: "&aSeguir observando"
+    material: COMPASS
+
+```
+
+### `events/horse.yml`
+
+Este bloque es el contenido del recurso del repositorio. Los comentarios YAML originales se conservan como guía. Ajusta los valores según las opciones documentadas en el propio archivo.
+
+```yaml
+max-players: 16
+min-players: 2
+countdown-seconds: 5
+race-timeout-seconds: 300
+allow-own-horses: false
+horse:
+  type: HORSE
+  speed: 0.225
+  jump-strength: 0.0
+  max-health: 30.0
+  color: CHESTNUT
+  style: NONE
+  saddle: true
+  remove-on-finish: true
+checkpoints:
+  enabled: false
+rewards:
+  first:
+    enabled: true
+    commands: []
+    experience: 100
+    items: ['DIAMOND:3']
+  second:
+    enabled: true
+    commands: []
+    experience: 50
+    items: ['GOLD_INGOT:5']
+  third:
+    enabled: true
+    commands: []
+    experience: 25
+    items: ['IRON_INGOT:5']
+
+# Objetos especiales de la carrera
+items:
+  speed-slot: 0
+  stun-slot: 1
+  speed-multiplier: 2.2
+  # Enfriamiento individual por objeto y jugador.
+  cooldown-seconds: 20
+
+
+# Menú para quienes cruzan la meta o quedan eliminados y pasan a espectador.
+winner-menu:
+  title: '&6&lCarrera de caballos: ¿Qué deseas hacer?'
+  exit:
+    material: RED_CONCRETE
+    slot: 11
+    name: '&c&lSalir del Evento'
+    lore:
+      - '&7Vuelve a tu ubicación anterior.'
+      - '&ePulsa para salir.'
+  spectate:
+    material: BLUE_CONCRETE
+    slot: 15
+    name: '&9&lEspectear'
+    lore:
+      - '&7Observa el resto de la carrera.'
+      - '&7Para salir del modo espectador:'
+      - '&e/evento leave'
+spectator-items:
+  exit:
+    material: BARRIER
+    slot: 8
+    name: '&cSalir del evento'
+    lore:
+      - '&7Para salir del modo espectador:'
+      - '&e/evento leave'
+
+```
+
+### `inventario/backroom.yml`
+
+Este bloque es el contenido del recurso del repositorio. Los comentarios YAML originales se conservan como guía. Ajusta los valores según las opciones documentadas en el propio archivo.
+
+```yaml
+size: 27
+title: '&5&lBackroom'
+items:
+  info: {slot: 13, material: COMPASS, name: '&dInformación', lore: ['&7PvP configurable en events/backroom.yml']}
+
+```
+
+### `inventario/caballos.yml`
+
+Este bloque es el contenido del recurso del repositorio. Los comentarios YAML originales se conservan como guía. Ajusta los valores según las opciones documentadas en el propio archivo.
+
+```yaml
+size: 27
+title: '&6&lCarrera de Caballos'
+items:
+  info: {slot: 13, material: SADDLE, name: '&6Información', lore: ['&7Inscríbete y compite']}
+
+```
+
+### `inventario/colormatch.yml`
+
+Este bloque es el contenido del recurso del repositorio. Los comentarios YAML originales se conservan como guía. Ajusta los valores según las opciones documentadas en el propio archivo.
+
+```yaml
+title: '&d&lColorMatch'
+size: 27
+items:
+  join:
+    slot: 11
+    material: LIME_WOOL
+    name: '&a&lEntrar a ColorMatch'
+    lore: ['&7Salta al color correcto y sé', '&7el último jugador en pie.', '&eClic para entrar']
+  leave:
+    slot: 15
+    material: RED_WOOL
+    name: '&c&lSalir de ColorMatch'
+    lore: ['&7Abandona la partida actual.']
+  status:
+    slot: 13
+    material: BOOK
+    name: '&e&lEstado de la partida'
+    lore: ['&7Consulta el estado y la ronda actual.', '&eClic para ver el estado']
+  stats:
+    slot: 22
+    material: PLAYER_HEAD
+    name: '&b&lMis estadísticas'
+    lore: ['&7Victorias, partidas y eliminaciones.', '&eClic para consultar']
+  top:
+    slot: 4
+    material: GOLD_INGOT
+    name: '&6&lTop de victorias'
+    lore: ['&7Los mejores jugadores de ColorMatch.', '&eClic para ver el top']
+
+```
+
