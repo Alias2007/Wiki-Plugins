@@ -1,30 +1,19 @@
-# ApoloEvent Wiki · ApoloMC Network
+# ApoloMC · Documentación de plugins
 
-Sitio web oficial de documentación de **ApoloEvent**.
+Centro de documentación técnica de cinco plugins de la red **ApoloMC Network**.
 
-🌐 **Web:** https://alias2007.github.io/Wiki-Plugins/
+## Categorías
 
-La web incluye una portada gaming adaptable a móviles, buscador de guías, accesos a descargas y enlaces al repositorio.
+1. [ApoloEvent](https://github.com/Alias2007/ApoloEvent-v2.0) — eventos, minijuegos, bosses y AirDrops.
+2. [KitPvP-Core](https://github.com/Alias2007/KitPvP) — kits, combate, arenas, economía y competición.
+3. [ApoloRankUp](https://github.com/Alias2007/ApoloRankUp) — niveles, requisitos y desbloqueos.
+4. [ApoloRR](https://github.com/Alias2007/ApoloRR) — minijuegos y sus sistemas.
+5. [ApoloPractice](https://github.com/Alias2007/Practice-Core) — duelos, colas, parties, torneos y replays.
 
-## Publicación con GitHub Pages
+La web está diseñada como una referencia de uso: comandos, argumentos, permisos, variables/placeholders, subfunciones y archivos de configuración. No es un catálogo de descargas.
 
-1. Abre **Settings → Pages**.
-2. En **Build and deployment → Source**, selecciona **GitHub Actions**.
-3. Abre **Actions** y espera a que termine el flujo **Deploy ApoloEvent Website**.
+## Publicación
 
-El sitio se publica automáticamente al actualizar `index.html`, `assets/` o `docs/`.
+La página se sirve desde la rama `gh-pages` del repositorio con GitHub Pages. Para publicar manualmente desde Termux, actualiza `main` y despliega los archivos del sitio a la rama `gh-pages`.
 
-## Documentación
-
-- [Introducción](docs/inicio.md)
-- [Instalación](docs/instalacion.md)
-- [Eventos](docs/eventos.md)
-- [Comandos y permisos](docs/comandos.md)
-- [Configuración](docs/configuracion.md)
-- [Integraciones](docs/integraciones.md)
-- [Desarrollo](docs/desarrollo.md)
-- [Soporte](docs/soporte.md)
-
-La Wiki nativa de GitHub se mantiene aparte: https://github.com/Alias2007/Wiki-Plugins/wiki
-
-Este repositorio documenta exclusivamente ApoloEvent.
+Sitio: https://alias2007.github.io/Wiki-Plugins/
