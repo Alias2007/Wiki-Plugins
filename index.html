@@ -3,9 +3,10 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width,initial-scale=1">
-<meta name="theme-color" content="#f4f5f2">
-<meta name="description" content="Documentación de los plugins de ApoloMC Network. Funciones, comandos, permisos, variables y configuración.">
-<title>ApoloMC · Documentación</title>
+<meta name="theme-color" content="#100d18">
+<meta name="description" content="ApoloMC Dedicator Network — documentación oficial de plugins, funciones, comandos y configuración.">
+<title>ApoloMC · Dedicator Network</title>
+<link rel="icon" href="assets/img/apolomc-logo.svg" type="image/svg+xml">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700&family=Manrope:wght@500;600;700;800&display=swap" rel="stylesheet">
@@ -16,21 +17,25 @@
 <body>
 <header class="topbar">
   <button class="mobile-menu" id="mobileMenu" aria-label="Abrir navegación">☰</button>
-  <a href="#home" class="brand"><span class="brand-icon">A</span><span>ApoloMC <small>DOCUMENTACIÓN</small></span></a>
-  <div class="top-search"><span>⌕</span><input id="globalSearch" type="search" placeholder="Buscar comandos, variables o funciones…" autocomplete="off"><kbd>Ctrl K</kbd><div id="searchResults" class="search-results" hidden></div></div>
-  <a class="github-link" href="https://github.com/Alias2007/Wiki-Plugins" target="_blank" rel="noreferrer">Repositorio ↗</a>
+  <a href="#home" class="brand"><img class="brand-logo" src="assets/img/apolomc-logo.svg" alt="ApoloMC Dedicator Network by Alias"><span>ApoloMC <small>DEDICATOR NETWORK</small></span></a>
+  <div class="top-search"><span aria-hidden="true">⌕</span><input id="globalSearch" type="search" placeholder="Buscar comandos, variables o funciones…" autocomplete="off" aria-label="Buscar documentación"><kbd>Ctrl K</kbd><div id="searchResults" class="search-results" hidden></div></div>
+  <div class="preferences">
+    <label class="preference"><span aria-hidden="true">文</span><select id="languageSelect" aria-label="Idioma"><option value="es">Español</option><option value="en">English</option><option value="pt">Português</option><option value="fr">Français</option><option value="de">Deutsch</option></select></label>
+    <label class="preference"><span aria-hidden="true">◐</span><select id="themeSelect" aria-label="Tema"><option value="purple">Morado</option><option value="midnight">Medianoche</option><option value="ocean">Océano</option><option value="forest">Bosque</option><option value="rose">Rosa</option></select></label>
+  </div>
+  <a class="github-link" href="https://github.com/Alias2007/Wiki-Plugins" target="_blank" rel="noreferrer">GitHub ↗</a>
 </header>
 <div class="layout">
   <aside class="sidebar" id="sidebar">
-    <div class="side-top"><span>DOCUMENTACIÓN</span><span class="side-count" id="pluginCount">5 PLUGINS</span></div>
-    <a class="home-link active" href="#home" id="homeLink"><span>⌂</span> Inicio</a>
+    <div class="side-top"><span data-i18n="documentation">DOCUMENTACIÓN</span><span class="side-count" id="pluginCount">5 PLUGINS</span></div>
+    <a class="home-link active" href="#home" id="homeLink"><span>⌂</span><span data-i18n="home">Inicio</span></a>
     <div id="pluginNavigation"></div>
-    <div class="sidebar-note"><b>¿Falta información?</b><p>Busca por comando, permiso, variable o nombre de función.</p><a href="https://github.com/Alias2007/Wiki-Plugins/issues">Enviar sugerencia ↗</a></div>
+    <div class="sidebar-note"><b data-i18n="missing">¿Falta información?</b><p data-i18n="searchTip">Busca por comando, permiso, variable o nombre de función.</p><a href="https://github.com/Alias2007/Wiki-Plugins/issues" data-i18n="suggest">Enviar sugerencia ↗</a></div>
   </aside>
   <main class="content-area">
     <div class="breadcrumbs" id="breadcrumbs"><span>ApoloMC</span><span>/</span><b>Inicio</b></div>
     <article id="pageContent" class="page-content"><div class="loading">Cargando documentación…</div></article>
-    <footer class="page-footer"><span>ApoloMC Network · Documentación técnica</span><a href="https://github.com/Alias2007/Wiki-Plugins">Repositorio en GitHub ↗</a></footer>
+    <footer class="page-footer"><span>© 2026 ApoloMC · Dedicator Network · by: Alias. <span data-i18n="rights">Todos los derechos reservados.</span> <a href="LICENSE">MIT License</a></span><a href="https://github.com/Alias2007/Wiki-Plugins">GitHub ↗</a></footer>
   </main>
 </div>
 </body>
