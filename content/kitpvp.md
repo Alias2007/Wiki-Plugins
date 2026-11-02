@@ -1471,3 +1471,198 @@ abilities:
 
 ```
 
+
+
+## Contenido YAML — continuación
+
+### `afk-zone-example.yml`
+
+Contenido fuente con comentarios originales:
+
+```yaml
+# Plantilla para copiar a afk-zones/<nombre>.yml y editar.
+enabled: false
+permission: ""
+messages:
+  entered: "&aEntraste a la zona AFK. Próxima recompensa en &f%time%"
+  left: "&7Saliste de la zona AFK. Tiempo: &f%time%"
+  reward:
+    - "&aRecompensa por &f%time%&a:"
+    - "&7- &f%reward%"
+in-zone:
+  title: "&d⌚ &fZONA AFK"
+  subtitle: "&ePróxima recompensa: &d%time%"
+  actionbar: ""
+  bossbar:
+    enabled: true
+    name: "&dZona AFK &7| &f%time%"
+    color: PURPLE
+    style: SOLID
+reward-time-seconds: 60
+roll-amount: 1
+rewards:
+  - chance: 50.0
+    permission: ""
+    minimum-time: 0
+    maximum-time: 100000
+    display: "1x Iron Ingot"
+    items:
+      - material: IRON_INGOT
+        amount: 1
+    commands: []
+  - chance: 25.0
+    permission: ""
+    minimum-time: 0
+    maximum-time: 100000
+    display: "5x Diamond"
+    items:
+      - material: DIAMOND
+        amount: 5
+    commands: []
+zone:
+  location1: {world: "world", x: 0, y: 80, z: 0}
+  location2: {world: "world", x: 5, y: 85, z: 5}
+
+```
+
+### `afk-zone.yml`
+
+Contenido fuente con comentarios originales:
+
+```yaml
+# Configuración global de zonas AFK.
+enabled: true
+prefix: "&5&lAPOLO &8» &r"
+zone-per-ip-limit: -1
+reset-after-reward: false
+# 0 = llena/decreciente; 1 = vacía/creciente.
+bossbar-direction: 0
+
+```
+
+### `arenas.yml`
+
+Contenido fuente con comentarios originales:
+
+```yaml
+# Individual arena definitions are stored in arenas/<id>.yml.
+settings:
+  auto-assign: false
+  require-spawn: true
+
+```
+
+### `clans.yml`
+
+Contenido fuente con comentarios originales:
+
+```yaml
+# Sistema de clanes nativo de KitPvP-Core; no requiere UltimateClans.
+enabled: true
+settings:
+  max-members: 20
+  # true permite daño entre miembros del mismo clan.
+  friendly-fire: true
+  # Activa solicitudes y aceptación de alianzas.
+  alliances: true
+  # false bloquea el daño entre miembros de clanes aliados.
+  allied-friendly-fire: false
+  min-name-length: 3
+  max-name-length: 16
+
+```
+
+### `combat.yml`
+
+Contenido fuente con comentarios originales:
+
+```yaml
+# KitPvP-Core — Configuración de Combate y CombatLog
+tag:
+  duration-seconds: 15
+  announce: true
+
+rewards:
+  kill-coins: 10
+  kill-xp: 25
+
+friendly-fire:
+  enabled: true
+  clan-members: true
+
+# Sanción automática personalizable por desconexión en combate (CombatLogX style)
+punishment:
+  enabled: true
+  # Ejecutar al jugador que desconectó
+  kill-player: true
+  # Dropear los objetos del inventario en la posición de desconexión
+  drop-items: true
+  # Dropear la experiencia acumulada
+  drop-exp: true
+  # Penalizaciones económicas y estadísticas al infractor
+  loss-coins: 50
+  loss-xp: 25
+  reset-streak: true
+  # Otorgar la baja y recompensa al último jugador que lo atacó
+  credit-attacker: true
+  # Notificaciones
+  broadcast: true
+  broadcast-message: "&5&lCOMBAT &8» &c{player} &7se desconectó en combate y fue ejecutado."
+  attacker-message: "&5&lCOMBAT &8» &a¡{player} se desconectó peleando contra ti! Has recibido la baja."
+  penalty-message: "&c&lCOMBAT-LOG &7» &cFuiste sancionado por desconectarte durante el combate."
+  # Comandos de consola a ejecutar en caso de desconexión en combate (usa {player} y {attacker})
+  commands: []
+
+```
+
+### `command-filter.yml`
+
+Contenido fuente con comentarios originales:
+
+```yaml
+# Command filtering for the KitPvP core.
+# Command names are case-insensitive and may be written with or without the leading slash.
+enabled: true
+
+# If true, only commands listed under commands are executable by non-bypassed players.
+use-commands-as-whitelist: false
+
+# Block commands from execution. Supports command roots and full command forms.
+commands:
+  - "plugins"
+  - "pl"
+  - "version"
+  - "ver"
+  - "about"
+  - "icanhasbukkit"
+  - "?"
+  - "helpop"
+  - "essentials:help"
+  - "bukkit:help"
+  - "minecraft:help"
+  - "essentials:plugins"
+  - "essentials:version"
+  - "essentials:about"
+  - "bukkit:plugins"
+  - "bukkit:pl"
+  - "bukkit:version"
+  - "bukkit:ver"
+  - "bukkit:about"
+
+# Block any command containing a namespace separator, such as minecraft: or bukkit:.
+block-colon-commands: true
+
+# Hide commands from tab completion. Set true to show only commands in commands.
+filter-tab-completion: true
+
+# Permission that bypasses command execution filtering.
+bypass-permission: "kitpvp.commandfilter.bypass"
+
+# Permission required to reload this configuration.
+admin-permission: "kitpvp.admin.commandfilter"
+
+blocked-message: "&cNo tienes permiso para ejecutar ese comando."
+reload-message: "&aFiltro de comandos recargado correctamente."
+
+```
+
