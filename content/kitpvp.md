@@ -2556,3 +2556,529 @@ items:
 
 ```
 
+
+
+## Contenido YAML — continuación
+
+### `kits/tank.yml`
+
+Contenido fuente con comentarios originales:
+
+```yaml
+display-name: "&6Tanque"
+permission: "kitpvp.kit.tank"
+cooldown-seconds: 30
+items:
+  sword: {material: STONE_SWORD, amount: 1}
+  food: {material: COOKED_BEEF, amount: 16}
+  helmet: {material: DIAMOND_HELMET, amount: 1}
+  chestplate: {material: IRON_CHESTPLATE, amount: 1}
+  leggings: {material: IRON_LEGGINGS, amount: 1}
+  boots: {material: IRON_BOOTS, amount: 1}
+
+```
+
+### `kits/warrior.yml`
+
+Contenido fuente con comentarios originales:
+
+```yaml
+display-name: "&cGuerrero"
+permission: ""
+cooldown-seconds: 10
+items:
+  sword: {material: IRON_SWORD, amount: 1}
+  food: {material: COOKED_BEEF, amount: 16}
+  helmet: {material: IRON_HELMET, amount: 1}
+  chestplate: {material: IRON_CHESTPLATE, amount: 1}
+  leggings: {material: IRON_LEGGINGS, amount: 1}
+  boots: {material: IRON_BOOTS, amount: 1}
+
+```
+
+### `leaderboard-animated.yml`
+
+Contenido fuente con comentarios originales:
+
+```yaml
+# Leaderboard 3D estático para Paper 1.21.4.
+# Guarda la ubicación una sola vez con /leaderboards animated set.
+# El cartel no gira hacia los jugadores ni se desplaza; solo refresca sus estadísticas.
+# auto-start mantiene la pantalla activa al reiniciar el servidor.
+enabled: true
+auto-start: true
+location-set: false
+location:
+  world: world
+  x: 0.0
+  y: 100.0
+  z: 0.0
+  yaw: 0.0
+  pitch: 0.0
+rotation:
+  start-index: 0 # Top fijo que se muestra; no rota automáticamente.
+  seconds-per-top: 15
+  entries: 10
+display:
+  height-offset: 2.0
+  line-width: 320
+  view-range: 1.5
+  refresh-ticks: 20
+  shadow: true
+  background:
+    alpha: 175
+    red: 13
+    green: 8
+    blue: 25
+animation:
+  bob-amplitude: 0.08 # Clave heredada; el modo estático no mueve la pantalla.
+  progress-segments: 18 # Clave heredada; el modo estático no muestra barra de progreso.
+style:
+  title-format: "&d&lAPOLOMC NETWORK\n&f{title}"
+  separator: "&8&m--------------------------------"
+  row-format: "&7#{position} &f{player} &8» &a{value}"
+  progress-filled: "&d█"
+  progress-empty: "&8░"
+  progress-format: "&7Siguiente top: {bar} &8({seconds}s)"
+
+```
+
+### `leaderboard-menu.yml`
+
+Contenido fuente con comentarios originales:
+
+```yaml
+# ============================================================================
+#  Menú de tops (/tops, /leaderboards) - KitPvP-Core
+# ============================================================================
+#  - /tops abre el salón de la fama con todas las categorías. /tops <id> abre una categoría (por ejemplo /tops kills).
+#  - Cada categoría muestra un podio (puestos 1-3), las gradas (4-10), un listado paginado hasta el puesto 100
+#    y tu propia posición, con cuánto te falta para superar al siguiente jugador.
+#  - Los tops internos (kills, deaths, coins, level y koth) se leen directamente de los perfiles del core.
+#    Cualquier otro tablero usa ajLeaderboards + PlaceholderAPI (solo podio y gradas).
+#  - Los textos aceptan colores &a, hexadecimales &#a855f7 y estos tokens (según el ítem):
+#    {position} {player} {value} {score} {label} {status} {bar} {leader_percent} {behind} {to_first} {you}
+# ============================================================================
+enabled: true
+menu:
+  # Título del salón de la fama. El menú de cada top usa design.top-title.
+  title: "&8✦ &5&lSalón de la Fama &8✦"
+  # Cuántos puestos se muestran en el podio y las gradas (3-10). El resto va en las páginas siguientes.
+  entries: 10
+  # Segundos entre actualizaciones automáticas de un top abierto (0 = desactivado).
+  auto-refresh-seconds: 10
+  previous-button:
+    material: ARROW
+    name: "&e&lTOP ANTERIOR"
+    lore:
+      - "&7{title}"
+      - "&8Haz clic para cambiar de top"
+  next-button:
+    material: NETHER_STAR
+    name: "&d&lSIGUIENTE TOP"
+    lore:
+      - "&7{title}"
+      - "&8Haz clic para ver el siguiente top"
+  back-button:
+    material: OAK_DOOR
+    name: "&e&l« CATEGORÍAS"
+    lore:
+      - "&7Volver al salón de la fama"
+  page-previous-button:
+    material: PAPER
+    name: "&f&l« PUESTOS ANTERIORES"
+    lore:
+      - "&7Ir al {range}"
+  page-next-button:
+    material: PAPER
+    name: "&f&lPUESTOS SIGUIENTES »"
+    lore:
+      - "&7Ver los puestos &f{range}"
+  close-button:
+    material: BARRIER
+    name: "&c&lCERRAR MENÚ"
+    lore:
+      - "&7Salir de los tops"
+  empty-name: "&7Puesto #{position} libre"
+  no-data-lore: "&cSin datos disponibles"
+  setup-message: "&cNo se encontró ajLeaderboards o PlaceholderAPI. La GUI requiere ambos plugins."
+  disabled-message: "&cEl menú de tops está desactivado."
+  no-tops-message: "&cNo hay tops configurados en leaderboard-menu.yml."
+
+# ----------------------------------------------------------------------------
+#  Apariencia
+# ----------------------------------------------------------------------------
+design:
+  # Formato del título de cada top ({title} es el título de la categoría).
+  top-title: "&8» &r{title}"
+  # Panel de fondo y color de marco por defecto (cada top puede definir "glass").
+  background: BLACK_STAINED_GLASS_PANE
+  default-glass: PURPLE_STAINED_GLASS_PANE
+  hub-glass: PURPLE_STAINED_GLASS_PANE
+  # Marco animado: un destello recorre el borde del menú.
+  animation:
+    enabled: true
+    interval-ticks: 3
+    highlight: WHITE_STAINED_GLASS_PANE
+    trail: LIGHT_GRAY_STAINED_GLASS_PANE
+  # Barras de progreso respecto al líder (usa un carácter que tu cliente muestre bien).
+  bar-char: "█"
+  bar-length: 12
+  bar-filled: "&a"
+  bar-empty: "&8"
+  you-tag: " &a(Tú)"
+  status-online: "&aConectado"
+  status-offline: "&7Desconectado"
+  # Podio: bloques bajo cada cabeza. Los slots son de un cofre de 54 casillas (0-53).
+  pillars:
+    enabled: true
+    first: GOLD_BLOCK
+    second: IRON_BLOCK
+    third: COPPER_BLOCK
+  # Posición del 1.º, 2.º y 3.º (podio) y de los puestos 4, 5, 6... (gradas).
+  podium-slots: [13, 20, 33]
+  side-slots: [11, 15, 19, 25, 28, 34, 37, 43]
+  # Estilo de cada puesto. glow: brillo del ítem (siempre se ilumina tu propia cabeza).
+  rank-styles:
+    first:
+      name: "&6&l★ #{position} &e&l{player}{you}"
+      glow: true
+      lore:
+        - "&8&m                      "
+        - "&7{label}: &e&l{value}"
+        - "&7Estado: {status}"
+        - ""
+        - "&6★ &eEl mejor de la clasificación"
+    second:
+      name: "&f&l#{position} &7&l{player}{you}"
+      lore:
+        - "&8&m                      "
+        - "&7{label}: &f&l{value}"
+        - "&7Estado: {status}"
+        - ""
+        - "&7A &f{to_first} &7del primer puesto"
+        - "{bar} &f{leader_percent}%"
+    third:
+      name: "&c&l#{position} &6&l{player}{you}"
+      lore:
+        - "&8&m                      "
+        - "&7{label}: &6&l{value}"
+        - "&7Estado: {status}"
+        - ""
+        - "&7A &f{to_first} &7del primer puesto"
+        - "{bar} &f{leader_percent}%"
+    default:
+      name: "&7#{position} &f{player}{you}"
+      lore:
+        - "&7{label}: &a{value}"
+        - "&7Estado: {status}"
+        - ""
+        - "&7Detrás del puesto anterior: &c-{behind}"
+        - "{bar} &f{leader_percent}%"
+  # Tarjeta de cada categoría en el salón de la fama (después de la descripción del top).
+  category-lore:
+    - ""
+    - "&7Líder: &f{leader} &8- &e{leader_value}"
+    - "&7Tu puesto: &a{rank} &8(&f{yours}&8)"
+    - ""
+    - "&e» &7Clic para ver la clasificación"
+  hub-header:
+    material: BEACON
+    name: "&d&l✦ SALÓN DE LA FAMA ✦"
+    lore:
+      - "&7Los mejores jugadores del servidor."
+      - "&8Elige una categoría para ver la clasificación."
+  # Tu tarjeta de perfil en el salón de la fama.
+  profile:
+    name: "&a&l{player}"
+    lore:
+      - "&7Kills: &c{kills} &8| &7Muertes: &6{deaths}"
+      - "&7KDR: &f{kdr}"
+      - "&7Asistencias: &e{assists}"
+      - "&7Nivel: &e{level}"
+      - "&7Monedas: &6{coins}"
+      - "&7Racha: &a{streak} &8(mejor {maxstreak})"
+      - "&7Victorias Koth: &d{koth}"
+  # Tu posición en el menú de un top.
+  me:
+    name: "&a&lTu posición: &f{rank}"
+    lore:
+      - "&7{label}: &a{value}"
+      - "{next_line}"
+    first-line: "&6¡Eres el número uno!"
+    next-line: "&7Para superar a &f{above}&7: &e+{diff}"
+    enter-line: "&7Para entrar al top 100: &e+{diff}"
+  # Casillas de los botones y detalles del menú de categorías (0-53 en un top, 0-44 en el salón de la fama).
+  slots:
+    back: 45
+    previous-page: 46
+    previous-top: 47
+    me: 49
+    next-top: 51
+    next-page: 52
+    close: 53
+    info: 10
+    refresh: 16
+    hub-header: 13
+    hub-profile: 40
+    hub-close: 42
+
+# Sonidos (vacío = sin sonido). Usa claves como minecraft:ui.button.click
+sounds:
+  volume: 0.6
+  open-hub: "minecraft:block.ender_chest.open"
+  open-top: "minecraft:block.amethyst_block.chime"
+  click: "minecraft:ui.button.click"
+  page: "minecraft:item.book.page_turn"
+
+# ----------------------------------------------------------------------------
+#  Categorías. Agrega todas las que quieras (hasta 14); cada id debe ser único.
+#   id            kills | deaths | money/coins | level | koth usan los perfiles del core; otro id usa "board"
+#   title         título del ítem y del menú
+#   icon          material del ítem en el salón de la fama
+#   glass         color del marco animado (material de cristal tintado)
+#   label         nombre corto de la estadística (por defecto, el título sin colores)
+#   description   líneas bajo el título en el salón de la fama
+#   value-format  cómo se muestra la puntuación ({value})
+#  Para un tablero de ajLeaderboards: board, type (alltime...), name-placeholder, value-placeholder
+#  y position-placeholder (opcionales, admiten {board} {position} {type}).
+#  Después de editar ejecuta /leaderboards reload.
+# ----------------------------------------------------------------------------
+tops:
+  - id: kills
+    title: "&cTop Kill"
+    icon: IRON_SWORD
+    glass: RED_STAINED_GLASS_PANE
+    label: "Kills"
+    description:
+      - "&7Los jugadores con más bajas."
+    board: "kitpvp_kills"
+    type: "alltime"
+    value-format: "{value} kills"
+  - id: deaths
+    title: "&eTop Death"
+    icon: SKELETON_SKULL
+    glass: YELLOW_STAINED_GLASS_PANE
+    label: "Muertes"
+    description:
+      - "&7Quienes más veces han caído."
+    board: "kitpvp_deaths"
+    type: "alltime"
+    value-format: "{value} deaths"
+  - id: money
+    title: "&6Top Money"
+    icon: GOLD_INGOT
+    glass: ORANGE_STAINED_GLASS_PANE
+    label: "Monedas"
+    description:
+      - "&7Las mayores fortunas."
+    board: "kitpvp_coins"
+    type: "alltime"
+    value-format: "{value} monedas"
+  - id: level
+    title: "&aTop Nivel"
+    icon: EXPERIENCE_BOTTLE
+    glass: LIME_STAINED_GLASS_PANE
+    label: "Nivel"
+    description:
+      - "&7Los jugadores de mayor nivel."
+    board: "kitpvp_level"
+    type: "alltime"
+    value-format: "nivel {value}"
+  - id: koth
+    title: "&dTop Koth"
+    icon: NETHER_STAR
+    glass: MAGENTA_STAINED_GLASS_PANE
+    label: "Victorias Koth"
+    description:
+      - "&7Los reyes de la colina."
+    board: "kitpvp_koth_wins"
+    type: "alltime"
+    value-format: "{value} victorias Koth"
+
+```
+
+### `messages.yml`
+
+Contenido fuente con comentarios originales:
+
+```yaml
+prefix: "&5&lAPOLO &8» &r"
+messages:
+  kits-header: "&dKits disponibles:"
+  kit-failed: "&cNo se pudo entregar ese kit. Comprueba el nombre, permisos o enfriamiento."
+  kit-given: "&aKit equipado correctamente."
+  balance: "&7Tu saldo: &6{coins} monedas"
+  no-permission: "&cNo tienes permiso para hacer eso."
+  reloaded: "&aConfiguraciones recargadas."
+  player-only: "&cEste comando solo puede utilizarlo un jugador."
+  invalid-amount: "&cIntroduce una cantidad positiva válida."
+  not-enough: "&cNo tienes monedas suficientes."
+  pay-success: "&aEnviaste &e{amount} monedas &aa &f{player}&a."
+  pay-received: "&aRecibiste &e{amount} monedas &ade &f{player}&a."
+  pay-self: "&cNo puedes transferirte monedas a ti mismo."
+  player-not-found: "&cEse jugador debe estar conectado."
+  kill: "&c{victim} &7fue eliminado por &a{killer}&7."
+  death: "&c{player} &7ha muerto."
+  spawn-protection: "&ePreparándote para combatir... &a{seconds} segundos de protección."
+  spawn-protection-ended: "&c¡La protección terminó! ¡A luchar!"
+  spawn-not-found: "&cNo hay puntos de aparición PvP válidos configurados."
+  spawn-saved: "&aPunto de aparición guardado correctamente."
+  level-up: "&d¡Subiste al nivel &f{level}&d!"
+  combat-tagged: "&c¡Estás en combate! No abandones el servidor."
+# Personaliza /help. Colores con & y variables {page}, {pages}, {version}.
+help:
+  text:
+    invalid-page: "&cPágina inválida. Usa /help <1-{pages}>."
+  header:
+    - "&8&m━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━"
+    - "&5&lAPOLOMC &d&lKITPVP &8• &7Ayuda &f{page}&8/&f{pages}"
+    - "&7Versión &f{version} &8| &7Comandos útiles del servidor"
+    - "&8&m━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━"
+  footer:
+    - "&8&m━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━"
+    - "&7Escribe &f/help <1-{pages}> &7para cambiar de página o &f/help&7."
+  pages:
+    1:
+      lines:
+        - text: "&d&lJUGADOR"
+        - text: "&d/kit &8» &fAbrir selector de kits"
+        - text: "&d/kit <id> &8» &fEquipar un kit disponible"
+        - text: "&d/menu &8» &fAbrir el menú principal"
+        - text: "&d/tag &8» &fElegir tu etiqueta"
+        - text: "&d/coins &8» &fConsultar tu saldo"
+        - text: "&d/report &8» &fReportar a un jugador o un bug"
+        - text: "&d/pay <jugador> <cantidad> &8» &fTransferir monedas"
+        - text: "&d/kitpvp stats [jugador] &8» &fVer estadísticas"
+        - text: "&d/top <kills|coins|level> &8» &fConsultar el ranking global"
+        - text: "&d/leaderboards &8» &fAbrir el menú de tops"
+        - text: "&d/channel <global|world|local> &8» &fCambiar canal de chat"
+        - text: "&d/msg <jugador> <mensaje> &8» &fEnviar mensaje privado"
+        - text: "&d/ignore <jugador> &8» &fIgnorar mensajes de un jugador"
+        - text: "&d/mention <enable|disable> &8» &fConfigurar menciones"
+        - text: "&d/emoji &8» &fVer códigos de emojis"
+        - text: "&d/ec &8» &fAbrir tu ender chest"
+        - text: "&d/help 2 &8» &fCombate, clanes y actividades"
+        - text: "&d/report &8» &fReportar un jugador o error del servidor"
+    2:
+      lines:
+        - text: "&d&lCOMBATE Y PROGRESO"
+        - text: "&d/ability list &8» &fVer habilidades disponibles"
+        - text: "&d/mission status &8» &fConsultar misión diaria"
+        - text: "&d/mission claim &8» &fReclamar recompensa disponible"
+        - text: "&d/clan <create|invite|join|leave|info|chat> &8» &fGestionar tu clan"
+        - text: "&d/duel <challenge|accept|leave> &8» &fDuelos 1 contra 1"
+        - text: "&d/event <status|join|leave> &8» &fConsultar o participar en eventos"
+        - text: "&d/tournament <status|join|leave> &8» &fTorneos activos"
+        - text: "&d/cosmetics <list|select|clear> &8» &fEfectos de eliminación"
+        - text: "&d/help 3 &8» &fHerramientas administrativas"
+    3:
+      lines:
+        - text: "&d&lADMINISTRACIÓN"
+        - permission: "kitpvp.admin.reload"
+          text: "&d/kitpvp reload &8» &fRecargar configuración"
+        - permission: "kitpvp.admin.kits"
+          text: "&d/kit <create|edit|setinv|delete|give|permission|cooldown> &8» &fAdministrar kits"
+        - permission: "kitpvp.admin.arenas"
+          text: "&d/arena <...> &8» &fConfigurar arenas y spawns"
+        - permission: "kitpvp.admin.spawns"
+          text: "&d/spawn <set|list|remove|teleport|reload> &8» &fAdministrar spawns"
+        - permission: "kitpvp.admin.abilities"
+          text: "&d/ability <give|reload> &8» &fAdministrar habilidades"
+        - permission: "kitpvp.admin.events"
+          text: "&d/event <start|begin|stop|setpoint> &8» &fControlar eventos"
+        - permission: "kitpvp.admin.tournaments"
+          text: "&d/tournament <create|start|resume|stop> &8» &fAdministrar torneos"
+        - permission: "kitpvp.admin.economy"
+          text: "&d/economy <balance|give|take|set> &8» &fAdministrar monedas"
+        - text: "&d/help 4 &8» &fHerramientas de staff"
+    4:
+      lines:
+        - text: "&d&lHERRAMIENTAS DE STAFF"
+        - permission: "kitpvp.admin"
+          text: "&d/kitpvp diagnostics &8» &fEstado del core y jugadores conectados"
+        - permission: "kitpvp.admin.leaderboards"
+          text: "&d/leaderboards reload &8» &fRecargar el menú de tops"
+        - permission: "kitpvp.admin.leaderboards"
+          text: "&d/leaderboards animated <set|start|stop|status> &8» &fControlar holograma 3D"
+        - permission: "kitpvp.admin.commandfilter"
+          text: "&d/commandfilter reload &8» &fRecargar el filtro de comandos"
+        - permission: "kitpvp.rollback.restore"
+          text: "&d/ir restore <jugador> &8» &fRestaurar un backup"
+        - permission: "kitpvp.invsee.inventory.view"
+          text: "&d/invsee <jugador> &8» &fInspeccionar inventario"
+        - permission: "kitpvp.invsee.ender.view"
+          text: "&d/endersee <jugador> &8» &fInspeccionar ender chest"
+        - permission: "kitpvp.admin.conditionalevents"
+          text: "&d/conditionalevents <list|reload|run> &8» &fGestionar eventos condicionales"
+
+
+# Ayuda independiente para el equipo. Cada línea puede limitarse con un permiso.
+helpstaff:
+  header:
+    - "&8&m━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━"
+    - "&5&lAPOLOMC &d&lSTAFF &8• &7Centro de ayuda"
+    - "&7KitPvP-Core &f{version}"
+    - "&8&m━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━"
+  lines:
+    - permission: "kitpvp.tag.admin"
+      text: "&d/tag create|delete|list|reload &8» &fAdministrar etiquetas"
+    - permission: "kitpvp.chat.admin"
+      text: "&d/strings reload &8» &fRecargar chat y mensajes"
+    - permission: "kitpvp.chat.socialspy"
+      text: "&d/socialspy &8» &fActivar o desactivar monitorización de mensajes privados"
+    - permission: "kitpvp.chat.clear"
+      text: "&d/clearchat &8» &fLimpiar el chat público"
+    - permission: "kitpvp.admin"
+      text: "&d/kitpvp diagnostics &8» &fDiagnóstico del core"
+    - permission: "kitpvp.admin.reload"
+      text: "&d/kitpvp reload &8» &fRecargar configuraciones del core"
+    - permission: "kitpvp.admin.kits"
+      text: "&d/kit <create|edit|setinv|delete|give|permission|cooldown> &8» &fAdministrar kits"
+    - permission: "kitpvp.admin.arenas"
+      text: "&d/arena <...> &8» &fAdministrar arenas"
+    - permission: "kitpvp.admin.spawns"
+      text: "&d/spawn <set|list|remove|teleport|reload> &8» &fAdministrar spawns"
+    - permission: "kitpvp.admin.npc"
+      text: "&d/npc <create|setkit|setname|settype|glow|remove|list|reload> &8» &fAdministrar NPCs"
+    - permission: "kitpvp.admin.abilities"
+      text: "&d/ability <give|reload> &8» &fAdministrar habilidades"
+    - permission: "kitpvp.admin.events"
+      text: "&d/event <start|begin|stop|setpoint> &8» &fAdministrar eventos"
+    - permission: "kitpvp.admin.tournaments"
+      text: "&d/tournament <create|start|resume|stop> &8» &fAdministrar torneos"
+    - permission: "kitpvp.admin.economy"
+      text: "&d/economy <balance|give|take|set> &8» &fAdministrar monedas"
+    - permission: "kitpvp.admin.leaderboards"
+      text: "&d/leaderboards reload &8» &fRecargar tops y leaderboards"
+    - permission: "kitpvp.admin.commandfilter"
+      text: "&d/commandfilter reload &8» &fRecargar el filtro de comandos"
+    - permission: "kitpvp.rollback.restore"
+      text: "&d/ir restore <jugador> &8» &fRestaurar inventarios respaldados"
+    - permission: "kitpvp.invsee.inventory.view"
+      text: "&d/invsee <jugador> &8» &fInspeccionar inventarios"
+    - permission: "kitpvp.admin.conditionalevents"
+      text: "&d/conditionalevents <list|reload|run> &8» &fGestionar eventos condicionales"
+    - permission: "kitpvp.helpstaff"
+      text: "&d/report &8» &fRevisar que los reportes se envíen al canal configurado"
+  footer:
+    - "&8&m━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━"
+    - "&7Edita las entradas en &fmessages.yml &7y configura Discord en &freports.yml&7."
+
+```
+
+### `missions.yml`
+
+Contenido fuente con comentarios originales:
+
+```yaml
+daily:
+  enabled: true
+  reset-hour-utc: 0
+weekly:
+  enabled: true
+  reset-day: MONDAY
+missions: {}
+
+```
+
