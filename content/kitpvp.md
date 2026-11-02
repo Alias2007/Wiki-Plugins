@@ -2323,3 +2323,236 @@ items:
 
 ```
 
+
+
+## Contenido YAML — continuación
+
+### `inventario/tienda.yml`
+
+Contenido fuente con comentarios originales:
+
+```yaml
+title: "&8Tienda"
+size: 27
+items: {}
+
+```
+
+### `inventory-rollback.yml`
+
+Contenido fuente con comentarios originales:
+
+```yaml
+# ApoloMC KitPvP - Inventory Rollback
+enabled: true
+
+# Automatic snapshots. Backups are saved to plugins/KitPvP-Core/inventory-rollback/<uuid>/.
+backups:
+  join: true
+  leave: true
+  death: true
+  world-change: true
+  manual: true
+
+# Number of backups kept per player. Death snapshots have their own limit.
+retention:
+  deaths: 50
+  other: 10
+
+```
+
+### `kit-chest.yml`
+
+Contenido fuente con comentarios originales:
+
+```yaml
+# Cofre virtual individual: no es el inventario compartido del bloque.
+# Cada jugador tiene su propio contenido persistente por UUID.
+# Al abrirlo, si cambió el kit equipado, su contenido se reinicia al kit nuevo.
+# Las claves bajo kits.<id> deben coincidir con el nombre del archivo del kit sin .yml.
+# Si el kit no aparece aquí, se usa fallback-kit.
+size: 27
+title: "&8Cofre de kit &7- &d%kit%"
+fallback-kit: default
+messages:
+  no-kit: "&cNo hay contenido configurado para tu kit."
+
+kits:
+  default:
+    items:
+      totem:
+        slot: 0
+        material: TOTEM_OF_UNDYING
+        amount: 1
+      healing:
+        slot: 1
+        material: SPLASH_POTION
+        potion-type: STRONG_HEALING
+        amount: 2
+      wind-charge:
+        slot: 2
+        material: WIND_CHARGE
+        amount: 4
+
+  # Ejemplo: plugins/KitPvP-Core/kits/pot.yml
+  pot:
+    items:
+      healing:
+        slot: 10
+        material: SPLASH_POTION
+        potion-type: STRONG_HEALING
+        amount: 8
+      speed:
+        slot: 12
+        material: SPLASH_POTION
+        potion-type: STRONG_SWIFTNESS
+        amount: 4
+      strength:
+        slot: 14
+        material: SPLASH_POTION
+        potion-type: STRONG_STRENGTH
+        amount: 4
+      fire-resistance:
+        slot: 16
+        material: SPLASH_POTION
+        potion-type: LONG_FIRE_RESISTANCE
+        amount: 2
+
+  # Ejemplo: plugins/KitPvP-Core/kits/mazo.yml
+  mazo:
+    items:
+      totems:
+        slot: 10
+        material: TOTEM_OF_UNDYING
+        amount: 3
+      wind-charges:
+        slot: 13
+        material: WIND_CHARGE
+        amount: 16
+
+  # Ejemplo: plugins/KitPvP-Core/kits/lanza.yml
+  lanza:
+    items:
+      totems:
+        slot: 10
+        material: TOTEM_OF_UNDYING
+        amount: 2
+      healing:
+        slot: 12
+        material: SPLASH_POTION
+        potion-type: STRONG_HEALING
+        amount: 6
+      speed:
+        slot: 14
+        material: SPLASH_POTION
+        potion-type: STRONG_SWIFTNESS
+        amount: 3
+      wind-charges:
+        slot: 16
+        material: WIND_CHARGE
+        amount: 8
+
+  starter:
+    items:
+      food:
+        slot: 10
+        material: COOKED_BEEF
+        amount: 16
+      healing:
+        slot: 13
+        material: SPLASH_POTION
+        potion-type: HEALING
+        amount: 2
+
+  warrior:
+    items:
+      totem:
+        slot: 10
+        material: TOTEM_OF_UNDYING
+        amount: 1
+      healing:
+        slot: 13
+        material: SPLASH_POTION
+        potion-type: HEALING
+        amount: 2
+
+  archer:
+    items:
+      arrows:
+        slot: 10
+        material: ARROW
+        amount: 32
+      healing:
+        slot: 13
+        material: SPLASH_POTION
+        potion-type: HEALING
+        amount: 2
+
+  tank:
+    items:
+      totems:
+        slot: 10
+        material: TOTEM_OF_UNDYING
+        amount: 2
+      healing:
+        slot: 13
+        material: SPLASH_POTION
+        potion-type: HEALING
+        amount: 2
+
+```
+
+### `kit-shop.yml`
+
+Contenido fuente con comentarios originales:
+
+```yaml
+# Tienda de kits; los IDs deben coincidir con los archivos existentes en kits/.
+settings:
+  enabled: true
+  permanent-unlocks: true
+  allow-free-kits: true
+  selection-mode: BOTH # NPC, GUI o BOTH
+  prevent-double-purchase: true
+kits: {}
+
+```
+
+### `kits/archer.yml`
+
+Contenido fuente con comentarios originales:
+
+```yaml
+display-name: "&aArquero"
+permission: ""
+cooldown-seconds: 10
+items:
+  bow: {material: BOW, amount: 1}
+  arrows: {material: ARROW, amount: 32}
+  sword: {material: STONE_SWORD, amount: 1}
+  food: {material: COOKED_BEEF, amount: 12}
+  helmet: {material: CHAINMAIL_HELMET, amount: 1}
+  chestplate: {material: LEATHER_CHESTPLATE, amount: 1}
+  leggings: {material: LEATHER_LEGGINGS, amount: 1}
+  boots: {material: LEATHER_BOOTS, amount: 1}
+
+```
+
+### `kits/starter.yml`
+
+Contenido fuente con comentarios originales:
+
+```yaml
+display-name: "&aStarter"
+permission: ""
+cooldown-seconds: 0
+items:
+  sword: {material: STONE_SWORD, amount: 1}
+  food: {material: COOKED_BEEF, amount: 16}
+  helmet: {material: CHAINMAIL_HELMET, amount: 1}
+  chestplate: {material: CHAINMAIL_CHESTPLATE, amount: 1}
+  leggings: {material: CHAINMAIL_LEGGINGS, amount: 1}
+  boots: {material: CHAINMAIL_BOOTS, amount: 1}
+
+```
+
