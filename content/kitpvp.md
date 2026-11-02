@@ -3082,3 +3082,134 @@ missions: {}
 
 ```
 
+
+
+## Contenido YAML — continuación
+
+### `npcs.yml`
+
+Contenido fuente con comentarios originales:
+
+```yaml
+# Registro persistente de NPC de selección. Los NPC se crean en ubicaciones elegidas por staff.
+settings:
+  enabled: true
+  # RIGHT_CLICK or LEFT_CLICK
+  interaction: RIGHT_CLICK
+  # Any valid living Bukkit entity type; VILLAGER recommended
+  default-type: VILLAGER
+  prevent-duplicate-entities: true
+  remove-orphans-on-disable: true
+npcs: {}
+
+```
+
+### `permissions.yml`
+
+Contenido fuente con comentarios originales:
+
+```yaml
+permissions:
+  kitpvp.use: "Usar funciones básicas"
+  kitpvp.kit: "Consultar y utilizar kits"
+  kitpvp.stats: "Consultar estadísticas"
+  kitpvp.pay: "Transferir monedas"
+  kitpvp.admin: "Administración del core"
+  kitpvp.admin.reload: "Recargar configuraciones"
+  kitpvp.admin.arenas: "Administrar arenas"
+  kitpvp.admin.economy: "Administrar economía"
+  kitpvp.admin.abilities: "Administrar y entregar ítems de habilidades especiales"
+
+  kitpvp.admin.afkzones: "Administrar zonas AFK y recompensas"
+  kitpvp.afkzones.bypass.iplimit: "Ignorar límite de cuentas por IP en zonas AFK"
+
+```
+
+### `progression.yml`
+
+Contenido fuente con comentarios originales:
+
+```yaml
+experience:
+  kill: 25
+  assist: 10
+  base-required: 100
+  increase-per-level: 50
+  max-level: 10000
+prestige:
+  enabled: false
+  max-prestige: 10
+
+```
+
+### `rewards.yml`
+
+Contenido fuente con comentarios originales:
+
+```yaml
+# Recompensas de combate. Todos los importes usan la economía interna del core.
+settings:
+  enabled: true
+  kill-reward: 10.0
+  assist-reward: 3.0
+  environmental-death-reward: false
+  suicide-reward: false
+  reward-victim-self: false
+  duplicate-event-window-ms: 5000
+  anti-farm:
+    enabled: true
+    repeated-kill-window-seconds: 300
+    max-repeated-rewards: 1
+    same-ip-penalty: false
+  streaks:
+    "5": 25.0
+    "10": 75.0
+  first-kill-of-day:
+    enabled: false
+    reward: 20.0
+messages:
+  kill: "&a+{amount} monedas por eliminar a {player}."
+  assist: "&e+{amount} monedas por asistencia."
+  no-reward: "&7Esta eliminación no cumple los requisitos de recompensa."
+
+```
+
+### `rewards/lang.yml`
+
+Contenido fuente con comentarios originales:
+
+```yaml
+help:
+  - "&6&lRecompensas"
+  - "&e/rewards &7- Abrir el menú"
+  - "&e/rewards reload &7- Recargar configuración"
+  - "&e/rewards reset <jugador> [menu] [recompensa] &7- Restablecer reclamaciones"
+  - "&e/rewards forceopen <jugador> [menu] &7- Abrir a un jugador"
+reload:
+  success: "&aConfiguración de recompensas recargada."
+errors:
+  menu-not-found: "&cNo existe el menú &f%menu%&c."
+  no-open-permission: "&cNo tienes permiso para abrir &f%menu%&c."
+  no-permission-command: "&cNo tienes permiso para administrar recompensas."
+  player-only: "&cSolo un jugador puede abrir el menú."
+  player-not-found: "&cEl jugador &f%player% &cno está conectado."
+no-permission:
+  message: "&cNecesitas el permiso &f%permission%&c."
+  sound: "BLOCK_ANVIL_LAND"
+on-cooldown:
+  message: "&cPodrás reclamar en &f%time%&c."
+  one-time: "&cYa reclamaste esta recompensa única."
+  sound: "BLOCK_ANVIL_LAND"
+claimed:
+  message: "&a¡Recompensa reclamada!"
+  sound: "ENTITY_PLAYER_LEVELUP"
+reset:
+  all: "&aReclamaciones de &f%player% &arestablecidas."
+  menu: "&aReclamaciones de &f%menu% &arestablecidas para &f%player%&a."
+  reward: "&aRecompensa &f%reward% &arestablecida para &f%player%&a."
+commands:
+  usage-reset: "&c/rewards reset <jugador> [menu] [recompensa]"
+  usage-forceopen: "&c/rewards forceopen <jugador> [menu]"
+
+```
+
