@@ -86,7 +86,7 @@ function homeHtml(){
  const cards=navData.plugins.map(p=>'<a class="plugin-card" href="#'+p.id+'/overview"><div class="plugin-card-head"><span class="plugin-type">'+esc(translatedLabel(pluginLabels[p.id]?.type,'',p.type))+'</span><span>↗</span></div><h2>'+esc(p.name)+'</h2><p>'+esc(translatedLabel(pluginLabels[p.id]?.description,'',p.description))+'</p><small>'+p.pages.length+' '+(lang()==='es'?'secciones':lang()==='pt'?'seções':lang()==='fr'?'sections':lang()==='de'?'Abschnitte':'sections')+'</small><div class="card-link">'+tr('open')+'</div></a>').join('');
  return '<section class="home-hero"><div class="eyebrow">APOLOMC · DEDICATOR NETWORK</div><h1>'+tr('hero')+'</h1><p>'+tr('intro')+'</p></section><div class="section-label">'+tr('categories')+'</div><div class="plugin-grid">'+cards+'</div><div class="section-label">'+tr('quick')+'</div><div class="doc-nav">'+navData.plugins.map(p=>'<a href="#'+p.id+'/overview">'+esc(p.name)+'</a>').join('')+'</div>';
 }
-async function getDoc(plugin){if(docCache[plugin])return docCache[plugin];const response=await fetch('content/'+plugin+'.md?v=5');if(!response.ok)throw new Error('No se pudo cargar content/'+plugin+'.md ('+response.status+')');return docCache[plugin]=await response.text();}
+async function getDoc(plugin){if(docCache[plugin])return docCache[plugin];const response=await fetch('content/'+plugin+'.md?v=6');if(!response.ok)throw new Error('No se pudo cargar content/'+plugin+'.md ('+response.status+')');return docCache[plugin]=await response.text();}
 function activeNav(plugin,page){
  document.querySelectorAll('.plugin-page').forEach(a=>a.classList.toggle('active',a.dataset.route===plugin+'/'+page));
  document.querySelectorAll('.plugin-group').forEach(g=>{if(g.dataset.plugin===plugin)g.classList.remove('collapsed');});
@@ -173,7 +173,7 @@ async function buildSearch(){
  if(!search.dataset.bound){search.addEventListener('input',()=>show(search.value));search.addEventListener('keydown',e=>{if(e.key==='Escape'){results.hidden=true;search.blur();}if(e.key==='Enter'){const first=results.querySelector('a');if(first)location.hash=first.getAttribute('href').slice(1);results.hidden=true;}});document.addEventListener('click',e=>{if(!e.target.closest('.top-search'))results.hidden=true;});document.addEventListener('keydown',e=>{if((e.ctrlKey||e.metaKey)&&e.key.toLowerCase()==='k'){e.preventDefault();search.focus();}});search.dataset.bound='1';}
 }
 async function init(){
- try{const r=await fetch('data/navigation.json?v=5');if(!r.ok)throw new Error('No se pudo cargar el índice.');navData=await r.json();renderNavigation();applyPreferences();await showRoute();await buildSearch();window.addEventListener('hashchange',showRoute);}
+ try{const r=await fetch('data/navigation.json?v=6');if(!r.ok)throw new Error('No se pudo cargar el índice.');navData=await r.json();renderNavigation();applyPreferences();await showRoute();await buildSearch();window.addEventListener('hashchange',showRoute);}
  catch(e){root.innerHTML='<h1>Error al cargar documentación</h1><p>'+esc(e.message)+'</p>';}
 }
 $('#languageSelect').addEventListener('change',async e=>{localStorage.setItem('apolo-language',e.target.value);applyPreferences();renderNavigation();await showRoute();});
