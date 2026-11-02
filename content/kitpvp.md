@@ -1666,3 +1666,373 @@ reload-message: "&aFiltro de comandos recargado correctamente."
 
 ```
 
+
+
+## Contenido YAML — continuación
+
+### `conditional-events.yml`
+
+Contenido fuente con comentarios originales. Los campos sensibles se ocultan:
+
+```yaml
+# Motor nativo de eventos condicionales de KitPvP-Core.
+# Se crea solo si no existe; la recarga no sobrescribe tus cambios.
+#
+# Tipos: player_join, player_quit, player_command, player_interact, player_consume,
+# block_break, block_place, player_death, player_kill, player_respawn, repetitive
+# Condiciones: equals, not equals, contains, startsWith, endsWith, >, <, >=, <=
+# Se permiten "and" y "or".
+# Variables: %player%, %player_name%, %player_uuid%, %player_world%, %online%,
+# %max_players%, %server_name%, %player_health%, %player_food%, %player_level%,
+# %player_gamemode%, %player_x%, %player_y%, %player_z%, %command%, %action%,
+# %item_material%, %item_name%, %block_type%, %is_kitpvp_block%, %victim%, %killer%, %cause%, %world_from%, %world_to%.
+#
+# Acciones: message:<texto>, broadcast:<texto>, actionbar:<texto>, title:<titulo>;<subtitulo>,
+# console_command:<comando>, give_item:<MATERIAL>;<cantidad>, repair_armor:<mensaje>, open_kit_chest,
+# potion_effect:<EFECTO>;<segundos>;<amplificador>, heal:<cantidad>,
+# set_food_level:<0-20>, teleport:<mundo>;<x>;<y>;<z>;<yaw>;<pitch>,
+# play_sound:<SONIDO>;<volumen>;<tono>, cancel_event:true|false, wait_ticks:<ticks>.
+
+settings:
+  repetitive:
+    enabled: false
+    interval-ticks: 100
+
+events:
+  bienvenida:
+    enabled: true
+    type: player_join
+    conditions: []
+    actions:
+      - "message:&d¡Bienvenido a ApoloMC, %player%!"
+      - "play_sound:ENTITY_EXPERIENCE_ORB_PICKUP;1;1"
+
+
+  # Repara solo al hacer clic derecho en un yunque portátil de KitPvP-Core.
+  reparar-armadura-yunque:
+    enabled: true
+    type: player_interact
+    conditions:
+      - '%action% equals RIGHT_CLICK and %is_kitpvp_block% equals true and %block_type% contains ANVIL'
+    actions:
+      - 'cancel_event:true'
+      - 'repair_armor:&a¡Tu armadura fue reparada!'
+
+  # Abre el cofre virtual solo en un cofre portátil de KitPvP-Core.
+  # Los jugadores pueden retirar/guardar objetos; el inventario se conserva por UUID.
+  # Edita las listas de kits en kit-chest.yml.
+  cofre-segun-kit:
+    enabled: true
+    type: player_interact
+    conditions:
+      - '%action% equals RIGHT_CLICK and %is_kitpvp_block% equals true and %block_type% equals CHEST'
+    actions:
+      - 'cancel_event:true'
+      - 'open_kit_chest'
+
+
+  cofre-trampa-segun-kit:
+    enabled: true
+    type: player_interact
+    conditions:
+      - '%action% equals RIGHT_CLICK and %is_kitpvp_block% equals true and %block_type% equals TRAPPED_CHEST'
+    actions:
+      - 'cancel_event:true'
+      - 'open_kit_chest'
+
+  ejemplo-comando:
+    enabled: false
+    type: player_command
+    conditions:
+      - '%command% contains /spawn'
+    actions:
+      - "actionbar:&aComando /spawn detectado."
+
+```
+
+### `config.yml`
+
+Contenido fuente con comentarios originales. Los campos sensibles se ocultan:
+
+```yaml
+# SCON Grado Empresa (HMAC-SHA256), proyecto kitpvp-core. Configura aquí la clave emitida por el panel.
+license-key: "REDACTED"
+
+# KitPvP-Core defaults; existing server values are preserved by ConfigUpdater.
+prefix: "&5&lAPOLO &8» &r"
+combat:
+  tag-seconds: 15
+  prevent-quit: false
+  quit-penalty: false
+  kill-reward: 10
+  death-loss: 0
+  assist-reward: 2
+  killstreak-rewards:
+    "5": {coins: 50, xp: 25}
+    "10": {coins: 150, xp: 100}
+    "20": {coins: 400, xp: 250}
+progression:
+  xp-per-kill: 25
+  xp-per-assist: 10
+  base-xp: 100
+  xp-per-level: 50
+economy:
+  starting-balance: 0
+missions:
+  daily-kills:
+    goal: 5
+    reward-coins: 100
+    reward-xp: 50
+  transfers-enabled: true
+  max-transfer: 1000000
+kits:
+  menu-title: "&8Selector de Kits"
+  cooldown-message: "&cDebes esperar {seconds}s para volver a usar este kit."
+  clear-inventory: true
+storage:
+  type: yaml
+  autosave-seconds: 60
+settings:
+  default-kit: starter
+  friendly-fire: true
+  debug: false
+
+# PvP entry flow; spawn protection is measured in seconds.
+pvp:
+  spawn-protection-seconds: 3
+  lobby-spawn:
+    world: ""
+    x: 0
+    y: 80
+    z: 0
+
+# Optional arena block rollback. Only applies inside configured arena regions where build=true.
+arenas:
+  restore-blocks: false
+  restore-delay-seconds: 30
+
+```
+
+### `cosmetics.yml`
+
+Contenido fuente con comentarios originales. Los campos sensibles se ocultan:
+
+```yaml
+enabled: true
+menu:
+  title: "&8Cosméticos ApoloMC"
+kill-effects:
+  flame: {enabled: true, particle: FLAME, count: 35, sound: ENTITY_BLAZE_DEATH}
+  hearts: {enabled: true, particle: HEART, count: 20, sound: ENTITY_PLAYER_LEVELUP}
+  portal: {enabled: true, particle: PORTAL, count: 30, sound: BLOCK_PORTAL_AMBIENT}
+categories:
+  kill-effects:
+    enabled: true
+    icon: DIAMOND
+    name: "&cEfectos de eliminación"
+    description: "&7Efectos al derrotar a otro jugador"
+    items:
+      flame: {enabled: true, material: BLAZE_POWDER, name: "&cLlamas", particle: FLAME, count: 35, sound: ENTITY_BLAZE_DEATH}
+      hearts: {enabled: true, material: HEART_OF_THE_SEA, name: "&dCorazones", particle: HEART, count: 20, sound: ENTITY_PLAYER_LEVELUP}
+      portal: {enabled: true, material: ENDER_PEARL, name: "&5Portal", particle: PORTAL, count: 30, sound: BLOCK_PORTAL_AMBIENT}
+      lightning: {enabled: true, material: TRIDENT, name: "&eRelámpago", particle: ELECTRIC_SPARK, count: 55, sound: ENTITY_LIGHTNING_BOLT_THUNDER}
+      soul: {enabled: true, material: SOUL_LANTERN, name: "&bAlmas", particle: SOUL, count: 45, sound: ENTITY_WITHER_DEATH}
+  particle-effects:
+    enabled: true
+    icon: BLAZE_POWDER
+    name: "&bEstelas de partículas"
+    description: "&7Partículas que acompañan tus movimientos"
+    items:
+      ender: {enabled: true, material: ENDER_EYE, name: "&5Rastro del End", particle: PORTAL}
+      magic: {enabled: true, material: AMETHYST_SHARD, name: "&dMagia", particle: WITCH}
+      flame: {enabled: true, material: BLAZE_POWDER, name: "&cLlamas", particle: FLAME}
+      hearts: {enabled: true, material: POPPY, name: "&dCorazones", particle: HEART}
+      stars: {enabled: true, material: NETHER_STAR, name: "&eEstrellas", particle: END_ROD}
+      souls: {enabled: true, material: SOUL_TORCH, name: "&bAlmas", particle: SOUL}
+      happy: {enabled: true, material: EMERALD, name: "&aNaturaleza", particle: HAPPY_VILLAGER}
+  hats:
+    enabled: true
+    icon: GOLDEN_HELMET
+    name: "&eSombreros mágicos"
+    description: "&7Auras y efectos sobre tu cabeza"
+    items:
+      crown: {enabled: true, material: GOLDEN_HELMET, name: "&6Corona", particle: WAX_ON}
+      halo: {enabled: true, material: END_ROD, name: "&fHalo", particle: END_ROD}
+      flame: {enabled: true, material: FIRE_CHARGE, name: "&cCorona de fuego", particle: FLAME}
+      witch: {enabled: true, material: CARVED_PUMPKIN, name: "&5Bruja", particle: WITCH}
+      snow: {enabled: true, material: SNOWBALL, name: "&bNieve", particle: SNOWFLAKE}
+  pets:
+    enabled: true
+    icon: WOLF_SPAWN_EGG
+    name: "&aMascotas"
+    description: "&7Compañeros cosméticos que te siguen"
+    items:
+      wolf: {enabled: true, material: WOLF_SPAWN_EGG, name: "&fLobo", entity: WOLF}
+      cat: {enabled: true, material: CAT_SPAWN_EGG, name: "&dGato", entity: CAT}
+      allay: {enabled: true, material: ALLAY_SPAWN_EGG, name: "&bAllay", entity: ALLAY}
+      fox: {enabled: true, material: FOX_SPAWN_EGG, name: "&6Zorro", entity: FOX}
+      bee: {enabled: true, material: BEE_SPAWN_EGG, name: "&eAbeja", entity: BEE}
+      parrot: {enabled: true, material: PARROT_SPAWN_EGG, name: "&cLoro", entity: PARROT}
+      axolotl: {enabled: true, material: AXOLOTL_SPAWN_EGG, name: "&dAjolote", entity: AXOLOTL}
+  mounts:
+    enabled: true
+    icon: SADDLE
+    name: "&6Monturas"
+    description: "&7Monturas temporales para desplazarte"
+    items:
+      horse: {enabled: true, material: SADDLE, name: "&fCaballo", entity: HORSE}
+      pig: {enabled: true, material: SADDLE, name: "&dCerdo", entity: PIG}
+      strider: {enabled: true, material: STRIDER_SPAWN_EGG, name: "&cStrider", entity: STRIDER}
+      camel: {enabled: true, material: CAMEL_SPAWN_EGG, name: "&6Camello", entity: CAMEL}
+  gadgets:
+    enabled: true
+    icon: FIREWORK_ROCKET
+    name: "&dGadgets"
+    description: "&7Objetos cosméticos con efectos"
+    items:
+      fireworks: {enabled: true, material: FIREWORK_ROCKET, name: "&dFuegos artificiales", lore: ["&7Clic derecho para un destello"], particle: FIREWORK, count: 65, sound: ENTITY_FIREWORK_ROCKET_BLAST, cooldown-ticks: 40}
+      magic: {enabled: true, material: AMETHYST_SHARD, name: "&5Varita mágica", lore: ["&7Clic derecho para liberar magia"], particle: WITCH, count: 50, sound: BLOCK_AMETHYST_BLOCK_CHIME, cooldown-ticks: 20}
+      snow: {enabled: true, material: SNOWBALL, name: "&bBola mágica", lore: ["&7Clic derecho para una ráfaga helada"], particle: SNOWFLAKE, count: 45, sound: BLOCK_GLASS_BREAK, cooldown-ticks: 20}
+      hearts: {enabled: true, material: POPPY, name: "&dCorazones", lore: ["&7Clic derecho para invocar corazones"], particle: HEART, count: 35, sound: ENTITY_PLAYER_LEVELUP, cooldown-ticks: 30}
+  projectile-effects:
+    enabled: true
+    icon: ARROW
+    name: "&cEstelas de proyectiles"
+    description: "&7Efectos visuales en flechas y proyectiles"
+    items:
+      flame: {enabled: true, material: BLAZE_POWDER, name: "&cFlechas ígneas", particle: FLAME, count: 2}
+      ender: {enabled: true, material: ENDER_EYE, name: "&5Flechas del End", particle: PORTAL, count: 3}
+      hearts: {enabled: true, material: POPPY, name: "&dFlechas de amor", particle: HEART, count: 2}
+      soul: {enabled: true, material: SOUL_TORCH, name: "&bFlechas de almas", particle: SOUL, count: 2}
+  death-effects:
+    enabled: true
+    icon: SOUL_LANTERN
+    name: "&8Efectos al morir"
+    description: "&7Efectos que aparecen al morir"
+    items:
+      soul: {enabled: true, material: SOUL_LANTERN, name: "&bAlmas", particle: SOUL, count: 45, sound: ENTITY_WITHER_DEATH}
+      explosion: {enabled: true, material: TNT, name: "&cExplosión visual", particle: EXPLOSION, count: 20, sound: ENTITY_GENERIC_EXPLODE}
+      hearts: {enabled: true, material: POPPY, name: "&dCorazones", particle: HEART, count: 35, sound: ENTITY_PLAYER_LEVELUP}
+  suits:
+    enabled: true
+    icon: LEATHER_CHESTPLATE
+    name: "&bAuras de traje"
+    description: "&7Auras visuales alrededor de tu personaje"
+    items:
+      emerald: {enabled: true, material: EMERALD, name: "&aEsmeralda", particle: HAPPY_VILLAGER}
+      fire: {enabled: true, material: BLAZE_POWDER, name: "&cFuego", particle: FLAME}
+      frost: {enabled: true, material: SNOWBALL, name: "&bEscarcha", particle: SNOWFLAKE}
+      ender: {enabled: true, material: ENDER_EYE, name: "&5End", particle: PORTAL}
+  morphs:
+    enabled: true
+    icon: CREEPER_HEAD
+    name: "&2Auras de transformación"
+    description: "&7Efectos temáticos; no cambia el modelo del jugador"
+    items:
+      creeper: {enabled: true, material: CREEPER_HEAD, name: "&aCreeper", particle: EXPLOSION}
+      enderman: {enabled: true, material: ENDER_PEARL, name: "&5Enderman", particle: PORTAL}
+      blaze: {enabled: true, material: BLAZE_ROD, name: "&6Blaze", particle: FLAME}
+      guardian: {enabled: true, material: PRISMARINE_SHARD, name: "&bGuardián", particle: BUBBLE}
+  emotes:
+    enabled: true
+    icon: TOTEM_OF_UNDYING
+    name: "&eEmotes"
+    description: "&7Gestos visuales al agacharte"
+    items:
+      happy: {enabled: true, material: SUNFLOWER, name: "&eFeliz", particle: HAPPY_VILLAGER, count: 12, sound: ENTITY_PLAYER_LEVELUP}
+      heart: {enabled: true, material: POPPY, name: "&dCorazón", particle: HEART, count: 12, sound: BLOCK_NOTE_BLOCK_CHIME}
+      angry: {enabled: true, material: BLAZE_POWDER, name: "&cEnojado", particle: ANGRY_VILLAGER, count: 12, sound: ENTITY_VILLAGER_NO}
+
+```
+
+### `death-messages.yml`
+
+Contenido fuente con comentarios originales. Los campos sensibles se ocultan:
+
+```yaml
+# Mensajes de muerte administrados por KitPvP-Core.
+# Edita una causa para personalizarla. Deja el valor como "" para ocultar ese mensaje.
+# Se agregan automáticamente las causas de daño que falten en la versión de Paper instalada.
+#
+# Colores: &a, &#RRGGBB y MiniMessage (<gradient:#a855f7:#ffffff>texto</gradient>).
+# Variables integradas: %victim%, %player%, {player}, {display-name}, %attacker%, {fighter}, {fighter-display-name}, %item%, %world%, %cause%, %x%, %y%, %z%.
+# Placeholders de PlaceholderAPI se procesan si está instalado.
+# En mensajes con atacante, %[ATTACKER]placeholder% se calcula para el atacante.
+
+enabled: true
+item-format: "&b%item%"
+empty-hand-text: "air"
+fallback-message: "&c%victim% &7murió."
+
+death-messages:
+  KILLED: "&c%victim% &7fue eliminado por &a%attacker%&7 usando %item%&7."
+  BLOCK_EXPLOSION: "&c%victim% &7murió en una explosión."
+  CONTACT: "&c%victim% &7se lastimó con un bloque peligroso."
+  CRAMMING: "&c%victim% &7fue aplastado por demasiadas entidades."
+  DRAGON_BREATH: "&c%victim% &7no sobrevivió al aliento de dragón."
+  DROWNING: "&c%victim% &7se ahogó."
+  DRYOUT: "&c%victim% &7se secó."
+  ENTITY_ATTACK: "&c%victim% &7fue atacado por una entidad."
+  ENTITY_EXPLOSION: "&c%victim% &7murió en una explosión."
+  ENTITY_SWEEP_ATTACK: "&c%victim% &7fue alcanzado por un ataque en barrido."
+  FALL: "&c%victim% &7cayó desde un lugar alto."
+  FALLING_BLOCK: "&c%victim% &7fue aplastado por un bloque que cayó."
+  FIRE: "&c%victim% &7murió en el fuego."
+  FIRE_TICK: "&c%victim% &7se quemó."
+  FLY_INTO_WALL: "&c%victim% &7chocó contra una pared mientras volaba."
+  FREEZE: "&c%victim% &7murió congelado."
+  HOT_FLOOR: "&c%victim% &7pisó una superficie demasiado caliente."
+  LAVA: "&c%victim% &7no pudo escapar de la lava."
+  LIGHTNING: "&c%victim% &7fue alcanzado por un rayo."
+  MAGIC: "&c%victim% &7murió por daño mágico."
+  MELTING: "&c%victim% &7se derritió."
+  POISON: "&c%victim% &7murió envenenado."
+  PROJECTILE: "&c%victim% &7fue alcanzado por un proyectil."
+  SONIC_BOOM: "&c%victim% &7fue alcanzado por una onda sónica."
+  STARVATION: "&c%victim% &7murió de hambre."
+  SUFFOCATION: "&c%victim% &7se asfixió."
+  SUICIDE: "&c%victim% &7murió."
+  THORNS: "&c%victim% &7fue derrotado por espinas."
+  VOID: "&c%victim% &7cayó al vacío."
+  WITHER: "&c%victim% &7se marchitó."
+  WORLD_BORDER: "&c%victim% &7quedó fuera de los límites del mundo."
+  CAMPFIRE: "&c%victim% &7se quemó en una fogata."
+  KILL: "&c%victim% &7murió."
+  CUSTOM: "&c%victim% &7murió por una causa desconocida."
+
+```
+
+### `duels.yml`
+
+Contenido fuente con comentarios originales. Los campos sensibles se ocultan:
+
+```yaml
+invitation:
+  expiry-seconds: 30
+  allow-spectators: true
+  default-mode: "1v1"
+  wager:
+    enabled: false
+    maximum: 10000
+ranking:
+  elo-start: 1000
+  elo-k-factor: 32
+
+```
+
+### `economy.yml`
+
+Contenido fuente con comentarios originales. Los campos sensibles se ocultan:
+
+```yaml
+currency:
+  name: "monedas"
+  symbol: "$"
+  starting-balance: 0
+transfers:
+  enabled: true
+  max-amount: 1000000
+  minimum-amount: 1
+
+```
+
