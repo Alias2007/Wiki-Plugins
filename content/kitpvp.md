@@ -2036,3 +2036,199 @@ transfers:
 
 ```
 
+
+
+## Contenido YAML — continuación
+
+### `essentialsx.yml`
+
+Contenido fuente con comentarios originales:
+
+```yaml
+# Integración administrada de EssentialsX para KitPvP-Core.
+# El core agrega estos comandos a disabled-commands sin borrar las opciones existentes.
+enabled: true
+
+# Los mensajes de death-messages.yml de KitPvP-Core prevalecen sobre EssentialsX.
+custom-death-messages:
+  disable-essentials-broadcast: true
+
+# Desactiva el MOTD de EssentialsX al entrar ("Welcome, ...", "Type /help...", "Players online...").
+# El mensaje de bienvenida lo controla KitPvP-Core (conditional-events.yml y strings.yml).
+disable-join-motd: true
+
+# Opciones de Essentials/config.yml que el core fuerza para evitar mensajes duplicados.
+# Solo se escriben si el valor actual es distinto. Para dejar de administrar una opción, bórrala de aquí.
+settings:
+  custom-join-message: none   # el mensaje de entrada lo muestra KitPvP-Core (strings.yml > join-leave.join)
+  custom-quit-message: none   # el mensaje de salida lo muestra KitPvP-Core (strings.yml > join-leave.leave)
+  notify-no-new-mail: false   # oculta "You have no new mail." al entrar
+
+# Comandos informativos de EssentialsX que no deben sustituir la ayuda ni revelar información del servidor.
+disabled-commands:
+  - economy
+  - eco
+  - kit
+  - spawn
+  - top
+  - pay
+  - help
+  - '?'
+  - report
+  - helpop
+  - plugins
+  - pl
+  - version
+  - ver
+  - about
+  - icanhasbukkit
+  - msg
+  - message
+  - reply
+  - r
+  - socialspy
+  - broadcast
+  - announce
+  - channel
+  - c
+  - helpop
+  - ignore
+  - unignore
+  - mention
+  - mentions
+  - chatcolor
+  - emoji
+  - rules
+  - clearchat
+  - chatclear
+  - strings
+
+```
+
+### `events.yml`
+
+Contenido fuente con comentarios originales:
+
+```yaml
+scheduler:
+  enabled: false
+  interval-minutes: 60
+events:
+  lms:
+    enabled: true
+    min-players: 2
+    max-players: 50
+    duration-seconds: 900
+  koth:
+    enabled: true
+    min-players: 2
+    max-players: 50
+    duration-seconds: 300
+koth:
+  world: ""
+  x: 0
+  y: 80
+  z: 0
+  radius: 8
+  points-to-win: 100
+
+```
+
+### `holograms.yml`
+
+Contenido fuente con comentarios originales:
+
+```yaml
+# Hologramas persistentes administrados por KitPvP-Core.
+settings:
+  enabled: true
+  # Intervalo de actualización de placeholders globales, en ticks.
+  update-ticks: 40
+holograms: {}
+
+```
+
+### `integrations.yml`
+
+Contenido fuente con comentarios originales:
+
+```yaml
+# KitPvP-Core - Integraciones oficiales
+vault:
+  enabled: true
+  # true = usa economía externa; false = registra la economía interna.
+  use-external-economy: false
+
+placeholderapi:
+  enabled: true
+
+luckperms:
+  enabled: true
+  # Grupos autorizados por kit (incluye grupos heredados). Ejemplo:
+  # kit-groups:
+  #   tank: [vip, mvp]
+  #   archer: [archer, vip]
+  # Si un kit aparece aquí, solo estos grupos podrán usarlo.
+  # Los cambios de rango se reflejan dinámicamente sin reiniciar.
+  kit-groups: {}
+
+worldguard:
+  # Synchronize existing WorldGuard regions with each arena ruleset when WorldGuard is installed.
+  enabled: true
+
+```
+
+### `inventario/admin.yml`
+
+Contenido fuente con comentarios originales:
+
+```yaml
+title: "&8Administración"
+size: 27
+items: {}
+
+```
+
+### `inventario/cosmeticos.yml`
+
+Contenido fuente con comentarios originales:
+
+```yaml
+# Menú cosmético nativo de KitPvP-Core.
+# Los slots usan índices desde 0; tamaños permitidos: 9, 18, 27, 36, 45 o 54.
+# La migración añade claves que falten y conserva los valores personalizados.
+
+main:
+  title: "&8Cosméticos ApoloMC"
+  size: 54
+  categories:
+    kill-effects: {slot: 10}
+    particle-effects: {slot: 11}
+    hats: {slot: 12}
+    pets: {slot: 13}
+    mounts: {slot: 14}
+    gadgets: {slot: 15}
+    projectile-effects: {slot: 16}
+    death-effects: {slot: 19}
+    suits: {slot: 20}
+    morphs: {slot: 21}
+    emotes: {slot: 22}
+  buttons:
+    close: {slot: 49, material: BARRIER, name: "&cCerrar", lore: ["&7Cierra el menú"]}
+
+category:
+  size: 54
+  # Sobrescribe el tamaño o el título de una categoría, por ejemplo:
+  # sizes: {pets: 27}
+  # titles: {pets: "&8Mis compañeros"}
+  sizes: {}
+  titles: {}
+  # Posición opcional de un artículo: items.pets.wolf.slot: 4
+  items: {}
+  buttons:
+    back: {slot: 45, material: ARROW, name: "&eVolver", lore: ["&7Regresa a las categorías"]}
+    clear: {slot: 49, material: BARRIER, name: "&cDesactivar", lore: ["&7Quita la selección de esta categoría"]}
+    close: {slot: 53, material: BARRIER, name: "&cCerrar", lore: ["&7Cierra el menú"]}
+
+```
+
