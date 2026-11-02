@@ -3572,3 +3572,23 @@ tags:
 
 ```
 
+
+
+### `tournaments.yml`
+
+Contenido fuente con comentarios originales:
+
+```yaml
+settings:
+  max-players: 64
+  format: single-elimination
+  require-duel-spawns: true
+rewards:
+  winner-coins: 0
+  runner-up-coins: 0
+
+```
+
+### `reports.yml` — configuración protegida
+
+Este archivo contiene la configuración del sistema de reportes y la integración de notificaciones externas. Por seguridad, no se publica aquí el valor de ninguna URL de webhook ni token. Consultá el archivo original del repositorio y reemplazá esos valores por credenciales propias; mantenelos privados.
