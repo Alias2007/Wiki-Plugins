@@ -143,50 +143,175 @@ Los cosméticos son efectos de kill configurables por jugador y guardados en YAM
 <a id="commands"></a>
 ## Comandos y permisos
 
-| Área | Comandos |
-|---|---|
-| Menús | `/practice menu`, `/practice kits` |
-| Duelos | `/practice duel <jugador> [kit]`, `/practice accept <jugador>`, `/practice rematch`, `/practice forfeit` |
-| Colas | `/practice queue <kit> [ranked\|unranked]`, `/practice leave` |
-| Parties | `/practice party <invite\|accept\|kick\|leave\|disband\|info> [jugador]` |
-| Party wars | `/practice partywar duel <líder rival> <kit>` |
-| FFA | `/practice ffa join <kit>`, `/practice ffa leave` |
-| Espectador | `/practice spectate <jugador>`, `/practice unspectate` |
-| Torneos | `/practice tournament join\|leave\|status` |
-| Entrenamiento | `/practice training start <kit> [easy\|normal\|hard]`, `/practice training stop` |
-| Replays | `/practice replay list\|play <id>\|pause\|resume\|speed <1\|2\|4>\|stop` |
-| Estadísticas | `/practice stats [jugador]`, `/practice top [elo\|wins\|kills]` |
-| Cosméticos | `/practice cosmetic list\|set <efecto>` |
-| Administración | `/practice arena list`, `/practice arena setspawn <id> <1\|2>`, `/practice ffa setspawn` |
-| Torneos admin | `/practice tournament create <kit> <nombre>`, `/practice tournament start`, `/practice tournament cancel` |
-| Staff | `/practice staff freeze <jugador>`, `/practice staff unfreeze <jugador>` |
-| Core | `/practice reload`, `/practice debug`, `/practice compatibility` |
-| Admin stats | `/practice admin resetstats <jugador>`, `/practice admin setelo <jugador> <elo>` |
+El comando raíz es /practice; los aliases registrados son /apolopractice y /prac.
 
-El README actual no enumera los nodos exactos de permisos de cada comando; deben confirmarse en el registro de permisos del plugin antes de asignarlos.
+| Comando | Argumentos / función |
+|---|---|
+| /practice | Abre el menú principal. |
+| /practice menu | Abre el menú principal. |
+| /practice kits | Abre el selector de kits. |
+| /practice duel <jugador> [kit] | Envía una solicitud de duelo 1v1. |
+| /practice accept <jugador> | Acepta una solicitud del jugador indicado. |
+| /practice rematch | Solicita revancha de la última partida compatible. |
+| /practice forfeit | Se rinde/abandona el duelo actual. |
+| /practice queue <kit> [ranked|unranked] | Entra a la cola del kit en modo clasificado o no clasificado. |
+| /practice leave | Sale de la cola o modalidad compatible. |
+| /practice party invite <jugador> | Invita un jugador a la party. |
+| /practice party accept <jugador> | Acepta invitación. |
+| /practice party kick <jugador> | Expulsa a un miembro. |
+| /practice party leave | Sale de la party. |
+| /practice party disband | Disuelve la party. |
+| /practice party info | Muestra miembros/estado de la party. |
+| /practice partywar duel <líder rival> <kit> | Inicia serie party-vs-party. |
+| /practice spectate <jugador> | Observa al jugador/partida. |
+| /practice unspectate | Sale de espectador. |
+| /practice ffa join <kit> | Entra al FFA usando el kit. |
+| /practice ffa leave | Sale del FFA. |
+| /practice ffa setspawn | Guarda el spawn FFA (admin). |
+| /practice tournament join | Se une al torneo abierto. |
+| /practice tournament leave | Abandona el torneo. |
+| /practice tournament status | Consulta estado. |
+| /practice tournament create <kit> <nombre> | Crea torneo (admin). |
+| /practice tournament start | Inicia torneo (admin). |
+| /practice tournament cancel | Cancela torneo (admin). |
+| /practice training start <kit> [easy|normal|hard] | Inicia entrenamiento con IA. |
+| /practice training stop | Detiene entrenamiento. |
+| /practice replay list | Lista replays guardados. |
+| /practice replay play <id> | Abre reproducción visual. |
+| /practice replay pause/resume | Pausa o reanuda reproducción. |
+| /practice replay speed <1|2|4> | Cambia velocidad. |
+| /practice replay stop | Cierra el replay. |
+| /practice stats [jugador conectado] | Consulta estadísticas. |
+| /practice top [elo|wins|kills] | Consulta ranking. |
+| /practice cosmetic list | Lista efectos cosméticos. |
+| /practice cosmetic set <efecto> | Selecciona efecto de kill. |
+| /practice arena list | Lista arenas. |
+| /practice arena setspawn <id> <1|2> | Guarda spawn 1 o 2 de la arena (admin). |
+| /practice staff freeze <jugador> | Congela jugador (staff). |
+| /practice staff unfreeze <jugador> | Descongela jugador (staff). |
+| /practice admin resetstats <jugador> | Reinicia estadísticas (admin). |
+| /practice admin setelo <jugador> <elo> | Ajusta ELO (admin). |
+| /practice reload | Guarda datos pendientes y recarga archivos. |
+| /practice debug | Muestra diagnóstico. |
+| /practice compatibility | Muestra información de compatibilidad. |
+| /practice compatibility reload | Recarga reglas de compatibilidad. |
+
+### Permisos registrados
+
+| Permiso | Default / alcance |
+|---|---|
+| apolopractice.use | true; acceso al comando principal y funciones de jugador. |
+| apolopractice.admin | OP; comandos administrativos, arenas/FFA, torneos y staff. |
+| apolopractice.compatibility | OP; administración/consulta del módulo de compatibilidad. |
+
+El proyecto define estos tres nodos principales en permissions.yml y plugin.yml. No presupongas que un subcomando tiene un permiso independiente si no está expuesto por el código. El acceso administrativo se agrupa bajo apolopractice.admin, mientras compatibility requiere apolopractice.compatibility.
+
+
 
 <a id="config"></a>
 ## Configuración, almacenamiento y compatibilidad
 
-Los archivos editables se generan en `plugins/ApoloPractice/`.
+La carpeta de datos es plugins/ApoloPractice/. Paper API 1.21.4 y Java 21 son el objetivo actual de compilación/CI. La compatibilidad de clientes depende del protocolo disponible y de las pruebas reales del servidor.
 
-### Almacenamiento
+### Backend de datos
 
-- SQLite por defecto: perfiles en `profiles.db`.
-- MySQL: se configura en `config.yml`.
-- YAML: perfiles locales en archivos YAML.
-- La importación inicial permite migrar perfiles YAML a SQL.
+- SQLite es el backend predeterminado: perfiles en profiles.db.
+- MySQL se conecta con las propiedades declaradas en config.yml.
+- YAML mantiene perfiles en archivos individuales y puede importarse inicialmente a SQL.
+- Cambiar el backend requiere reiniciar; /practice reload no cambia el motor de almacenamiento.
 
-Cambiar el backend requiere reiniciar. `/practice reload` guarda las estadísticas antes de recargar archivos.
+### Compatibilidad de cliente
 
-### Compatibilidad
+compatibility.yml controla política global, límites del servidor, adaptadores ViaVersion/ViaBackwards/ViaRewind y excepciones por modo. También define en qué eventos del ciclo de jugador se valida versión: join, cola, duelo, entrada a arena o cambio de modo. Los límites por kit se guardan en kits.yml.
 
-- Los límites `minimum-client-version` y `maximum-client-version` se configuran por kit.
-- `compatibility.yml` aplica límites por modo, versiones incompatibles y el interruptor global.
-- ViaVersion permite detectar versión del cliente si está instalado; sin él se usa la versión nativa del servidor.
+### Límites del estado actual
 
-### Integraciones
+- Entrenamiento usa un primer adaptador NMS de ServerPlayer para Paper 1.21.4; la visibilidad, golpes recibidos y limpieza necesitan prueba en servidor real.
+- Party war actual es formato de serie de lanes 1v1 en paralelo; no es combate de equipos en una arena compartida.
+- Replay almacena snapshots y los muestra visualmente; no reconstruye determinísticamente cada evento.
+- ViaVersion ayuda a detectar protocolos, pero no garantiza soporte universal de cualquier cliente.
 
-PlaceholderAPI es opcional. Vault permite recompensa monetaria por victoria y está desactivado por defecto.
 
-El README no publica nombres exactos de placeholders propios de ApoloPractice, por lo que no se enumeran aquí.
+
+<a id="variables"></a>
+## Variables y placeholders
+
+### PlaceholderAPI
+
+La expansión se registra con el identificador apolopractice. Los placeholders son:
+
+| Placeholder | Significado |
+|---|---|
+| %apolopractice_queue_count% | Cantidad de jugadores en cola. |
+| %apolopractice_online% | Jugadores conectados/activos en Practice según el contador de la expansión. |
+| %apolopractice_elo% | Rating/ELO del jugador. |
+| %apolopractice_rating% | Alias del ELO. |
+| %apolopractice_wins% | Victorias. |
+| %apolopractice_losses% | Derrotas. |
+| %apolopractice_kills% | Bajas. |
+| %apolopractice_deaths% | Muertes. |
+| %apolopractice_streak% | Racha actual. |
+| %apolopractice_best_streak% | Mejor racha. |
+| %apolopractice_winrate% | Porcentaje de victorias. |
+
+Los placeholders por jugador requieren perfil; queue_count/online son contadores generales. PlaceholderAPI es una integración opcional y debe estar presente para que otros plugins puedan resolver la expansión.
+
+
+
+<a id="yaml"></a>
+## Archivos YAML — referencia de configuración
+
+Ruta: plugins/ApoloPractice/. Esta referencia cubre los archivos de recursos editables y los archivos que se generan al crear arenas/kits o guardar perfiles. No incluye plugin.yml.
+
+### Archivos incluidos en el JAR
+
+| Archivo | Rutas / opciones |
+|---|---|
+| config.yml | language establece idioma base de mensajes; debug activa registros de diagnóstico; storage.type admite sqlite, mysql o yaml; storage.mysql contiene host/port/database/username/password/SSL y parámetros del pool; modules controla perfiles, kits, arenas, duelos, colas, ranked, parties, espectadores, estadísticas, training y compatibilidad; replay define intervalo de snapshots y duración máxima; scoreboard.enabled controla la sidebar; training.default-difficulty fija dificultad; rewards.money-per-win define pago opcional por victoria vía Vault; combat.countdown-seconds, duel-request-expiry-seconds, restore-player-state y boxing-hits-to-win controlan cuenta atrás, caducidad de solicitudes, restauración y condición de victoria de Boxing. |
+| compatibility.yml | global.enabled y límites min/max de versión del servidor; integration.via-version/via-backwards/via-rewind enabled/required; default-policy define qué hacer con clientes demasiado antiguos/nuevos/no admitidos; checks determina si validar al entrar, entrar a cola, iniciar duelo, entrar a arena o cambiar de modo; modes.<id> permite enabled, min/max, allow-older/allow-newer, listas de versiones incompatibles y mensaje de rechazo. |
+| messages.yml | prefix y mensajes generales como no-permission, usage, reloaded, status y diagnósticos de compatibilidad. Los textos admiten MiniMessage. |
+| permissions.yml | Descripción legible de apolopractice.use, apolopractice.admin y apolopractice.compatibility. El registro de nodos y valores por defecto se define en el descriptor del plugin y se resume en Comandos. |
+
+### Archivos generados / editables en la carpeta del plugin
+
+| Archivo/carpeta | Contenido y claves |
+|---|---|
+| kits.yml | Definiciones bajo kits.<id>. Cada kit permite display-name, enabled, ranked, mode, mínimo/máximo de versión de cliente, contents, armor, health, food y reglas de construcción. Se utiliza para modos estándar, Boxing, Spleef, Sumo y kits personalizados según el modo cargado. |
+| arenas.yml | Registro bajo arenas.<id>: enabled, world, spawn1 y spawn2; cada spawn guarda world, x, y, z, yaw y pitch. Los spawns se establecen con /practice arena setspawn <id> 1|2. |
+| profiles.db | SQLite cuando storage.type es sqlite. Conserva perfiles, rating, estadísticas y resultados. |
+| profiles.yml | Perfiles individuales cuando storage.type es yaml. La importación inicial puede migrar los registros YAML a SQL. |
+| replays/ | Archivos/snapshots visuales de las partidas. No es un log determinista de todos los paquetes/eventos de combate. |
+| cosmetics/ | Datos de cosméticos/effecto de kill por UUID. |
+| logs / archivos de recuperación | Diagnóstico y estados persistentes según el módulo activo; no editarlos manualmente salvo indicación de la documentación de esa versión. |
+
+### Esquema de kits
+
+Los kits se guardan en kits.yml bajo kits.<id>. Las claves importantes son:
+- display-name: texto mostrado en la GUI.
+- enabled: permite o desactiva ese kit.
+- ranked: define si puede aparecer en matchmaking clasificado.
+- mode: reglas de modo (estándar, boxing, spleef, sumo u otros compatibles).
+- minimum-client-version y maximum-client-version: límites de protocolo para ese kit.
+- contents y armor: inventario normal y armadura.
+- health y food: atributos iniciales.
+- build: permite reglas de construcción en modos que lo soportan.
+
+La estructura de objetos debe respetar el formato que genera la versión instalada. Copia una definición existente y cambia IDs/materiales en lugar de inventar atributos desconocidos.
+
+### Esquema de arenas
+
+Cada arena se registra en arenas.yml y puede incluir:
+- enabled: habilita o deshabilita la arena.
+- world: nombre exacto del mundo.
+- spawn1 y spawn2: ubicaciones de cada lado del duelo (world/x/y/z/yaw/pitch).
+
+Los comandos arena list y arena setspawn consultan/actualizan esta información. Para revisar un mapa, valida ambos spawns y el mundo cargado antes de habilitarlo para cola/duelo.
+
+### Cómo aplicar cambios
+
+- /practice reload guarda estadísticas antes de recargar los archivos.
+- /practice compatibility reload vuelve a leer los límites y reglas de compatibilidad.
+- Los cambios de backend storage.type requieren reinicio.
+- Cambios de kit/arena deben probarse con una partida privada antes de abrir colas ranked.
+- Los cambios de NMS/entrenamiento, replay y compatibilidad necesitan validación en un servidor Paper real; una compilación de Maven no verifica estas funciones en juego.
+
