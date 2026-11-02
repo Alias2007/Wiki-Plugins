@@ -259,6 +259,125 @@ Los placeholders por jugador requieren perfil; queue_count/online son contadores
 
 
 <a id="yaml"></a>
+
+### Ejemplo real: config.yml
+
+```yaml
+language: es
+debug: false
+storage:
+  type: sqlite
+  mysql:
+    host: 127.0.0.1
+    port: 3306
+    database: apolopractice
+    username: root
+    password: ""
+modules:
+  profiles: true
+  kits: true
+  arenas: true
+  duels: true
+  queues: true
+  ranked: true
+  parties: true
+  spectators: true
+  statistics: true
+  training: true
+  compatibility: true
+replay:
+  interval-ticks: 5
+  max-duration-seconds: 600
+scoreboard:
+  enabled: true
+training:
+  default-difficulty: normal
+rewards:
+  money-per-win: 0.0
+combat:
+  countdown-seconds: 3
+  duel-request-expiry-seconds: 30
+  restore-player-state: true
+  boxing-hits-to-win: 100
+```
+
+**Cómo funciona:** `language/debug` controlan idioma y diagnóstico; `storage.type` elige sqlite/mysql/yaml; `modules` activa sistemas independientes; `replay` controla frecuencia y duración de snapshots; `scoreboard` activa la sidebar; `training` define dificultad; `rewards` integra Vault; `combat` controla cuenta atrás, caducidad de solicitudes, restauración del estado y condición de victoria de Boxing.
+
+### Ejemplo real: compatibility.yml
+
+```yaml
+compatibility:
+  enabled: true
+  server:
+    minimum-supported-client: "1.8"
+    maximum-supported-client: "1.26+"
+  integrations:
+    viaversion: { enabled: true, required: false }
+    viabackwards: { enabled: true, required: false }
+    viarewind: { enabled: true, required: false }
+  default-policy:
+    allow-older-clients: true
+    allow-newer-clients: true
+    deny-unsupported-clients: true
+  checks:
+    on-join: true
+    on-queue: true
+    on-duel: true
+    on-arena-entry: true
+    on-mode-change: true
+  modes:
+    no-debuff:
+      enabled: true
+      min: "1.8"
+      max: "1.26+"
+      allow-older-clients: true
+      allow-newer-clients: true
+      incompatible-versions: []
+```
+
+**Cómo funciona:** define límites de versión por servidor y modo; activa integraciones ViaVersion/ViaBackwards/ViaRewind; `default-policy` decide cómo tratar clientes fuera del rango; `checks` determina en qué momentos validar; `modes` permite reglas específicas por modalidad.
+
+### Ejemplo de kits.yml y arenas.yml
+
+```yaml
+kits:
+  nodebuff:
+    display-name: "&aNoDebuff"
+    enabled: true
+    ranked: true
+    mode: nodebuff
+    minimum-client-version: "1.8"
+    maximum-client-version: "1.26+"
+    contents: []
+    armor: []
+    health: 20.0
+    food: 20
+    build: false
+```
+
+```yaml
+arenas:
+  arena_1:
+    enabled: true
+    world: world
+    spawn1:
+      world: world
+      x: 0.5
+      y: 80.0
+      z: 0.5
+      yaw: 0.0
+      pitch: 0.0
+    spawn2:
+      world: world
+      x: 20.5
+      y: 80.0
+      z: 0.5
+      yaw: 180.0
+      pitch: 0.0
+```
+
+**Cómo funciona:** cada kit tiene ID, visibilidad, modalidad, límites de versión, inventario, armadura, salud, comida y construcción. Cada arena define mundo y dos ubicaciones completas. Los contenidos de inventario deben conservar el formato serializado que genera el plugin; usa la GUI/comandos del plugin para crear o editar cuando corresponda.
+
 ## Archivos YAML — referencia de configuración
 
 Ruta: plugins/ApoloPractice/. Esta referencia cubre los archivos de recursos editables y los archivos que se generan al crear arenas/kits o guardar perfiles. No incluye plugin.yml.
