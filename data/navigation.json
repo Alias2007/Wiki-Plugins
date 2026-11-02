@@ -1,0 +1,385 @@
+{
+  "plugins": [
+    {
+      "id": "apoloevent",
+      "name": "ApoloEvent",
+      "type": "Eventos",
+      "description": "Eventos competitivos, minijuegos, bosses y AirDrops.",
+      "repository": "https://github.com/Alias2007/ApoloEvent-v2.0",
+      "pages": [
+        {
+          "id": "overview",
+          "title": "Resumen",
+          "description": "Funciones y estructura general",
+          "tags": "eventos modalidades plugin"
+        },
+        {
+          "id": "backroom",
+          "title": "Backroom",
+          "description": "Carrera, checkpoints y PvP",
+          "tags": "carrera checkpoints pvp"
+        },
+        {
+          "id": "horses",
+          "title": "Carrera de caballos",
+          "description": "Monturas, posiciones y recompensas",
+          "tags": "caballos horse monturas"
+        },
+        {
+          "id": "colormatch",
+          "title": "ColorMatch",
+          "description": "Rondas, colores y preparación de arena",
+          "tags": "colormatch arena colores"
+        },
+        {
+          "id": "bosses",
+          "title": "Bosses y minas",
+          "description": "Boss integrado, personalizados y bosses de minas",
+          "tags": "boss warden wither ravager minas mineboss"
+        },
+        {
+          "id": "minigames",
+          "title": "MiniGames",
+          "description": "Arenas de Spleef, Minefield y JumpRun",
+          "tags": "minigames spleef minefield jumprun"
+        },
+        {
+          "id": "airdrop",
+          "title": "AirDrop",
+          "description": "Horarios, aparición, seguimiento y recompensas",
+          "tags": "airdrop drop horarios track"
+        },
+        {
+          "id": "commands",
+          "title": "Comandos y permisos",
+          "description": "Sintaxis, argumentos y permisos del plugin",
+          "tags": "comandos permisos evento staff"
+        },
+        {
+          "id": "variables",
+          "title": "Variables y placeholders",
+          "description": "Variables documentadas e integración PlaceholderAPI",
+          "tags": "variables placeholders papi"
+        },
+        {
+          "id": "config",
+          "title": "Configuración",
+          "description": "Archivos, opciones e integraciones",
+          "tags": "config yaml worldguard ultimateclans vault"
+        }
+      ]
+    },
+    {
+      "id": "kitpvp",
+      "name": "KitPvP-Core",
+      "type": "PvP",
+      "description": "Kits, combate, arenas, economía y competición.",
+      "repository": "https://github.com/Alias2007/KitPvP",
+      "pages": [
+        {
+          "id": "overview",
+          "title": "Resumen",
+          "description": "Módulos principales y requisitos",
+          "tags": "kitpvp core paper"
+        },
+        {
+          "id": "kits",
+          "title": "Kits y selector",
+          "description": "GUI, editor, cooldowns y permisos",
+          "tags": "kits selector cooldown editor"
+        },
+        {
+          "id": "abilities",
+          "title": "Habilidades",
+          "description": "Objetos especiales y acciones disponibles",
+          "tags": "ability habilidades dash fireball"
+        },
+        {
+          "id": "combat",
+          "title": "Combate y mensajes",
+          "description": "Combat tag, sanciones y mensajes de muerte",
+          "tags": "combate combatlog muerte"
+        },
+        {
+          "id": "arenas",
+          "title": "Arenas y spawns",
+          "description": "Reglas, regiones y puntos seguros",
+          "tags": "arena spawns worldguard"
+        },
+        {
+          "id": "npcs",
+          "title": "NPCs",
+          "description": "NPCs nativos y selectores",
+          "tags": "npc citizens selector"
+        },
+        {
+          "id": "events",
+          "title": "Eventos y torneos",
+          "description": "LMS, KOTH y torneos 1v1",
+          "tags": "lms koth torneo"
+        },
+        {
+          "id": "economy",
+          "title": "Economía y clanes",
+          "description": "Monedas, pagos, clanes y misiones",
+          "tags": "coins pay economy clanes misiones"
+        },
+        {
+          "id": "rewards",
+          "title": "Recompensas y AFK",
+          "description": "Recompensas diarias, semanales y zonas AFK",
+          "tags": "rewards afkzone"
+        },
+        {
+          "id": "visuals",
+          "title": "Scoreboard y tablist",
+          "description": "Diseños, condiciones y animaciones",
+          "tags": "scoreboard tablist nametag"
+        },
+        {
+          "id": "commands",
+          "title": "Comandos y permisos",
+          "description": "Comandos de jugador y administración",
+          "tags": "comandos permisos kit arena npc"
+        },
+        {
+          "id": "variables",
+          "title": "Variables y placeholders",
+          "description": "Placeholders propios y condiciones",
+          "tags": "variables placeholders papi"
+        },
+        {
+          "id": "config",
+          "title": "Configuración y API",
+          "description": "Archivos, almacenamiento, integraciones y API",
+          "tags": "config yaml sqlite mysql api"
+        }
+      ]
+    },
+    {
+      "id": "rankup",
+      "name": "ApoloRankUp",
+      "type": "Progresión",
+      "description": "Niveles, costes y desbloqueos por progreso.",
+      "repository": "https://github.com/Alias2007/ApoloRankUp",
+      "pages": [
+        {
+          "id": "overview",
+          "title": "Resumen",
+          "description": "Cómo funciona la progresión",
+          "tags": "rankup niveles progreso"
+        },
+        {
+          "id": "levels",
+          "title": "Niveles y ascensos",
+          "description": "Requisitos, costes y recompensas",
+          "tags": "levels coste rankup"
+        },
+        {
+          "id": "unlocks",
+          "title": "Desbloqueos",
+          "description": "Comandos, regiones, mundos, bloques e ítems",
+          "tags": "unlocks commands regions worlds blocks items entities"
+        },
+        {
+          "id": "commands",
+          "title": "Comandos y permisos",
+          "description": "Jugador, administración y bypass",
+          "tags": "comandos permisos bypass"
+        },
+        {
+          "id": "config",
+          "title": "Configuración y datos",
+          "description": "YAML, SQL, Vault y WorldGuard",
+          "tags": "config storage sqlite mysql vault worldguard"
+        }
+      ]
+    },
+    {
+      "id": "apolorr",
+      "name": "ApoloRR",
+      "type": "Minijuegos",
+      "description": "Minijuegos, mesas y estadísticas.",
+      "repository": "https://github.com/Alias2007/ApoloRR",
+      "pages": [
+        {
+          "id": "overview",
+          "title": "Resumen",
+          "description": "Catálogo de juegos y estado documentado",
+          "tags": "apolorr minijuegos"
+        },
+        {
+          "id": "ruletarusa",
+          "title": "Ruleta Rusa",
+          "description": "Mesas y modo individual",
+          "tags": "ruleta rusa rr"
+        },
+        {
+          "id": "coinflip",
+          "title": "Coinflip",
+          "description": "Apuestas cara o cruz y estadísticas",
+          "tags": "coinflip cf"
+        },
+        {
+          "id": "blackjack",
+          "title": "Blackjack",
+          "description": "Partidas y apuesta",
+          "tags": "blackjack bj"
+        },
+        {
+          "id": "roulette",
+          "title": "Ruleta de casino",
+          "description": "Apuestas de ruleta europea",
+          "tags": "roulette ruleta casino"
+        },
+        {
+          "id": "mines",
+          "title": "Mines",
+          "description": "Tablero, minas y cobro",
+          "tags": "mines minas"
+        },
+        {
+          "id": "memory",
+          "title": "Memory",
+          "description": "Salas y rondas de memoria",
+          "tags": "memory memoria"
+        },
+        {
+          "id": "ppt",
+          "title": "Piedra, Papel o Tijera",
+          "description": "Modo solo y desafíos PvP",
+          "tags": "ppt rps"
+        },
+        {
+          "id": "echo",
+          "title": "Eco Arcano",
+          "description": "Secuencias de runas",
+          "tags": "eco arcano runas"
+        },
+        {
+          "id": "scratch",
+          "title": "Raspa y Gana",
+          "description": "Cartas, símbolos y premios",
+          "tags": "raspa scratch"
+        },
+        {
+          "id": "crash",
+          "title": "Crash",
+          "description": "Multiplicador y cobro",
+          "tags": "crash"
+        },
+        {
+          "id": "arcade",
+          "title": "Arcade",
+          "description": "Races, Pyramid y Tres en Raya",
+          "tags": "arcade races pyramid tictactoe"
+        },
+        {
+          "id": "slot",
+          "title": "Tragamonedas visual",
+          "description": "Interfaz visual y estado actual",
+          "tags": "slot tragamonedas"
+        },
+        {
+          "id": "commands",
+          "title": "Comandos y permisos",
+          "description": "Sintaxis y permisos de cada modo",
+          "tags": "comandos permisos aplorr"
+        },
+        {
+          "id": "variables",
+          "title": "Variables y placeholders",
+          "description": "Variables de Coinflip y mesas",
+          "tags": "variables placeholders papi"
+        },
+        {
+          "id": "config",
+          "title": "Configuración",
+          "description": "Archivos, probabilidades y dificultad",
+          "tags": "config yaml probabilidad difficulty"
+        }
+      ]
+    },
+    {
+      "id": "practice",
+      "name": "ApoloPractice",
+      "type": "Practice PvP",
+      "description": "Duelos, colas, parties, entrenamiento y replays.",
+      "repository": "https://github.com/Alias2007/Practice-Core",
+      "pages": [
+        {
+          "id": "overview",
+          "title": "Resumen",
+          "description": "Modos disponibles y estado de desarrollo",
+          "tags": "practice pvp"
+        },
+        {
+          "id": "duels",
+          "title": "Duelos",
+          "description": "Solicitudes, revancha y abandono",
+          "tags": "duel duelos accept rematch"
+        },
+        {
+          "id": "queues",
+          "title": "Colas y ELO",
+          "description": "Ranked y unranked",
+          "tags": "queue ranked unranked elo"
+        },
+        {
+          "id": "kits",
+          "title": "Kits y modos",
+          "description": "Kits YAML, Boxing y Spleef",
+          "tags": "kits boxing spleef"
+        },
+        {
+          "id": "parties",
+          "title": "Parties",
+          "description": "Grupos, invitaciones y party wars",
+          "tags": "party invite partywar"
+        },
+        {
+          "id": "ffa",
+          "title": "Free For All",
+          "description": "Partidas FFA y espectadores",
+          "tags": "ffa freeforall"
+        },
+        {
+          "id": "tournaments",
+          "title": "Torneos",
+          "description": "Torneos eliminatorios",
+          "tags": "tournament torneo"
+        },
+        {
+          "id": "training",
+          "title": "Entrenamiento",
+          "description": "IA local y dificultades",
+          "tags": "training bot ia"
+        },
+        {
+          "id": "replays",
+          "title": "Replays",
+          "description": "Reproducción y controles",
+          "tags": "replay snapshots"
+        },
+        {
+          "id": "stats",
+          "title": "Estadísticas y cosméticos",
+          "description": "ELO, tops y efectos visuales",
+          "tags": "stats top elo cosmetic"
+        },
+        {
+          "id": "commands",
+          "title": "Comandos y permisos",
+          "description": "Comandos de jugador y staff",
+          "tags": "comandos permisos practice"
+        },
+        {
+          "id": "config",
+          "title": "Configuración y compatibilidad",
+          "description": "YAML, SQLite, MySQL y versiones",
+          "tags": "config storage sqlite mysql viaversion"
+        }
+      ]
+    }
+  ]
+}
