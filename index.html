@@ -1,0 +1,54 @@
+<!doctype html>
+<html lang="es">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<meta name="theme-color" content="#080d18">
+<meta name="description" content="Documentación oficial de ApoloEvent para ApoloMC Network. Eventos, comandos, permisos, configuración e instalación.">
+<title>ApoloEvent Wiki | ApoloMC Network</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@500;600;700;800&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="assets/css/site.css">
+</head>
+<body>
+<div class="ambient ambient-a"></div><div class="ambient ambient-b"></div>
+<header class="topbar">
+ <a class="brand" href="#home"><span class="brand-mark">A</span><span>APOLO<span class="mint">MC</span><small>NETWORK / KNOWLEDGE BASE</small></span></a>
+ <button class="menu-toggle" id="menuToggle" aria-label="Abrir menú">☰</button>
+ <nav id="mainNav"><a href="#docs">Documentación</a><a href="#features">Funciones</a><a href="#quick">Accesos rápidos</a><a class="nav-github" href="https://github.com/Alias2007/ApoloEvent-v2.0" target="_blank" rel="noreferrer">GitHub ↗</a></nav>
+</header>
+<main id="home">
+ <section class="hero">
+  <div class="hero-copy">
+   <div class="status"><i></i> DOCUMENTACIÓN OFICIAL · APOLOMC NETWORK</div>
+   <p class="overline">EVENT MANAGEMENT SYSTEM</p>
+   <h1>APOLO<span class="mint">EVENT</span><br><span class="outline">WIKI_</span></h1>
+   <p class="hero-text">Todo el conocimiento de ApoloEvent en un solo lugar. Aprende a instalar, configurar y administrar cada evento de tu servidor.</p>
+   <div class="hero-actions"><a class="button primary" href="#docs">EXPLORAR DOCUMENTACIÓN <b>→</b></a><a class="button secondary" href="https://github.com/Alias2007/ApoloEvent-v2.0/releases">DESCARGAR PLUGIN ↗</a></div>
+   <div class="hero-meta"><span><b>01</b> PLUGIN</span><span><b>08</b> GUÍAS</span><span><b>∞</b> POSIBILIDADES</span></div>
+  </div>
+  <div class="hero-art" aria-label="Ilustración abstracta gaming">
+   <div class="orbit orbit-one"></div><div class="orbit orbit-two"></div><div class="core"><span>A</span><small>APOLO EVENT</small></div><div class="float-tag tag-top">SYSTEM ONLINE</div><div class="float-tag tag-bottom">PAPER / JAVA</div><div class="crosshair">+</div>
+  </div>
+ </section>
+ <section class="ticker"><span>APOLOMC NETWORK</span><b>✦</b><span>EVENTS</span><b>✦</b><span>CONFIGURATION</span><b>✦</b><span>COMMUNITY</span><b>✦</b><span>APOLOMC NETWORK</span></section>
+ <section class="section" id="docs">
+  <div class="section-heading"><div><p class="eyebrow">01 / KNOWLEDGE BASE</p><h2>Centro de <span class="mint">documentación</span></h2><p>Selecciona una categoría para consultar su guía.</p></div><div class="search-wrap"><span>⌕</span><input id="docSearch" type="search" placeholder="Buscar documentación..." aria-label="Buscar documentación"></div></div>
+  <div class="doc-grid" id="docGrid">
+   <a class="doc-card" data-search="introduccion inicio requisitos estructura plugin" href="docs/inicio.md"><span class="card-index">01</span><span class="card-icon">◈</span><h3>Introducción</h3><p>Conoce ApoloEvent, sus requisitos y la estructura de datos.</p><span class="card-link">LEER GUÍA ↗</span></a>
+   <a class="doc-card" data-search="instalacion actualizar compilar jar paper java" href="docs/instalacion.md"><span class="card-index">02</span><span class="card-icon">▣</span><h3>Instalación</h3><p>Instala, actualiza y compila el plugin paso a paso.</p><span class="card-link">LEER GUÍA ↗</span></a>
+   <a class="doc-card" data-search="eventos backroom caballos boss colormatch airdrop minijuegos" href="docs/eventos.md"><span class="card-index">03</span><span class="card-icon">⚔</span><h3>Eventos y minijuegos</h3><p>Descubre los modos de juego y cómo funcionan.</p><span class="card-link">LEER GUÍA ↗</span></a>
+   <a class="doc-card" data-search="comandos permisos admin staff tops" href="docs/comandos.md"><span class="card-index">04</span><span class="card-icon">⌘</span><h3>Comandos y permisos</h3><p>Consulta argumentos, acciones administrativas y permisos.</p><span class="card-link">LEER GUÍA ↗</span></a>
+   <a class="doc-card" data-search="configuracion yaml mensajes menus recompensas tops" href="docs/configuracion.md"><span class="card-index">05</span><span class="card-icon">⚙</span><h3>Configuración</h3><p>Personaliza archivos YAML, menús, mensajes y recompensas.</p><span class="card-link">LEER GUÍA ↗</span></a>
+   <a class="doc-card" data-search="integraciones worldguard ultimateclans placeholderapi vault discord" href="docs/integraciones.md"><span class="card-index">06</span><span class="card-icon">⌁</span><h3>Integraciones</h3><p>Conecta las dependencias y servicios compatibles.</p><span class="card-link">LEER GUÍA ↗</span></a>
+   <a class="doc-card" data-search="desarrollo compilar maven java git github" href="docs/desarrollo.md"><span class="card-index">07</span><span class="card-icon">⌬</span><h3>Desarrollo</h3><p>Prepara el entorno, compila y contribuye al proyecto.</p><span class="card-link">LEER GUÍA ↗</span></a>
+   <a class="doc-card" data-search="soporte errores problemas ayuda diagnostico" href="docs/soporte.md"><span class="card-index">08</span><span class="card-icon">◎</span><h3>Soporte</h3><p>Resuelve problemas y prepara un reporte útil.</p><span class="card-link">LEER GUÍA ↗</span></a>
+  </div><p class="no-results" id="noResults" hidden>No se encontraron guías con esa búsqueda.</p>
+ </section>
+ <section class="feature-band" id="features"><div><p class="eyebrow">02 / BUILT FOR YOUR SERVER</p><h2>Controla cada evento.<br><span class="mint">Domina la experiencia.</span></h2></div><div class="feature-list"><article><b>01</b><div><h3>Administración centralizada</h3><p>Comandos y configuraciones organizados para el staff.</p></div></article><article><b>02</b><div><h3>Eventos configurables</h3><p>Guías para preparar mapas, arenas, recompensas y reglas.</p></div></article><article><b>03</b><div><h3>Documentación viva</h3><p>Contenido alojado en GitHub y actualizable junto al proyecto.</p></div></article></div></section>
+ <section class="section quick" id="quick"><p class="eyebrow">03 / QUICK ACCESS</p><h2>Enlaces <span class="mint">directos</span></h2><div class="quick-grid"><a href="https://github.com/Alias2007/ApoloEvent-v2.0/releases"><span>↓</span><b>Descargas</b><small>Versiones del plugin ↗</small></a><a href="https://github.com/Alias2007/ApoloEvent-v2.0/actions"><span>◷</span><b>Compilaciones</b><small>GitHub Actions ↗</small></a><a href="https://github.com/Alias2007/ApoloEvent-v2.0/issues"><span>⚑</span><b>Reportar un error</b><small>Soporte del proyecto ↗</small></a><a href="https://github.com/Alias2007/Wiki-Plugins/wiki"><span>▤</span><b>Wiki de GitHub</b><small>Edición colaborativa ↗</small></a></div></section>
+</main>
+<footer><a class="brand footer-brand" href="#home"><span class="brand-mark">A</span><span>APOLO<span class="mint">MC</span><small>NETWORK</small></span></a><p>APOLOEVENT // DOCUMENTACIÓN OFICIAL</p><a href="https://github.com/Alias2007/Wiki-Plugins">POWERED BY GITHUB PAGES ↗</a></footer>
+<script src="assets/js/site.js"></script>
+</body></html>
