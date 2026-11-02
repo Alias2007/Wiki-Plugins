@@ -54,7 +54,7 @@ rankup:{type:{es:'Progresión',en:'Progression',pt:'Progressão',fr:'Progression
 apolorr:{type:{es:'Minijuegos',en:'Minigames',pt:'Minijogos',fr:'Mini-jeux',de:'Minispiele'},description:{es:'Minijuegos e interfaces de entretenimiento.',en:'Minigames and entertainment interfaces.',pt:'Minijogos e interfaces de entretenimento.',fr:'Mini-jeux et interfaces de divertissement.',de:'Minispiele und Unterhaltungsoberflächen.'}},
 practice:{type:{es:'Practice PvP',en:'Practice PvP',pt:'Practice PvP',fr:'Practice PvP',de:'Practice PvP'},description:{es:'Duelos, colas, parties, entrenamiento y replays.',en:'Duels, queues, parties, training and replays.',pt:'Duelos, filas, grupos, treino e replays.',fr:'Duels, files, groupes, entraînement et replays.',de:'Duelle, Warteschlangen, Gruppen, Training und Replays.'}}
 };
-function lang(){const v=localStorage.getItem('apolo-language')||'es';return langs.includes(v)?v:'es';}
+function lang(){const saved=localStorage.getItem('apolo-language');if(!saved){localStorage.setItem('apolo-language','es');return 'es';}return langs.includes(saved)?saved:'es';}
 function tr(key){return (ui[lang()]&&ui[lang()][key])||ui.es[key]||key;}
 function translatedLabel(map,key,fallback){return map&&map[key]&&(map[key][lang()]||map[key].es)||fallback;}
 function applyPreferences(){
@@ -75,7 +75,7 @@ function renderNavigation(){
   const group=document.createElement('section');group.className='plugin-group';group.dataset.plugin=plugin.id;
   const button=document.createElement('button');button.className='plugin-heading';button.type='button';
   button.innerHTML='<i class="plugin-dot"></i><span>'+esc(plugin.name)+'</span><span class="plugin-chevron">▾</span>';
-  button.addEventListener('click',()=>group.classList.toggle('collapsed'));
+  group.classList.add('collapsed');button.setAttribute('aria-expanded','false');button.addEventListener('click',()=>{const collapsed=group.classList.toggle('collapsed');button.setAttribute('aria-expanded',String(!collapsed));});
   const pages=document.createElement('div');pages.className='plugin-pages';
   plugin.pages.forEach(page=>{const a=document.createElement('a');a.className='plugin-page';a.href='#'+plugin.id+'/'+page.id;a.textContent=pageTitle(plugin,page);a.dataset.route=plugin.id+'/'+page.id;pages.appendChild(a);});
   group.append(button,pages);navRoot.appendChild(group);
@@ -86,10 +86,10 @@ function homeHtml(){
  const cards=navData.plugins.map(p=>'<a class="plugin-card" href="#'+p.id+'/overview"><div class="plugin-card-head"><span class="plugin-type">'+esc(translatedLabel(pluginLabels[p.id]?.type,'',p.type))+'</span><span>↗</span></div><h2>'+esc(p.name)+'</h2><p>'+esc(translatedLabel(pluginLabels[p.id]?.description,'',p.description))+'</p><small>'+p.pages.length+' '+(lang()==='es'?'secciones':lang()==='pt'?'seções':lang()==='fr'?'sections':lang()==='de'?'Abschnitte':'sections')+'</small><div class="card-link">'+tr('open')+'</div></a>').join('');
  return '<section class="home-hero"><div class="eyebrow">APOLOMC · DEDICATOR NETWORK</div><h1>'+tr('hero')+'</h1><p>'+tr('intro')+'</p></section><div class="section-label">'+tr('categories')+'</div><div class="plugin-grid">'+cards+'</div><div class="section-label">'+tr('quick')+'</div><div class="doc-nav">'+navData.plugins.map(p=>'<a href="#'+p.id+'/overview">'+esc(p.name)+'</a>').join('')+'</div>';
 }
-async function getDoc(plugin){if(docCache[plugin])return docCache[plugin];const response=await fetch('content/'+plugin+'.md?v=6');if(!response.ok)throw new Error('No se pudo cargar content/'+plugin+'.md ('+response.status+')');return docCache[plugin]=await response.text();}
+async function getDoc(plugin){if(docCache[plugin])return docCache[plugin];const response=await fetch('content/'+plugin+'.md?v=7');if(!response.ok)throw new Error('No se pudo cargar content/'+plugin+'.md ('+response.status+')');return docCache[plugin]=await response.text();}
 function activeNav(plugin,page){
  document.querySelectorAll('.plugin-page').forEach(a=>a.classList.toggle('active',a.dataset.route===plugin+'/'+page));
- document.querySelectorAll('.plugin-group').forEach(g=>{if(g.dataset.plugin===plugin)g.classList.remove('collapsed');});
+ document.querySelectorAll('.plugin-group').forEach(g=>{g.classList.add('collapsed');const b=g.querySelector('.plugin-heading');if(b)b.setAttribute('aria-expanded','false');});
  $('#homeLink').classList.toggle('active',!plugin);
 }
 function setStatus(message,kind){let el=root.querySelector('.translation-status');if(!el){el=document.createElement('div');el.className='translation-status';root.prepend(el);}el.textContent=message;el.dataset.state=kind||'info';}
@@ -173,7 +173,7 @@ async function buildSearch(){
  if(!search.dataset.bound){search.addEventListener('input',()=>show(search.value));search.addEventListener('keydown',e=>{if(e.key==='Escape'){results.hidden=true;search.blur();}if(e.key==='Enter'){const first=results.querySelector('a');if(first)location.hash=first.getAttribute('href').slice(1);results.hidden=true;}});document.addEventListener('click',e=>{if(!e.target.closest('.top-search'))results.hidden=true;});document.addEventListener('keydown',e=>{if((e.ctrlKey||e.metaKey)&&e.key.toLowerCase()==='k'){e.preventDefault();search.focus();}});search.dataset.bound='1';}
 }
 async function init(){
- try{const r=await fetch('data/navigation.json?v=6');if(!r.ok)throw new Error('No se pudo cargar el índice.');navData=await r.json();renderNavigation();applyPreferences();await showRoute();await buildSearch();window.addEventListener('hashchange',showRoute);}
+ try{const r=await fetch('data/navigation.json?v=7');if(!r.ok)throw new Error('No se pudo cargar el índice.');navData=await r.json();renderNavigation();applyPreferences();await showRoute();await buildSearch();window.addEventListener('hashchange',showRoute);}
  catch(e){root.innerHTML='<h1>Error al cargar documentación</h1><p>'+esc(e.message)+'</p>';}
 }
 $('#languageSelect').addEventListener('change',async e=>{localStorage.setItem('apolo-language',e.target.value);applyPreferences();renderNavigation();await showRoute();});
