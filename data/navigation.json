@@ -188,6 +188,12 @@
           "tags": "levels coste rankup"
         },
         {
+          "id": "requirements",
+          "title": "Requisitos dinámicos",
+          "description": "15 tipos de condiciones, operadores y ejemplos",
+          "tags": "requirements requisitos vault playtime kills deaths blocks items permissions placeholder statistic quests custom"
+        },
+        {
           "id": "unlocks",
           "title": "Desbloqueos",
           "description": "Comandos, regiones, mundos, bloques e ítems",
