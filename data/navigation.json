@@ -200,6 +200,12 @@
           "tags": "comandos permisos bypass"
         },
         {
+          "id": "levels-menu",
+          "title": "Menú de niveles",
+          "description": "Diseño configurable de la GUI principal",
+          "tags": "levels-menu menu gui inventario slots tamaño iconos lore"
+        },
+        {
           "id": "config",
           "title": "Configuración y datos",
           "description": "YAML, SQL, Vault y WorldGuard",
