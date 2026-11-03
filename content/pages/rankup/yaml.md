@@ -683,3 +683,18 @@ entities:
     WITHER: 5
 
 ```
+
+### levels-menu.yml — menú principal configurable
+
+Este archivo nuevo controla `/rankup` y `/rankup menu`; no modifica `menu.yml`, que queda para `/rankup overview`.
+
+| Ruta | Función |
+|---|---|
+| `menu.title` | Título. |
+| `menu.size` | Tamaño de 9 a 54 slots, múltiplo de 9. Valor inválido: vuelve a 54. |
+| `menu.filler.enabled/material/name` | Panel de relleno. |
+| `menu.levels.slots` | Slots ordenados de los niveles; su cantidad determina niveles por página. Slots fuera de rango se ignoran y duplicados se eliminan. |
+| `menu.levels.states.unlocked/next/locked` | Material, nombre y lore para cada estado. |
+| `menu.buttons.previous/next/close/unlocks/profile/top` | Slot, material, nombre, lore y visibilidad de botones. |
+
+Placeholders: `%player%`, `%level%`, `%level_name%`, `%max_level%`, `%next_level%`, `%next_level_name%`, `%progress%`, `%target_level%`, `%target_name%`, `%page%` y `%pages%`. Si no queda ningún slot de nivel válido, se usa la distribución predeterminada de 45 slots. Aplicá cambios con `/rankup reload`.
