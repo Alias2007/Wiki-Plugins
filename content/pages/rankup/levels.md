@@ -1,31 +1,48 @@
 <a id="levels"></a>
 ## Niveles y ascensos
 
-El archivo levels.yml contiene la escalera de niveles bajo levels.<número>. Los números no tienen que ser consecutivos: al ascender, el plugin busca el siguiente nivel numérico configurado por encima del nivel actual.
+El archivo `levels.yml` define la escalera en `levels.<número>`. Los números no tienen que ser consecutivos: el plugin busca el siguiente nivel numérico configurado por encima del actual.
 
-Cada nivel admite:
+### Opciones por nivel
 
-| Clave | Tipo / significado |
+| Clave | Función |
 |---|---|
-| name | Nombre visible del rango; admite MiniMessage y códigos &. |
-| cost | Coste económico. Requiere Vault y un proveedor de economía cuando es mayor que cero. |
-| requirements.items | Mapa de materiales y cantidades que el jugador debe tener; los objetos se consumen al ascender. |
-| rewards | Lista de comandos ejecutados por consola cuando el ascenso termina. |
-| reward-display | Lista de textos mostrados en el menú en lugar de exponer comandos internos. |
+| `name` | Nombre visible del rango; admite MiniMessage y códigos clásicos `&`. |
+| `luckperms-group` | Grupo de LuckPerms ya existente que corresponde a este nivel y pertenece al Track configurado. |
+| `cost` | Coste económico general mediante Vault. Se mantiene compatible con el sistema de requisitos dinámicos. |
+| `requirements` | Requisitos combinables; admite los 15 tipos incorporados. |
+| `rewards` | Comandos ejecutados por consola al completar el ascenso. |
+| `reward-display` | Texto opcional mostrado en el menú en lugar de exponer los comandos internos. |
 
-Ejemplo:
+### Requisitos
+
+Los requisitos se declaran dentro de `requirements` con una clave identificadora y un `type`. Se pueden combinar varias condiciones en el mismo nivel. Además del coste general y del formato antiguo `requirements.items`, hay 15 tipos: `vault`, `playtime`, `level`, `kills`, `deaths`, `blocks-broken`, `blocks-placed`, `mob-kills`, `items`, `permissions`, `luckperms-group`, `placeholder`, `statistic`, `quests` y `custom`.
+
+La referencia completa de campos, operadores, dependencias y ejemplos está en [Requisitos dinámicos](#requirements).
+
+### Ejemplo
+
 ~~~yaml
 levels:
   '3':
     name: Explorador
+    luckperms-group: explorador
     cost: 500
     requirements:
-      items:
-        IRON_INGOT: 16
+      playtime:
+        type: playtime
+        minutes: 60
+      diamonds:
+        type: items
+        material: DIAMOND
+        amount: 16
+        consume: true
     rewards:
-      - "give %player% diamond 2"
+      - "give %player% emerald 4"
     reward-display:
-      - "2x Diamante"
+      - "4x Esmeralda"
 ~~~
 
-El plugin comprueba dinero y objetos antes de procesar la subida. Si el proveedor Vault no está disponible y el nivel tiene coste, el ascenso se bloquea sin consumir materiales. Al completar el nivel se ejecutan las recompensas y se actualizan los comandos del jugador conectado.
+El coste y los requisitos se verifican antes del ascenso. Los materiales y el dinero configurados para consumirse solo se descuentan cuando la operación puede completarse. Los placeholders disponibles para comandos de recompensa incluyen `%player%`, `%uuid%`, `%level%`, `%level_name%`, `%previous_level%` y `%next_level%`.
+
+El nivel de ApoloRankUp es el dato principal de progresión. Si LuckPerms está habilitado, el grupo asociado al nivel se sincroniza según la configuración; el plugin no crea ni modifica grupos o Tracks.
