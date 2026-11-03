@@ -335,9 +335,9 @@ rankup-effects:
 
 ### `levels.yml`
 
-Contenido fuente del repositorio; se mantienen comentarios y estructura. Las contraseñas se sustituyen por seguridad.
+Fuente vigente del repositorio para Paper 1.21.4 / Java 21. Cada nivel admite nombre, grupo LuckPerms existente, coste, requisitos combinables, recompensas y texto de presentación. Se conserva el formato anterior `requirements.items`; la referencia de los 15 tipos de requisitos y sus campos está en [Requisitos dinámicos](#requirements).
 
-```yaml
+~~~yaml
 # Niveles del rankup. Las claves son números; el jugador solo puede subir al siguiente
 # nivel configurado por encima del suyo (los números no tienen que ser consecutivos).
 #
@@ -348,6 +348,18 @@ Contenido fuente del repositorio; se mantienen comentarios y estructura. Las con
 # rewards:         comandos que ejecuta la consola al ascender.
 #                  Placeholders: %player% %uuid% %level% %level_name% %previous_level% %next_level%
 # reward-display:  (opcional) texto que ve el jugador en el menú en lugar de los comandos.
+# luckperms-group: nombre de un grupo QUE YA EXISTE en LuckPerms y pertenece al Track configurado.
+#                  ApoloRankUp nunca crea ni agrega grupos/Tracks. Comprueba con /rankup luckperms check.
+#
+# Requisitos dinámicos: cada clave dentro de requirements (salvo items, formato antiguo) debe tener type.
+# Tipos: vault(amount, consume), playtime(minutes|hours), level(amount), kills(amount), deaths(amount),
+# blocks-broken(amount, material opcional), blocks-placed(amount, material opcional), mob-kills(amount),
+# items(material, amount, consume), permissions(permission), luckperms-group(group),
+# placeholder(placeholder, operator, value), statistic(statistic, amount, material/entity),
+# quests(placeholder, operator, value), custom(placeholder, operator, value).
+# Operators numéricos/texto: >=, >, <=, <, ==, !=. placeholder/quests/custom requieren PlaceholderAPI.
+# Los requisitos de tipo items consumen por defecto (consume: true); usa consume: false para no consumirlos.
+# vault también consume por defecto; el coste general 'cost' sigue siendo compatible.
 #
 # Qué se desbloquea con cada nivel (comandos, minas, mundos, bloques, ítems, mobs)
 # se configura en unlocks.yml.
@@ -355,6 +367,7 @@ Contenido fuente del repositorio; se mantienen comentarios y estructura. Las con
 levels:
   '1':
     name: Novato
+    luckperms-group: novato
     cost: 0
     requirements:
       items: {}
@@ -362,6 +375,7 @@ levels:
 
   '2':
     name: Minero
+    luckperms-group: minero
     cost: 0
     requirements:
       items:
@@ -373,10 +387,14 @@ levels:
 
   '3':
     name: Explorador
+    luckperms-group: explorador
     cost: 500
     requirements:
       items:
         IRON_INGOT: 16
+      playtime:
+        type: playtime
+        minutes: 60
     rewards:
       - "give %player% diamond 2"
     reward-display:
@@ -384,6 +402,7 @@ levels:
 
   '4':
     name: Experto
+    luckperms-group: experto
     cost: 2000
     requirements:
       items:
@@ -395,6 +414,7 @@ levels:
 
   '5':
     name: Maestro
+    luckperms-group: maestro
     cost: 5000
     requirements:
       items:
@@ -403,8 +423,7 @@ levels:
       - "give %player% diamond 8"
     reward-display:
       - "8x Diamante"
-
-```
+~~~
 
 ### `menu.yml`
 
@@ -590,9 +609,9 @@ messages:
 
 ### `unlocks.yml`
 
-Contenido fuente del repositorio; se mantienen comentarios y estructura. Las contraseñas se sustituyen por seguridad.
+Fuente vigente del repositorio. Define restricciones de comandos, regiones WorldGuard, mundos, bloques, uso/crafteo de objetos y ataques a entidades. Las entradas admiten formato corto o completo con nivel, nombre y mensaje.
 
-```yaml
+~~~yaml
 # ─────────────────────────────────────────────────────────────────────────────
 #  Desbloqueos por nivel
 #  Mientras el jugador no tenga el nivel indicado, no puede hacer lo que se lista aquí.
@@ -681,8 +700,7 @@ entities:
       name: "Warden"
     ENDER_DRAGON: 5
     WITHER: 5
-
-```
+~~~
 
 ### levels-menu.yml — menú principal configurable
 
