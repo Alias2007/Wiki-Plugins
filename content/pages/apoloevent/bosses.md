@@ -27,6 +27,18 @@ Los jefes personalizados se guardan en `plugins/ApoloEvent/bosses/`. Pueden defi
 
 **Inventario:** el evento Boss no captura ni restaura el inventario. Al morir, el participante pierde sus objetos y queda fuera del evento.
 
+### Webhook de derrota — versión 0.5.120
+
+El webhook de Discord del Boss principal admite una sección `defeat` con mensaje y embed configurables. Las variables disponibles incluyen:
+
+- `{player}`: jugador que derrotó al Boss.
+- `{boss}`: nombre del Boss derrotado.
+- `{reward}`: resumen de la recompensa especial y la recompensa base entregadas.
+
 ### Bosses automáticos de minas
 
 Se configuran en `mine-events.yml`. Admiten regiones, nombre de mina, anuncios, efectos, animaciones, guardianes y persistencia de bosses vivos en `mine-boss-state.yml` cuando está activada.
+
+En la versión 0.5.120, el webhook de derrota de mina también admite un embed con jugador, boss, mina, recompensa y coordenadas (`{x}`, `{y}`, `{z}`); incluye además `{world}` para el mundo de la derrota. La sección se configura en `mine-events.discord-webhook.defeat`.
+
+Fuente: [commit 0.5.120](https://github.com/Alias2007/ApoloEvent-v2.0/commit/4ffdbf43edf51625583df91b7e6a651b2ad726c2).
