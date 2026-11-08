@@ -1,5 +1,5 @@
 <a id="arenas"></a>
-## Arenas y spawns
+# Arenas y spawns
 
 Las arenas tienen límites, reglas por región y puntos de aparición validados para evitar ubicaciones inseguras. El core permite restaurar bloques modificados durante peleas y aplicar protección temporal al reaparecer.
 

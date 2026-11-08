@@ -31,3 +31,7 @@ html[data-theme="white"] .search-result:hover,html[data-theme="black"] .search-r
 .translation-status[data-state="loading"]{opacity:.8}
 .preferences .preference select{min-width:86px}
 @media(max-width:650px){.preferences{gap:3px}.preference select{min-width:0;max-width:76px}}
+
+/* ApoloMC sidebar groups: usa solo variables del tema, así respeta los 7 temas. */
+.plugin-page-group{margin:11px 0 3px 9px;color:var(--muted);font:700 9px "DM Sans",system-ui,sans-serif;letter-spacing:.11em;text-transform:uppercase;opacity:.85}
+.plugin-page-group:first-child{margin-top:3px}

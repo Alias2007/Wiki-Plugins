@@ -1,5 +1,5 @@
 <a id="visuals"></a>
-## Scoreboard y tablist
+# Scoreboard y tablist
 
 Los archivos se encuentran en `ScorebordLs/`:
 - `scoreboard.yml`: panel lateral y diseños condicionales.

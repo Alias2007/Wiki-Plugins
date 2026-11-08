@@ -1,5 +1,5 @@
 <a id="config"></a>
-## Configuración, almacenamiento y API
+# Configuración, almacenamiento y API
 
 Carpeta: `plugins/KitPvP-Core/`.
 
@@ -16,11 +16,11 @@ Carpeta: `plugins/KitPvP-Core/`.
 | `kits/` | Definiciones de kits. |
 | `inventario/` | Menús editables. |
 
-### Integraciones
+## Integraciones
 
 Vault, PlaceholderAPI, LuckPerms y WorldGuard son dependencias opcionales según la función. EssentialsX puede coexistir: el core gestiona los comandos en conflicto y evita anuncios duplicados de muerte.
 
-### API pública
+## API pública
 
 ```java
 KitPvPApi api = KitPvPCore.getApi();

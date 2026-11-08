@@ -1,5 +1,5 @@
 <a id="technical"></a>
-## Información técnica
+# Información técnica
 
 - **Versión documentada del proyecto:** 0.0.50.
 - **Java:** 21.

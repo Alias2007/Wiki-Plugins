@@ -1,5 +1,5 @@
 <a id="duels"></a>
-## Duelos
+# Duelos
 
 Duelos 1v1 con solicitudes que expiran, aceptación, revancha, rendición y restauración del estado del jugador al finalizar.
 

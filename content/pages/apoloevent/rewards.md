@@ -1,6 +1,6 @@
 # Recompensas BossMina — referencia detallada
 
-Esta página corresponde exclusivamente a bosses automáticos de minas. Para el evento principal consulta [Boss normal](normal-boss).
+Esta página corresponde exclusivamente a bosses automáticos de minas. Para el evento principal consulta [Boss normal](#apoloevent/normal-boss).
 
 **Archivo:** `plugins/ApoloEvent/BossMina/rewards.yml`
 

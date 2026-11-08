@@ -9,84 +9,98 @@
       "pages": [
         {
           "id": "overview",
+          "group": "intro",
           "title": "Resumen",
           "description": "Funciones y estructura general",
           "tags": "eventos modalidades plugin"
         },
         {
           "id": "backroom",
+          "group": "events",
           "title": "Backroom",
           "description": "Carrera, checkpoints y PvP",
           "tags": "carrera checkpoints pvp"
         },
         {
           "id": "horses",
+          "group": "events",
           "title": "Carrera de caballos",
           "description": "Monturas, posiciones y recompensas",
           "tags": "caballos horse monturas"
         },
         {
           "id": "colormatch",
+          "group": "events",
           "title": "ColorMatch",
           "description": "Rondas, colores y preparación de arena",
           "tags": "colormatch arena colores"
         },
         {
-          "id": "bosses",
-          "title": "Bosses y minas",
-          "description": "Boss integrado, personalizados y bosses de minas",
-          "tags": "boss warden wither ravager minas mineboss"
-        },
-        {
-          "id": "normal-boss",
-          "title": "Boss normal",
-          "description": "Evento principal, bosses clásicos, personalizados y recompensas",
-          "tags": "boss normal boss.yml warden wither ravager titan creeper rewards"
-        },
-        {
-          "id": "bossmina",
-          "title": "BossMina",
-          "description": "Bosses de minas, perfiles, horarios, hologramas y configuración",
-          "tags": "bossmina mine minas horarios holograma rewards"
-        },
-        {
-          "id": "rewards",
-          "title": "Recompensas BossMina",
-          "description": "Referencia detallada de rewards.yml para bosses de minas",
-          "tags": "rewards rewards.yml bossmina drop chance items"
-        },
-        {
           "id": "minigames",
+          "group": "events",
           "title": "MiniGames",
           "description": "Arenas de Spleef, Minefield y JumpRun",
           "tags": "minigames spleef minefield jumprun"
         },
         {
           "id": "airdrop",
+          "group": "events",
           "title": "AirDrop",
           "description": "Horarios, aparición, seguimiento y recompensas",
           "tags": "airdrop drop horarios track"
         },
         {
+          "id": "bosses",
+          "group": "bosses",
+          "title": "Bosses y minas",
+          "description": "Boss integrado, personalizados y bosses de minas",
+          "tags": "boss warden wither ravager minas mineboss"
+        },
+        {
+          "id": "normal-boss",
+          "group": "bosses",
+          "title": "Boss normal",
+          "description": "Evento principal, bosses clásicos, personalizados y recompensas",
+          "tags": "boss normal boss.yml warden wither ravager titan creeper rewards"
+        },
+        {
+          "id": "bossmina",
+          "group": "bosses",
+          "title": "BossMina",
+          "description": "Bosses de minas, perfiles, horarios, hologramas y configuración",
+          "tags": "bossmina mine minas horarios holograma rewards"
+        },
+        {
+          "id": "rewards",
+          "group": "bosses",
+          "title": "Recompensas BossMina",
+          "description": "Referencia detallada de rewards.yml para bosses de minas",
+          "tags": "rewards rewards.yml bossmina drop chance items"
+        },
+        {
           "id": "commands",
+          "group": "reference",
           "title": "Comandos y permisos",
           "description": "Sintaxis, argumentos y permisos del plugin",
           "tags": "comandos permisos evento staff"
         },
         {
           "id": "variables",
+          "group": "reference",
           "title": "Variables y placeholders",
           "description": "Variables documentadas e integración PlaceholderAPI",
           "tags": "variables placeholders papi"
         },
         {
           "id": "config",
+          "group": "settings",
           "title": "Configuración",
           "description": "Archivos, opciones e integraciones",
           "tags": "config yaml worldguard ultimateclans vault"
         },
         {
           "id": "yaml",
+          "group": "settings",
           "title": "Archivos YAML",
           "description": "Referencia por archivo: claves, opciones y aplicación de cambios",
           "tags": "yaml yml config configuration settings archivos parámetros"
@@ -102,84 +116,205 @@
       "pages": [
         {
           "id": "overview",
+          "group": "intro",
           "title": "Resumen",
           "description": "Módulos principales y requisitos",
           "tags": "kitpvp core paper"
         },
         {
           "id": "kits",
+          "group": "features",
           "title": "Kits y selector",
           "description": "GUI, editor, cooldowns y permisos",
           "tags": "kits selector cooldown editor"
         },
         {
           "id": "abilities",
+          "group": "features",
           "title": "Habilidades",
           "description": "Objetos especiales y acciones disponibles",
           "tags": "ability habilidades dash fireball"
         },
         {
           "id": "combat",
+          "group": "features",
           "title": "Combate y mensajes",
           "description": "Combat tag, sanciones y mensajes de muerte",
           "tags": "combate combatlog muerte"
         },
         {
           "id": "arenas",
+          "group": "features",
           "title": "Arenas y spawns",
           "description": "Reglas, regiones y puntos seguros",
           "tags": "arena spawns worldguard"
         },
         {
           "id": "npcs",
+          "group": "features",
           "title": "NPCs",
           "description": "NPCs nativos y selectores",
           "tags": "npc citizens selector"
         },
         {
           "id": "events",
+          "group": "features",
           "title": "Eventos y torneos",
           "description": "LMS, KOTH y torneos 1v1",
           "tags": "lms koth torneo"
         },
         {
           "id": "economy",
+          "group": "features",
           "title": "Economía y clanes",
           "description": "Monedas, pagos, clanes y misiones",
           "tags": "coins pay economy clanes misiones"
         },
         {
           "id": "rewards",
+          "group": "features",
           "title": "Recompensas y AFK",
           "description": "Recompensas diarias, semanales y zonas AFK",
           "tags": "rewards afkzone"
         },
         {
           "id": "visuals",
+          "group": "features",
           "title": "Scoreboard y tablist",
           "description": "Diseños, condiciones y animaciones",
           "tags": "scoreboard tablist nametag"
         },
         {
           "id": "commands",
+          "group": "reference",
           "title": "Comandos y permisos",
           "description": "Comandos de jugador y administración",
           "tags": "comandos permisos kit arena npc"
         },
         {
           "id": "variables",
+          "group": "reference",
           "title": "Variables y placeholders",
           "description": "Placeholders propios y condiciones",
           "tags": "variables placeholders papi"
         },
         {
           "id": "config",
+          "group": "settings",
           "title": "Configuración y API",
           "description": "Archivos, almacenamiento, integraciones y API",
           "tags": "config yaml sqlite mysql api"
         },
         {
           "id": "yaml",
+          "group": "settings",
+          "title": "Archivos YAML",
+          "description": "Referencia por archivo: claves, opciones y aplicación de cambios",
+          "tags": "yaml yml config configuration settings archivos parámetros"
+        }
+      ]
+    },
+    {
+      "id": "practice",
+      "name": "ApoloPractice",
+      "type": "Practice PvP",
+      "description": "Duelos, colas, parties, entrenamiento y replays.",
+      "repository": "https://github.com/Alias2007/Practice-Core",
+      "pages": [
+        {
+          "id": "overview",
+          "group": "intro",
+          "title": "Resumen",
+          "description": "Modos disponibles y estado de desarrollo",
+          "tags": "practice pvp"
+        },
+        {
+          "id": "duels",
+          "group": "features",
+          "title": "Duelos",
+          "description": "Solicitudes, revancha y abandono",
+          "tags": "duel duelos accept rematch"
+        },
+        {
+          "id": "queues",
+          "group": "features",
+          "title": "Colas y ELO",
+          "description": "Ranked y unranked",
+          "tags": "queue ranked unranked elo"
+        },
+        {
+          "id": "kits",
+          "group": "features",
+          "title": "Kits y modos",
+          "description": "Kits YAML, Boxing y Spleef",
+          "tags": "kits boxing spleef"
+        },
+        {
+          "id": "parties",
+          "group": "features",
+          "title": "Parties",
+          "description": "Grupos, invitaciones y party wars",
+          "tags": "party invite partywar"
+        },
+        {
+          "id": "ffa",
+          "group": "features",
+          "title": "Free For All",
+          "description": "Partidas FFA y espectadores",
+          "tags": "ffa freeforall"
+        },
+        {
+          "id": "tournaments",
+          "group": "features",
+          "title": "Torneos",
+          "description": "Torneos eliminatorios",
+          "tags": "tournament torneo"
+        },
+        {
+          "id": "training",
+          "group": "features",
+          "title": "Entrenamiento",
+          "description": "IA local y dificultades",
+          "tags": "training bot ia"
+        },
+        {
+          "id": "replays",
+          "group": "features",
+          "title": "Replays",
+          "description": "Reproducción y controles",
+          "tags": "replay snapshots"
+        },
+        {
+          "id": "stats",
+          "group": "features",
+          "title": "Estadísticas y cosméticos",
+          "description": "ELO, tops y efectos visuales",
+          "tags": "stats top elo cosmetic"
+        },
+        {
+          "id": "commands",
+          "group": "reference",
+          "title": "Comandos y permisos",
+          "description": "Comandos de jugador y staff",
+          "tags": "comandos permisos practice"
+        },
+        {
+          "id": "variables",
+          "group": "reference",
+          "title": "Variables y placeholders",
+          "description": "Placeholders propios y datos disponibles para mostrar",
+          "tags": "variables placeholders papi estadísticas"
+        },
+        {
+          "id": "config",
+          "group": "settings",
+          "title": "Configuración y compatibilidad",
+          "description": "YAML, SQLite, MySQL y versiones",
+          "tags": "config storage sqlite mysql viaversion"
+        },
+        {
+          "id": "yaml",
+          "group": "settings",
           "title": "Archivos YAML",
           "description": "Referencia por archivo: claves, opciones y aplicación de cambios",
           "tags": "yaml yml config configuration settings archivos parámetros"
@@ -195,48 +330,56 @@
       "pages": [
         {
           "id": "overview",
+          "group": "intro",
           "title": "Resumen",
           "description": "Cómo funciona la progresión",
           "tags": "rankup niveles progreso"
         },
         {
           "id": "levels",
+          "group": "features",
           "title": "Niveles y ascensos",
           "description": "Requisitos, costes y recompensas",
           "tags": "levels coste rankup"
         },
         {
           "id": "requirements",
+          "group": "features",
           "title": "Requisitos dinámicos",
           "description": "15 tipos de condiciones, operadores y ejemplos",
           "tags": "requirements requisitos vault playtime kills deaths blocks items permissions placeholder statistic quests custom"
         },
         {
           "id": "unlocks",
+          "group": "features",
           "title": "Desbloqueos",
           "description": "Comandos, regiones, mundos, bloques e ítems",
           "tags": "unlocks commands regions worlds blocks items entities"
         },
         {
           "id": "commands",
+          "group": "reference",
           "title": "Comandos y permisos",
           "description": "Jugador, administración y bypass",
           "tags": "comandos permisos bypass"
         },
         {
-          "id": "levels-menu",
-          "title": "Menú de niveles",
-          "description": "Diseño configurable de la GUI principal",
-          "tags": "levels-menu menu gui inventario slots tamaño iconos lore"
-        },
-        {
           "id": "config",
+          "group": "settings",
           "title": "Configuración y datos",
           "description": "YAML, SQL, Vault y WorldGuard",
           "tags": "config storage sqlite mysql vault worldguard"
         },
         {
+          "id": "levels-menu",
+          "group": "settings",
+          "title": "Menú de niveles",
+          "description": "Diseño configurable de la GUI principal",
+          "tags": "levels-menu menu gui inventario slots tamaño iconos lore"
+        },
+        {
           "id": "yaml",
+          "group": "settings",
           "title": "Archivos YAML",
           "description": "Referencia por archivo: claves, opciones y aplicación de cambios",
           "tags": "yaml yml config configuration settings archivos parámetros"
@@ -251,120 +394,31 @@
       "pages": [
         {
           "id": "overview",
+          "group": "intro",
           "title": "Resumen",
           "description": "Descripción general y alcance de la documentación",
           "tags": "apolorr plugin resumen"
         },
         {
           "id": "interfaces",
+          "group": "info",
           "title": "Interfaces y menús",
           "description": "Organización visual de las interfaces",
           "tags": "interfaz menu inventario visual"
         },
         {
           "id": "technical",
+          "group": "info",
           "title": "Información técnica",
           "description": "Compatibilidad y notas generales",
           "tags": "version java paper vault placeholderapi"
         },
         {
           "id": "scope",
+          "group": "info",
           "title": "Alcance de la guía",
           "description": "Qué información técnica contiene esta sección",
           "tags": "documentación guia alcance"
-        }
-      ]
-    },
-    {
-      "id": "practice",
-      "name": "ApoloPractice",
-      "type": "Practice PvP",
-      "description": "Duelos, colas, parties, entrenamiento y replays.",
-      "repository": "https://github.com/Alias2007/Practice-Core",
-      "pages": [
-        {
-          "id": "overview",
-          "title": "Resumen",
-          "description": "Modos disponibles y estado de desarrollo",
-          "tags": "practice pvp"
-        },
-        {
-          "id": "duels",
-          "title": "Duelos",
-          "description": "Solicitudes, revancha y abandono",
-          "tags": "duel duelos accept rematch"
-        },
-        {
-          "id": "queues",
-          "title": "Colas y ELO",
-          "description": "Ranked y unranked",
-          "tags": "queue ranked unranked elo"
-        },
-        {
-          "id": "kits",
-          "title": "Kits y modos",
-          "description": "Kits YAML, Boxing y Spleef",
-          "tags": "kits boxing spleef"
-        },
-        {
-          "id": "parties",
-          "title": "Parties",
-          "description": "Grupos, invitaciones y party wars",
-          "tags": "party invite partywar"
-        },
-        {
-          "id": "ffa",
-          "title": "Free For All",
-          "description": "Partidas FFA y espectadores",
-          "tags": "ffa freeforall"
-        },
-        {
-          "id": "tournaments",
-          "title": "Torneos",
-          "description": "Torneos eliminatorios",
-          "tags": "tournament torneo"
-        },
-        {
-          "id": "training",
-          "title": "Entrenamiento",
-          "description": "IA local y dificultades",
-          "tags": "training bot ia"
-        },
-        {
-          "id": "replays",
-          "title": "Replays",
-          "description": "Reproducción y controles",
-          "tags": "replay snapshots"
-        },
-        {
-          "id": "stats",
-          "title": "Estadísticas y cosméticos",
-          "description": "ELO, tops y efectos visuales",
-          "tags": "stats top elo cosmetic"
-        },
-        {
-          "id": "commands",
-          "title": "Comandos y permisos",
-          "description": "Comandos de jugador y staff",
-          "tags": "comandos permisos practice"
-        },
-        {
-          "id": "variables",
-          "title": "Variables y placeholders",
-          "description": "Placeholders propios y datos disponibles para mostrar",
-          "tags": "variables placeholders papi estadísticas"
-        },
-        {
-          "id": "config",
-          "title": "Configuración y compatibilidad",
-          "description": "YAML, SQLite, MySQL y versiones",
-          "tags": "config storage sqlite mysql viaversion"
-        },
-        {
-          "id": "yaml",
-          "title": "Archivos YAML",
-          "description": "Referencia por archivo: claves, opciones y aplicación de cambios",
-          "tags": "yaml yml config configuration settings archivos parámetros"
         }
       ]
     }

@@ -1,5 +1,5 @@
 <a id="replays"></a>
-## Replays
+# Replays
 
 Replays mediante snapshots, con reproducción visual como espectador y fantasma del rival.
 

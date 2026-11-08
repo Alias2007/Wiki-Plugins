@@ -162,7 +162,7 @@ Primero se comprueba la probabilidad general. Luego se mezclan las entradas y se
 
 Variables de mensajes: `{player}`, `{boss}`, `{mine}`, `{item}`. `no-drop-message` es global y puede dejarse vacío para desactivar el aviso.
 
-Consulta [Recompensas BossMina](rewards) para la referencia completa. Para el Boss principal usa [Boss normal](normal-boss): su sistema de recompensas es distinto.
+Consulta [Recompensas BossMina](#apoloevent/rewards) para la referencia completa. Para el Boss principal usa [Boss normal](#apoloevent/normal-boss): su sistema de recompensas es distinto.
 
 ## Comandos
 

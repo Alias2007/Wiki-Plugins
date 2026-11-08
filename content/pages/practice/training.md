@@ -1,5 +1,5 @@
 <a id="training"></a>
-## Entrenamiento
+# Entrenamiento
 
 Entrenamiento local contra una IA propia del core, con kit y dificultad.
 

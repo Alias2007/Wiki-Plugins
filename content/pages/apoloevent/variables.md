@@ -1,7 +1,7 @@
 <a id="variables"></a>
-## Variables y placeholders
+# Variables y placeholders
 
-### PlaceholderAPI — tops de eventos
+## PlaceholderAPI — tops de eventos
 
 La expansión de tops usa el identificador apoloevent. Categorías admitidas: horse, backroom, boss, mineboss y el alias mine_boss.
 
@@ -26,7 +26,7 @@ Ejemplos:
 %apoloevent_mineboss_score%
 ~~~
 
-### PlaceholderAPI — AirDrop
+## PlaceholderAPI — AirDrop
 
 El identificador de la expansión es apoloevent_airdrop.
 
@@ -44,7 +44,7 @@ El identificador de la expansión es apoloevent_airdrop.
 | %apoloevent_airdrop_last_world% | Mundo de la última aparición. |
 | %apoloevent_airdrop_last_tier% | Rareza de la última crate. |
 
-### Variables en mensajes y anuncios
+## Variables en mensajes y anuncios
 
 | Variable | Uso |
 |---|---|

@@ -1,5 +1,5 @@
 <a id="colormatch"></a>
-## ColorMatch
+# ColorMatch
 
 Minijuego de supervivencia por colores, con rondas, efectos, perfiles de arena y recompensas. Permite preparar lobby y región, construir la arena, iniciar/detener partidas y restaurar los bloques al finalizar.
 

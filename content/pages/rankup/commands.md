@@ -1,5 +1,5 @@
 <a id="commands"></a>
-## Comandos y permisos
+# Comandos y permisos
 
 El comando principal es `/rankup`; alias registrado: `/ru`.
 
@@ -18,7 +18,7 @@ El comando principal es `/rankup`; alias registrado: `/ru`.
 | `/rankup set <jugador> <nivel>` | `apolorankup.admin` | Establece un nivel existente. |
 | `/rankup add <jugador> <cantidad>` | `apolorankup.admin` | Avanza una cantidad de posiciones dentro de la escalera configurada. |
 
-### Permisos
+## Permisos
 
 | Permiso | Alcance |
 |---|---|

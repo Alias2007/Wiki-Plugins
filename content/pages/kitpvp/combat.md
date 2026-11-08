@@ -1,5 +1,5 @@
 <a id="combat"></a>
-## Combate y mensajes de muerte
+# Combate y mensajes de muerte
 
 El core incorpora sistema de combate y sanción por desconexión en combate, con acciones configurables como ejecución, pérdida de inventario/experiencia y multas de monedas o XP, según `combat.yml`.
 

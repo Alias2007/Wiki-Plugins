@@ -1,5 +1,5 @@
 <a id="commands"></a>
-## Comandos y permisos
+# Comandos y permisos
 
 El comando raíz es /practice; los aliases registrados son /apolopractice y /prac.
 
@@ -54,7 +54,7 @@ El comando raíz es /practice; los aliases registrados son /apolopractice y /pra
 | /practice compatibility | Muestra información de compatibilidad. |
 | /practice compatibility reload | Recarga reglas de compatibilidad. |
 
-### Permisos registrados
+## Permisos registrados
 
 | Permiso | Default / alcance |
 |---|---|

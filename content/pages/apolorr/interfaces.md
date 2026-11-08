@@ -1,5 +1,5 @@
 <a id="interfaces"></a>
-## Interfaces y menús
+# Interfaces y menús
 
 El proyecto utiliza interfaces de inventario para presentar los distintos módulos de juego. A nivel general, la interfaz permite mostrar:
 - Títulos y elementos visuales.

@@ -1,5 +1,5 @@
 <a id="backroom"></a>
-## Backroom
+# Backroom
 
 Carrera por un mapa con puntos de control y meta. Incorpora espectadores, habilidades, PvP configurable, partículas para orientar a los participantes, objetos de velocidad/fuerza y brújula rastreadora.
 

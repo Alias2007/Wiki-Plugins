@@ -25,19 +25,4 @@ ApoloPractice es un core modular de Practice PvP. El README del proyecto describ
 
 La base automatizada se valida con Paper API 1.21.4 y Java 21. Algunas funciones —en particular el jugador falso para entrenamiento— requieren pruebas en un servidor real antes de considerarse estables.
 
-## Módulos documentados
-
-La navegación de ApoloPractice incluye páginas para:
-
-- Duelos, solicitudes y revancha.
-- Colas ranked/unranked y ELO.
-- Kits y modos de juego.
-- Parties y party wars.
-- Free For All.
-- Torneos.
-- Entrenamiento.
-- Replays.
-- Estadísticas y cosméticos.
-- Comandos, permisos, variables y configuración.
-
 > **Nota:** la presencia de una función en esta documentación describe el alcance del proyecto; no garantiza que todas las funciones estén terminadas o listas para producción en la versión SNAPSHOT.

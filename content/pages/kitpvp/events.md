@@ -1,5 +1,5 @@
 <a id="events"></a>
-## Eventos y torneos
+# Eventos y torneos
 
 - **LMS (Last Man Standing):** evento de último jugador en pie.
 - **KOTH (King of the Hill):** captura y control de punto configurable.

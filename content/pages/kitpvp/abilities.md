@@ -1,5 +1,5 @@
 <a id="abilities"></a>
-## Habilidades especiales
+# Habilidades especiales
 
 Las habilidades se configuran en `abilities.yml`. Cada definición puede incluir estado activo, acción, cooldown e ítem activador (material, nombre, lore, modelo y consumo).
 

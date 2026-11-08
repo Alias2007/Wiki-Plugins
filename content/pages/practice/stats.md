@@ -1,5 +1,5 @@
 <a id="stats"></a>
-## Estadísticas y cosméticos
+# Estadísticas y cosméticos
 
 Estadísticas disponibles: victorias, derrotas, kills, muertes, rachas y ELO.
 

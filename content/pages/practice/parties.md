@@ -1,5 +1,5 @@
 <a id="parties"></a>
-## Parties y party wars
+# Parties y party wars
 
 Las parties admiten hasta ocho jugadores. Las invitaciones expiran a los 60 segundos.
 

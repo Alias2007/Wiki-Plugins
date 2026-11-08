@@ -1,5 +1,5 @@
 <a id="airdrop"></a>
-## AirDrop
+# AirDrop
 
 Entregas programadas mediante `airdrop.times` o manuales.
 

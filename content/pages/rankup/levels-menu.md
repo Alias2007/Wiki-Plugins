@@ -1,9 +1,9 @@
 <a id="levels-menu"></a>
-## Menú principal de niveles — levels-menu.yml
+# Menú principal de niveles — levels-menu.yml
 
 El archivo `levels-menu.yml` controla la GUI que se abre con `/rankup` y `/rankup menu`. Es independiente de `menu.yml`, que conserva el menú anterior accesible mediante `/rankup overview`.
 
-### Qué se puede personalizar
+## Qué se puede personalizar
 
 | Ruta | Función |
 |---|---|
@@ -15,7 +15,7 @@ El archivo `levels-menu.yml` controla la GUI que se abre con `/rankup` y `/ranku
 | `menu.buttons.previous/next` | Navegación entre páginas. |
 | `menu.buttons.close/unlocks/profile/top` | Posición y aspecto de los botones y perfil. |
 
-### Placeholders
+## Placeholders
 
 - Jugador y progreso: `%player%`, `%level%`, `%level_name%`, `%max_level%`, `%next_level%`, `%next_level_name%`, `%progress%`.
 - Nivel representado: `%target_level%`, `%target_name%`.
@@ -23,7 +23,7 @@ El archivo `levels-menu.yml` controla la GUI que se abre con `/rankup` y `/ranku
 
 Los nombres y lore aceptan MiniMessage y códigos clásicos `&`.
 
-### Consideraciones
+## Consideraciones
 
 - El tamaño debe ser múltiplo de 9 y estar entre 9 y 54; de lo contrario, se usa 54.
 - Los slots fuera del inventario se ignoran y los duplicados se eliminan.
@@ -32,7 +32,7 @@ Los nombres y lore aceptan MiniMessage y códigos clásicos `&`.
 - La cantidad de slots válidos determina el tamaño de cada página.
 - Para aplicar cambios, ejecutá `/rankup reload`.
 
-### Contenido actual del archivo
+## Contenido actual del archivo
 
 ~~~yaml
 # Menú principal de niveles: /rankup y /rankup menu

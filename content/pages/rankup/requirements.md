@@ -1,9 +1,9 @@
 <a id="requirements"></a>
-## Requisitos dinámicos de niveles
+# Requisitos dinámicos de niveles
 
 ApoloRankUp permite combinar varios requisitos dentro de cada nivel. Se configuran en `levels.yml`, debajo de `levels.<nivel>.requirements`. Cada requisito lleva una clave identificadora y un `type`; podés añadir varias entradas y mezclar tipos dentro del mismo nivel. No hay un límite fijo de una sola condición.
 
-### Variantes disponibles
+## Variantes disponibles
 
 | Tipo | Campos | Qué comprueba |
 |---|---|---|
@@ -23,7 +23,7 @@ ApoloRankUp permite combinar varios requisitos dentro de cada nivel. Se configur
 | `quests` | `placeholder`, `operator`, `value` | Evalúa el progreso de misiones mediante un placeholder. |
 | `custom` | `placeholder`, `operator`, `value` | Permite integrar una condición externa mediante un placeholder. |
 
-### Operadores de comparación
+## Operadores de comparación
 
 Los tipos `placeholder`, `quests` y `custom` admiten:
 
@@ -38,7 +38,7 @@ Los tipos `placeholder`, `quests` y `custom` admiten:
 
 Cuando ambos valores son numéricos, la comparación es numérica. Para `==` y `!=`, si no son números, se comparan como texto sin distinguir mayúsculas/minúsculas.
 
-### Ejemplo combinado
+## Ejemplo combinado
 
 ~~~yaml
 levels:
@@ -80,7 +80,7 @@ levels:
 
 El ejemplo es ilustrativo: reemplazá los placeholders por los que realmente ofrezcan tus plugins y elegí estadísticas válidas de Bukkit.
 
-### Compatibilidad y comportamiento
+## Compatibilidad y comportamiento
 
 - `placeholder`, `quests` y `custom` necesitan PlaceholderAPI y una expansión que proporcione el placeholder utilizado.
 - `statistic` utiliza nombres de la enumeración Bukkit `Statistic`, por ejemplo `JUMP`, `FISH_CAUGHT`, `ANIMALS_BRED` o `PLAY_ONE_MINUTE`. Para estadísticas asociadas a bloques/ítems se usa `material`; para estadísticas de entidades se usa `entity`.

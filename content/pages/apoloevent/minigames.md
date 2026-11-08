@@ -1,5 +1,5 @@
 <a id="minigames"></a>
-## MiniGames
+# MiniGames
 
 El menú se abre con:
 ```

@@ -1,9 +1,9 @@
 <a id="commands"></a>
-## Comandos y permisos
+# Comandos y permisos
 
 Los comandos se separan por sistema. Los subcomandos de administración requieren evento.admin, apoloevent.admin o el permiso específico indicado.
 
-### Consulta y participación
+## Consulta y participación
 
 | Comando | Función |
 |---|---|
@@ -16,7 +16,7 @@ Los comandos se separan por sistema. Los subcomandos de administración requiere
 | /eventostaff | Abrir el panel de staff. |
 | /evento top | Abrir el menú de clasificaciones. |
 
-### Ciclo de vida de eventos
+## Ciclo de vida de eventos
 
 ~~~text
 /evento start <evento>
@@ -30,7 +30,7 @@ Los comandos se separan por sistema. Los subcomandos de administración requiere
 
 forcestart permite iniciar sin cumplir el mínimo de participantes. Los aliases de sesión para caballos incluyen horse y horserace; para Backroom, br.
 
-### Preparación de mapas, spawns y checkpoints
+## Preparación de mapas, spawns y checkpoints
 
 ~~~text
 /evento setspawn <evento> <jugadores|staff|meta|spectator>
@@ -49,7 +49,7 @@ Las órdenes setspawn players de Backroom y caballos se pueden repetir para guar
 
 Para clonar, coloca el mundo completo, incluido level.dat, en plugins/ApoloEvent/templates/<nombre>/. La clonación no debe sobrescribir un mundo activo. Después revisa que las coordenadas configuradas correspondan al mundo destino.
 
-### Anuncios programados
+## Anuncios programados
 
 ~~~text
 /evento anuncio backroom <tiempo>
@@ -58,7 +58,7 @@ Para clonar, coloca el mundo completo, incluido level.dat, en plugins/ApoloEvent
 
 El tiempo puede ser segundos (30s), minutos (10m), horas (2h), minutos como número o una hora HH:mm. El anuncio informa y cuenta hacia atrás, pero no inicia automáticamente el evento: el staff debe ejecutar /evento start <evento>.
 
-### Boss integrado y jefes personalizados
+## Boss integrado y jefes personalizados
 
 ~~~text
 /evento boss seleccionar <1|2|3|4|5|random>
@@ -73,7 +73,7 @@ El tiempo puede ser segundos (30s), minutos (10m), horas (2h), minutos como núm
 
 Tipos clásicos: 1 Warden, 2 Wither, 3 Ravager, 4 Zombie grande, 5 Piglin Brute. random selecciona uno de los cinco. crear copia bosses/example.yml; edita el archivo y ejecuta invocar <id>. El evento debe estar detenido antes de cambiar el Boss seleccionado o eliminar el Boss activo.
 
-### Eclipse de Sangre
+## Eclipse de Sangre
 
 ~~~text
 /evento eclipse join
@@ -86,7 +86,7 @@ Tipos clásicos: 1 Warden, 2 Wither, 3 Ravager, 4 Zombie grande, 5 Piglin Brute.
 
 El spawn se establece desde la ubicación actual del administrador. El evento utiliza las opciones de events/eclipse.yml y el mapa registrado en maps.yml.
 
-### ColorMatch
+## ColorMatch
 
 Comandos de jugador:
 ~~~text
@@ -133,7 +133,7 @@ Preparación y administración:
 
 Los perfiles se guardan en events/colormatch-arenas/<nombre>.yml. El perfil guarda lobby, esquinas, modo, cantidad de jugadores, rondas, tiempos, tamaño de región y dificultad. Solo se pueden cambiar o cargar perfiles cuando no hay partida ni participantes. setreward <cantidad> modifica el dinero del ganador; setreward <2-100> <cantidad> define premio de puesto; setreward participacion <cantidad> define el premio de participación. También acepta ganador, winner o 1 para el primer puesto. El pago requiere Vault o una economía compatible.
 
-### MiniGames
+## MiniGames
 
 ~~~text
 /evento minigames
@@ -145,7 +145,7 @@ Los perfiles se guardan en events/colormatch-arenas/<nombre>.yml. El perfil guar
 
 El constructor actual acepta los cuatro tipos listados en setup. El menú también muestra otros módulos configurables, pero no debe interpretarse como confirmación de que todos tienen una partida completa implementada.
 
-### AirDrop
+## AirDrop
 
 ~~~text
 /airdrop help
@@ -165,7 +165,7 @@ El constructor actual acepta los cuatro tipos listados en setup. El menú tambi�
 
 track y locate son comandos de jugador. rewards y edit abren un inventario para editar los objetos de la rareza seleccionada; al cerrar, el contenido se guarda en airdrop-rewards.yml. Las operaciones administrativas requieren apoloevent.airdrop.admin.
 
-### Tops, recarga, validación y textos
+## Tops, recarga, validación y textos
 
 ~~~text
 /evento top
@@ -178,7 +178,7 @@ track y locate son comandos de jugador. rewards y edit abren un inventario para 
 
 Los tops soportan los períodos histórico all, semana week y mes month. validate revisa archivos y valores de configuración. textos estado informa del estado de actualización; restaurar vuelve a los textos predeterminados del archivo elegido y crea una copia de seguridad en backups/.
 
-### Permisos
+## Permisos
 
 | Permiso | Uso |
 |---|---|

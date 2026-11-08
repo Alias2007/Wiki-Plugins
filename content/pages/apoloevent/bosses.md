@@ -1,12 +1,12 @@
 <a id="bosses"></a>
-## Sistemas de Bosses
+# Sistemas de Bosses
 
 ApoloEvent tiene dos sistemas independientes: el **Boss normal**, que es el evento principal, y **BossMina**, que genera jefes automáticos en minas. Cada uno usa archivos, comandos y recompensas diferentes.
 
-- [Boss normal: evento principal, perfiles clásicos/personalizados, habilidades y recompensas](normal-boss).
-- [BossMina: configuración de bosses de minas, horarios, hologramas, equipo y recompensas](bossmina).
+- [Boss normal: evento principal, perfiles clásicos/personalizados, habilidades y recompensas](#apoloevent/normal-boss).
+- [BossMina: configuración de bosses de minas, horarios, hologramas, equipo y recompensas](#apoloevent/bossmina).
 
-## Bosses y bosses de minas
+## Resumen de cada sistema
 
 ### Evento Boss
 
@@ -44,7 +44,7 @@ El webhook de Discord del Boss principal admite una sección `defeat` con mensaj
 
 ### Bosses automáticos de minas
 
-Se configuran en `mine-events.yml`. Admiten regiones, nombre de mina, anuncios, efectos, animaciones, guardianes y persistencia de bosses vivos en `mine-boss-state.yml` cuando está activada. Las recompensas de objetos por boss se configuran por separado en `BossMina/rewards.yml`; consulta [BossMina](bossmina) y su [referencia de recompensas](rewards).
+Se configuran en `mine-events.yml`. Admiten regiones, nombre de mina, anuncios, efectos, animaciones, guardianes y persistencia de bosses vivos en `mine-boss-state.yml` cuando está activada. Las recompensas de objetos por boss se configuran por separado en `BossMina/rewards.yml`; consulta [BossMina](#apoloevent/bossmina) y su [referencia de recompensas](#apoloevent/rewards).
 
 En la versión 0.5.120, el webhook de derrota de mina también admite un embed con jugador, boss, mina, recompensa y coordenadas (`{x}`, `{y}`, `{z}`); incluye además `{world}` para el mundo de la derrota. La sección se configura en `mine-events.discord-webhook.defeat`.
 

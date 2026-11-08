@@ -1,5 +1,116 @@
 <a id="yaml"></a>
 
+# Archivos YAML
+
+## Archivos YAML — referencia de configuración
+
+Ruta: plugins/ApoloRankUp/. Esta página cubre los cinco archivos configurables del proyecto; excluye plugin.yml.
+
+### config.yml — ajustes generales
+
+| Ruta | Función y valores |
+|---|---|
+| default-level | Nivel asignado a jugadores nuevos. Debe existir en levels.yml. |
+| storage.type | yaml, sqlite o mysql. El tipo define dónde se guardan los perfiles. Reiniciar al cambiarlo. |
+| storage.autosave-ticks | Intervalo de seguridad de guardado en ticks; cambios de nivel se guardan al instante. |
+| storage.sync-interval-seconds | Solo MySQL: intervalo para refrescar niveles de jugadores conectados que pueden cambiar desde otro servidor. |
+| storage.table-prefix | Prefijo para tablas SQL. |
+| storage.sqlite.file | Nombre/ruta del archivo SQLite; por defecto players.db. |
+| storage.mysql.host/port/database/username/password/use-ssl | Datos de conexión MySQL. No publiques ni compartas password. |
+| storage.mysql.pool-size | Máximo de conexiones del pool. |
+| storage.mysql.connection-timeout-ms | Tiempo máximo para establecer una conexión. |
+| storage.mysql.max-lifetime-ms | Vida máxima de una conexión del pool. |
+| top.cache-seconds | Segundos que se reutiliza el resultado de /rankup top. |
+| locks.hide-locked-commands | Oculta comandos bloqueados del autocompletado. |
+| locks.eject-on-join | Envía al spawn principal a jugadores que reaparecen dentro de zonas/mundos para los que ya no tienen nivel. |
+| barrier.enabled | Activa la pared visual por jugador frente a bordes de región bloqueados. WorldGuard requerido. Desactivarla no abre la región. |
+| barrier.material | Material de la barrera; por defecto RED_STAINED_GLASS. |
+| barrier.radius | Distancia de dibujo, de 3 a 16 bloques. |
+| barrier.update-ticks | Frecuencia de actualización de la pared. |
+| barrier.refresh-seconds | Intervalo de reenvío completo de la pared para recuperar cambios de chunks. |
+| barrier.max-blocks | Límite de bloques falsos por jugador. |
+| notifications.chat-for | Lista de tipos de bloqueo que notifican en chat. |
+| notifications.action-bar-for | Lista de tipos de bloqueo que notifican en actionbar. |
+| notifications.cooldown-ms | Tiempo mínimo entre avisos del mismo tipo al mismo jugador. |
+| notifications.sound.key/volume/pitch | Sonido al chocar contra un bloqueo; key vacío lo desactiva. |
+| rankup-effects.title | enabled, title, subtitle, fade-in-ticks, stay-ticks y fade-out-ticks del título al ascender. |
+| rankup-effects.sound | enabled, key, volume y pitch del sonido de ascenso. |
+| rankup-effects.particles.enabled | Activa partículas al subir de nivel. |
+| rankup-effects.broadcast.enabled/min-level | Controla anuncio global y nivel mínimo para anunciar. |
+
+Los tipos de notificación incluyen COMMAND, REGION_ENTER, REGION_BREAK, REGION_PLACE, WORLD, BLOCK_BREAK, BLOCK_PLACE, ITEM_USE, ITEM_CRAFT y ENTITY_ATTACK; también puede usarse ALL según las listas aceptadas por el sistema.
+
+Ejemplo MySQL: cambia type a mysql y completa host/port/database/username/password. Mantén las credenciales solo en el servidor y reinicia para aplicar el backend.
+
+### levels.yml — escalera de progreso
+
+El nivel se define bajo levels.<id>. Las claves son numéricas, pero pueden saltarse números; el siguiente ascenso utiliza el siguiente ID existente por encima del nivel actual.
+
+| Clave | Uso |
+|---|---|
+| name | Nombre visible del nivel. |
+| cost | Dinero requerido; Vault + economía compatibles. |
+| requirements.items | Materiales Bukkit y cantidades que deben entregarse/consumirse. |
+| rewards | Comandos ejecutados por la consola después del ascenso. |
+| reward-display | Textos visibles en GUI para describir premios sin enseñar comandos internos. |
+
+Placeholders válidos en comandos de recompensa: %player%, %uuid%, %level%, %level_name%, %previous_level% y %next_level%. Las claves de levels.yml no configuran bloqueos; esos van en unlocks.yml.
+
+### unlocks.yml — restricciones por nivel
+
+| Ruta | Qué controla |
+|---|---|
+| enabled | Interruptor global de bloqueos. |
+| commands.<comando>.level | Nivel mínimo para ejecutar el comando. Admite name y message opcionales. |
+| regions.<id>.level/name/restrict | Nivel mínimo y restricciones de WorldGuard. restrict: enter, break y/o place. |
+| worlds.<world>.level/name | Acceso a un mundo o dimensión. |
+| blocks.break.<material> | Nivel mínimo para romper ese material. |
+| blocks.place.<material> | Nivel mínimo para colocar ese material. |
+| items.use.<material> | Nivel mínimo para usar un objeto. |
+| items.craft.<material> | Nivel mínimo para fabricar una receta/objeto. |
+| entities.attack.<entity> | Nivel mínimo para atacar esa entidad. |
+
+Formato corto (material: 4) o extendido:
+~~~yaml
+ANCIENT_DEBRIS:
+  level: 5
+  name: "Restos antiguos"
+~~~
+El nombre se usa en mensajes/listados. Para comandos se debe omitir la barra inicial. Los nombres de regiones deben coincidir exactamente con WorldGuard. Los comodines admiten patrones como *_ORE y DIAMOND_*; una regla exacta tiene prioridad sobre un comodín. Bypass: apolorankup.bypass o uno de los permisos por categoría.
+
+### menu.yml — GUI de RankUp
+
+| Ruta | Función |
+|---|---|
+| menu.title | Título del menú. |
+| menu.size | Tamaño, múltiplo de 9, entre 9 y 54 slots. |
+| menu.filler.enabled/material/name | Panel de relleno. |
+| menu.items.<id>.slot/material/name/lore | Ubicación, icono, título y lore de cada botón. |
+| menu.items.<id>.action | Acción: rankup, unlocks, top, refresh, close o none. |
+
+Los IDs rankup y unlocks pueden añadir automáticamente requisitos, recompensas y próximos desbloqueos. PLAYER_HEAD muestra la cabeza del jugador.
+
+Placeholders de menú: %player%, %level%, %level_name%, %max_level%, %next_level%, %next_level_name%, %cost%, %progress% y %progress_bar%.
+
+### messages.yml — textos, mensajes y variables
+
+- prefix define el prefijo general.
+- lock-types cambia las etiquetas de cada clase de bloqueo (command, region-enter, region-break, region-place, world, block-break, block-place, item-use, item-craft, entity-attack).
+- messages contiene cadenas por clave: ayuda, errores, ascenso, avisos, top, info, unlocks y menú.
+- Se admiten MiniMessage y códigos clásicos &.
+- Si se elimina una clave, el plugin usa el valor predeterminado incluido en el código.
+
+Tokens usados en los mensajes incluyen %prefix%, %player%, %level%, %level_name%, %cost%, %balance%, %item%, %amount%, %missing%, %progress%, %progress_bar%, %next_level%, %target%, %type%, %page%, %pages%, %position%, %uuid% y otros relacionados con la clave específica. No todos los tokens se aplican a cada mensaje; respeta los placeholders que correspondan a la línea que estás editando.
+
+### Datos generados
+
+- players.db: SQLite cuando storage.type: sqlite.
+- players.yml: perfiles cuando storage.type: yaml.
+- Las tablas MySQL utilizan el table-prefix configurado.
+- Los backups deben realizarse antes de cambiar el tipo de almacenamiento.
+
+## Ejemplos reales
+
 ### Ejemplo real: config.yml
 
 ```yaml
@@ -121,114 +232,6 @@ entities:
 ```
 
 **Cómo funciona:** `enabled` activa el sistema; `commands`, `regions`, `worlds`, `blocks`, `items` y `entities` establecen nivel mínimo por acción. Los IDs de regiones deben coincidir con WorldGuard; los materiales y entidades usan nombres Bukkit; se admiten comodines según la guía.
-
-## Archivos YAML — referencia de configuración
-
-Ruta: plugins/ApoloRankUp/. Esta página cubre los cinco archivos configurables del proyecto; excluye plugin.yml.
-
-### config.yml — ajustes generales
-
-| Ruta | Función y valores |
-|---|---|
-| default-level | Nivel asignado a jugadores nuevos. Debe existir en levels.yml. |
-| storage.type | yaml, sqlite o mysql. El tipo define dónde se guardan los perfiles. Reiniciar al cambiarlo. |
-| storage.autosave-ticks | Intervalo de seguridad de guardado en ticks; cambios de nivel se guardan al instante. |
-| storage.sync-interval-seconds | Solo MySQL: intervalo para refrescar niveles de jugadores conectados que pueden cambiar desde otro servidor. |
-| storage.table-prefix | Prefijo para tablas SQL. |
-| storage.sqlite.file | Nombre/ruta del archivo SQLite; por defecto players.db. |
-| storage.mysql.host/port/database/username/password/use-ssl | Datos de conexión MySQL. No publiques ni compartas password. |
-| storage.mysql.pool-size | Máximo de conexiones del pool. |
-| storage.mysql.connection-timeout-ms | Tiempo máximo para establecer una conexión. |
-| storage.mysql.max-lifetime-ms | Vida máxima de una conexión del pool. |
-| top.cache-seconds | Segundos que se reutiliza el resultado de /rankup top. |
-| locks.hide-locked-commands | Oculta comandos bloqueados del autocompletado. |
-| locks.eject-on-join | Envía al spawn principal a jugadores que reaparecen dentro de zonas/mundos para los que ya no tienen nivel. |
-| barrier.enabled | Activa la pared visual por jugador frente a bordes de región bloqueados. WorldGuard requerido. Desactivarla no abre la región. |
-| barrier.material | Material de la barrera; por defecto RED_STAINED_GLASS. |
-| barrier.radius | Distancia de dibujo, de 3 a 16 bloques. |
-| barrier.update-ticks | Frecuencia de actualización de la pared. |
-| barrier.refresh-seconds | Intervalo de reenvío completo de la pared para recuperar cambios de chunks. |
-| barrier.max-blocks | Límite de bloques falsos por jugador. |
-| notifications.chat-for | Lista de tipos de bloqueo que notifican en chat. |
-| notifications.action-bar-for | Lista de tipos de bloqueo que notifican en actionbar. |
-| notifications.cooldown-ms | Tiempo mínimo entre avisos del mismo tipo al mismo jugador. |
-| notifications.sound.key/volume/pitch | Sonido al chocar contra un bloqueo; key vacío lo desactiva. |
-| rankup-effects.title | enabled, title, subtitle, fade-in-ticks, stay-ticks y fade-out-ticks del título al ascender. |
-| rankup-effects.sound | enabled, key, volume y pitch del sonido de ascenso. |
-| rankup-effects.particles.enabled | Activa partículas al subir de nivel. |
-| rankup-effects.broadcast.enabled/min-level | Controla anuncio global y nivel mínimo para anunciar. |
-
-Los tipos de notificación incluyen COMMAND, REGION_ENTER, REGION_BREAK, REGION_PLACE, WORLD, BLOCK_BREAK, BLOCK_PLACE, ITEM_USE, ITEM_CRAFT y ENTITY_ATTACK; también puede usarse ALL según las listas aceptadas por el sistema.
-
-Ejemplo MySQL: cambia type a mysql y completa host/port/database/username/password. Mantén las credenciales solo en el servidor y reinicia para aplicar el backend.
-
-### levels.yml — escalera de progreso
-
-El nivel se define bajo levels.<id>. Las claves son numéricas, pero pueden saltarse números; el siguiente ascenso utiliza el siguiente ID existente por encima del nivel actual.
-
-| Clave | Uso |
-|---|---|
-| name | Nombre visible del nivel. |
-| cost | Dinero requerido; Vault + economía compatibles. |
-| requirements.items | Materiales Bukkit y cantidades que deben entregarse/consumirse. |
-| rewards | Comandos ejecutados por la consola después del ascenso. |
-| reward-display | Textos visibles en GUI para describir premios sin enseñar comandos internos. |
-
-Placeholders válidos en comandos de recompensa: %player%, %uuid%, %level%, %level_name%, %previous_level% y %next_level%. Las claves de levels.yml no configuran bloqueos; esos van en unlocks.yml.
-
-### unlocks.yml — restricciones por nivel
-
-| Ruta | Qué controla |
-|---|---|
-| enabled | Interruptor global de bloqueos. |
-| commands.<comando>.level | Nivel mínimo para ejecutar el comando. Admite name y message opcionales. |
-| regions.<id>.level/name/restrict | Nivel mínimo y restricciones de WorldGuard. restrict: enter, break y/o place. |
-| worlds.<world>.level/name | Acceso a un mundo o dimensión. |
-| blocks.break.<material> | Nivel mínimo para romper ese material. |
-| blocks.place.<material> | Nivel mínimo para colocar ese material. |
-| items.use.<material> | Nivel mínimo para usar un objeto. |
-| items.craft.<material> | Nivel mínimo para fabricar una receta/objeto. |
-| entities.attack.<entity> | Nivel mínimo para atacar esa entidad. |
-
-Formato corto (material: 4) o extendido:
-~~~yaml
-ANCIENT_DEBRIS:
-  level: 5
-  name: "Restos antiguos"
-~~~
-El nombre se usa en mensajes/listados. Para comandos se debe omitir la barra inicial. Los nombres de regiones deben coincidir exactamente con WorldGuard. Los comodines admiten patrones como *_ORE y DIAMOND_*; una regla exacta tiene prioridad sobre un comodín. Bypass: apolorankup.bypass o uno de los permisos por categoría.
-
-### menu.yml — GUI de RankUp
-
-| Ruta | Función |
-|---|---|
-| menu.title | Título del menú. |
-| menu.size | Tamaño, múltiplo de 9, entre 9 y 54 slots. |
-| menu.filler.enabled/material/name | Panel de relleno. |
-| menu.items.<id>.slot/material/name/lore | Ubicación, icono, título y lore de cada botón. |
-| menu.items.<id>.action | Acción: rankup, unlocks, top, refresh, close o none. |
-
-Los IDs rankup y unlocks pueden añadir automáticamente requisitos, recompensas y próximos desbloqueos. PLAYER_HEAD muestra la cabeza del jugador.
-
-Placeholders de menú: %player%, %level%, %level_name%, %max_level%, %next_level%, %next_level_name%, %cost%, %progress% y %progress_bar%.
-
-### messages.yml — textos, mensajes y variables
-
-- prefix define el prefijo general.
-- lock-types cambia las etiquetas de cada clase de bloqueo (command, region-enter, region-break, region-place, world, block-break, block-place, item-use, item-craft, entity-attack).
-- messages contiene cadenas por clave: ayuda, errores, ascenso, avisos, top, info, unlocks y menú.
-- Se admiten MiniMessage y códigos clásicos &.
-- Si se elimina una clave, el plugin usa el valor predeterminado incluido en el código.
-
-Tokens usados en los mensajes incluyen %prefix%, %player%, %level%, %level_name%, %cost%, %balance%, %item%, %amount%, %missing%, %progress%, %progress_bar%, %next_level%, %target%, %type%, %page%, %pages%, %position%, %uuid% y otros relacionados con la clave específica. No todos los tokens se aplican a cada mensaje; respeta los placeholders que correspondan a la línea que estás editando.
-
-### Datos generados
-
-- players.db: SQLite cuando storage.type: sqlite.
-- players.yml: perfiles cuando storage.type: yaml.
-- Las tablas MySQL utilizan el table-prefix configurado.
-- Los backups deben realizarse antes de cambiar el tipo de almacenamiento.
-
 
 
 ## Contenido íntegro de los archivos YAML

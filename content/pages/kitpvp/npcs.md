@@ -1,5 +1,5 @@
 <a id="npcs"></a>
-## NPCs nativos
+# NPCs nativos
 
 Los NPCs interactivos son nativos y no requieren Citizens.
 
