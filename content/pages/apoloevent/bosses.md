@@ -37,7 +37,7 @@ El webhook de Discord del Boss principal admite una sección `defeat` con mensaj
 
 ### Bosses automáticos de minas
 
-Se configuran en `mine-events.yml`. Admiten regiones, nombre de mina, anuncios, efectos, animaciones, guardianes y persistencia de bosses vivos en `mine-boss-state.yml` cuando está activada.
+Se configuran en `mine-events.yml`. Admiten regiones, nombre de mina, anuncios, efectos, animaciones, guardianes y persistencia de bosses vivos en `mine-boss-state.yml` cuando está activada. Las recompensas de objetos por boss se configuran por separado en `BossMina/rewards.yml`; consulta la [guía de recompensas BossMina](rewards) para ver probabilidades, materiales, nombres, lore y mensajes.
 
 En la versión 0.5.120, el webhook de derrota de mina también admite un embed con jugador, boss, mina, recompensa y coordenadas (`{x}`, `{y}`, `{z}`); incluye además `{world}` para el mundo de la derrota. La sección se configura en `mine-events.discord-webhook.defeat`.
 
