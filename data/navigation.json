@@ -38,6 +38,24 @@
           "tags": "boss warden wither ravager minas mineboss"
         },
         {
+          "id": "normal-boss",
+          "title": "Boss normal",
+          "description": "Evento principal, bosses clásicos, personalizados y recompensas",
+          "tags": "boss normal boss.yml warden wither ravager titan creeper rewards"
+        },
+        {
+          "id": "bossmina",
+          "title": "BossMina",
+          "description": "Bosses de minas, perfiles, horarios, hologramas y configuración",
+          "tags": "bossmina mine minas horarios holograma rewards"
+        },
+        {
+          "id": "rewards",
+          "title": "Recompensas BossMina",
+          "description": "Referencia detallada de rewards.yml para bosses de minas",
+          "tags": "rewards rewards.yml bossmina drop chance items"
+        },
+        {
           "id": "minigames",
           "title": "MiniGames",
           "description": "Arenas de Spleef, Minefield y JumpRun",
@@ -60,12 +78,6 @@
           "title": "Variables y placeholders",
           "description": "Variables documentadas e integración PlaceholderAPI",
           "tags": "variables placeholders papi"
-        },
-        {
-          "id": "rewards",
-          "title": "Recompensas BossMina",
-          "description": "Configuración de rewards.yml, objetos y probabilidades",
-          "tags": "rewards rewards.yml bossmina recompensas drop items chance-percent"
         },
         {
           "id": "config",
