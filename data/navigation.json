@@ -62,6 +62,12 @@
           "tags": "variables placeholders papi"
         },
         {
+          "id": "rewards",
+          "title": "Recompensas BossMina",
+          "description": "Configuración de rewards.yml, objetos y probabilidades",
+          "tags": "rewards rewards.yml bossmina recompensas drop items chance-percent"
+        },
+        {
           "id": "config",
           "title": "Configuración",
           "description": "Archivos, opciones e integraciones",
