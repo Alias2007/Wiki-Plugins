@@ -1,5 +1,100 @@
 <a id="yaml"></a>
 
+# Archivos YAML
+
+## Archivos YAML — referencia de configuración
+
+Ruta base: plugins/ApoloEvent/. Los archivos de esta página son recursos configurables del proyecto; no incluye plugin.yml. Haz una copia antes de editar. YAML depende de la indentación: usa espacios, no tabuladores.
+
+### Configuración global y registro de eventos
+
+| Archivo | Secciones y claves que debes conocer |
+|---|---|
+| config.yml | language define el idioma base de mensajes; lobby.enabled/world/x/y/z/yaw/pitch define el lobby opcional; defaults.max-players/countdown-seconds/min-players son valores por defecto para sesiones; restore.return-to-previous-location devuelve al jugador a su ubicación previa; debug activa diagnósticos; integrations.ultimateclans.enabled/same-clan/allies controla el friendly-fire entre miembros y aliados de clan en Backroom; tops.rewards.weekly.enabled/announcement/commands define premios y anuncio de los primeros tres puestos semanales por categoría; auto-update-texts permite añadir/actualizar textos no personalizados; audit.enabled registra acciones administrativas en audit.log. |
+| events.yml | events.backroom, events.caballos y events.eclipse: enabled, max-players, min-players y map. Controla si cada sesión se ofrece y sus límites de participantes. |
+| maps.yml | maps.<evento>.type/enabled/world registra el mapa. Spawns, puntos múltiples de jugador, meta, esquinas de meta, checkpoints y puntos específicos se guardan aquí al ejecutar comandos /evento set*. Las coordenadas deben pertenecer al mundo indicado. |
+| messages.yml | prefix, mensajes generales, sección game, sección staff, líneas help-player y help-staff, textos de tops y anuncios. Los mensajes admiten códigos de color Bukkit con &; los tokens como {player} son reemplazos de cada mensaje. |
+| legacy-texts.yml | Archivo interno que conserva valores antiguos para detectar textos sin personalizar durante la actualización. No editar manualmente. |
+
+### Archivos por evento
+
+| Archivo | Opciones configurables |
+|---|---|
+| events/backroom.yml | PvP: pvp.enabled y block-indirect-damage-when-disabled; eliminación y espectadores: elimination.void-and-death/spectator-mode; cuenta atrás, mínimo/máximo de jugadores y avisos; recompensas first/second/third.enabled/commands/experience/items; kit permite cambiar armadura, espada y slot; abilities.goal-trail define rastro de meta, espera, duración, espaciado y tamaño; abilities.items define cooldown y duración de efectos speed/strength y alcance, objetivos y revelado del tracker; winner-menu y spectator-items personalizan la GUI de salida/espectador. |
+| events/horse.yml | max-players, min-players, countdown-seconds, race-timeout-seconds, allow-own-horses; horse.type/speed/jump-strength/max-health/color/style/saddle/remove-on-finish; checkpoints.enabled; recompensas first/second/third; items.speed-slot/stun-slot/speed-multiplier/cooldown-seconds; menú final y objetos de espectador. |
+| events/eclipse.yml | enabled, max/min players, map, cuenta atrás; pvp.enabled; oleadas waves.enabled/interval-seconds/max-mobs/types; oscuridad darkness.enabled/time; kit inicial (armadura, espada, slot y comida); recompensas por puesto; habilidad abilities.tracker; winner-menu. |
+| events/colormatch.yml | En settings: activar/desactivar, mínimos/máximos, rondas, cuenta atrás, duración de ronda y descanso, límite de región, bloques construidos por tick, dificultad, modo de arena, avisos, limpieza de efectos, efectos y kits seleccionables; sonidos y volumen/tono; pagos y comandos del ganador; recompensas por puestos/participación y mínimo de jugadores; lista allowed-commands. titles configura títulos/subtítulos y messages define los textos de juego. |
+| events/boss.yml | max-players, duration-seconds, teleport-players-to-arena; region.enabled/world/id/check-interval-ticks registra participantes al entrar a WorldGuard; auto.enabled/interval-seconds programa apariciones; boss.selection elige tipo clásico, aleatorio o personalizado; boss.world/x/y/z/yaw/pitch configura coordenadas; bosses.<WARDEN|WITHER|RAVAGER|ZOMBIE|PIGLIN_BRUTE> permite ajustar nombre, vida, daño, casco, escala, armadura, arma, adornos y encantamientos; boss-kill-reward contiene chance general y tablas de objetos por tipo; además hay secciones para comandos, escalado de combate, agresividad, defensa, visuales, barra de Boss, ayudantes, fases, recompensas, mensajes y cinemática. Consulta los comentarios del propio archivo para los valores admitidos por cada acción. |
+
+### Recompensas de Boss integrado
+
+Dentro de events/boss.yml, boss-kill-reward.chance-percent es la probabilidad global de activar el sistema. bosses.<tipo>.item contiene los drops para ese tipo concreto: chance-percent, mensajes de drop/no-drop y una lista de objetos con material, cantidad, nombre, lore, trim y encantamientos. El código limita a un objeto por derrota y a una recompensa de comandos según la configuración. Los porcentajes individuales se interpretan como porcentaje, no como fracción decimal.
+
+### Bosses personalizados
+
+Los archivos están en bosses/; example.yml es la plantilla creada por /evento boss crear <id>.
+
+| Clave | Qué controla |
+|---|---|
+| id | Identificador del archivo. |
+| boss.entity/name/max-health/attack-damage | Tipo de entidad, nombre visible, vida y daño. |
+| boss.helmet/scale/armor-material/weapon | Casco, tamaño, material de armadura y arma. |
+| boss.armor-trim | Patrón template y material del adorno. |
+| boss.armor-enchantments, boss.weapon-enchantments | Encantamientos por pieza o arma. |
+| abilities.enabled, abilities.skills | Habilidades periódicas. La plantilla muestra acciones como partículas, sonido, efectos de poción cercanos, daño en área, rayo, explosión e invocación. Cada acción tiene parámetros propios. |
+| phases[] | Fases activadas al cruzar health-percent; cada fase puede llevar mensaje y lista de acciones. |
+
+Los archivos titan-apocalipsis.yml y creeper-infernal.yml muestran opciones adicionales de IA, velocidad, modo de selección de objetivo, reaparición y fases. No copies una sección de un jefe a otro sin verificar que el tipo de acción/entidad sea compatible.
+
+### Minas y recompensas de bosses automáticos
+
+| Archivo | Secciones y claves |
+|---|---|
+| mine-events.yml | Requiere WorldGuard. mine-events.enabled/scan-interval-ticks/resume-after-restart/regions controla el gestor y las regiones vigiladas; announcements.broadcast-enabled/message define el aviso; discord-webhook.enabled/url/username/avatar-url/message configura el webhook (mantén la URL privada); bosses.<id> permite habilitar cada jefe y fijar región, probabilidad, cooldown, duración, mundo/posición, tipo, nombre, vida, daño, agresividad, embestida, golpe asistido, defensa, escalado por tiempo/vida, nombre de mina, efectos, guardianes, armadura, animación, premios por daño y recompensa de otros participantes; time-rewards controla el premio por permanecer en la región; bounties controla recompensas por bajas/condición de activación y anti-farm. |
+| mine-boss-kill.yml | Configura objetos adicionales por jefe de mina: mensajes de drop/no-drop, bosses.<id>.enabled, mine-name, chance-percent, lista items y dentro de cada objeto la probabilidad individual, material, cantidad, nombre, lore y encantamientos. El archivo se puede editar mientras el servidor está encendido. |
+| bosses/*.yml | Definiciones YAML de jefes del evento Boss, no los bosses de minas. |
+
+### AirDrop
+
+| Archivo | Secciones y claves |
+|---|---|
+| airdrop.yml | airdrop.enabled/world/times controla activación, mundo y horarios; announce-before-minutes/message el aviso previo; timezone zona horaria; catch-up-minutes tolerancia tras lag/reinicio; despawn-minutes/announce caducidad; spawn.max-radius/min-radius-from-world-spawn/attempts/avoid-protected-regions/nether-min-y/retry-minutes/announce regula la búsqueda del punto; open-cooldown-seconds limita aperturas consecutivas; hologram.enabled/height/text, compass.enabled, fireworks.enabled/power/type/colors controlan la presentación; crates.<basic|rare|epic|legendary> permite habilitar cada rareza, nombre, bloque y peso relativo. |
+| airdrop-rewards.yml | Archivo generado para el contenido de objetos de cada rareza. Se gestiona con /airdrop rewards <rareza> o /airdrop edit <rareza>; el inventario se guarda al cerrarlo, conservando metadatos y encantamientos. |
+
+### Menús configurables
+
+Los archivos bajo inventario/ controlan título, tamaño, slots, material, nombre y lore de botones.
+
+| Archivo | Menú |
+|---|---|
+| inventario/evento.yml | Menú principal y accesos a Eclipse, Backroom, ColorMatch, Caballos y MiniGames. |
+| inventario/eventostaff.yml | Botones del panel de administración para iniciar/detener modalidades. |
+| inventario/backroom.yml | Menú informativo de Backroom. |
+| inventario/caballos.yml | Menú informativo de Carrera de caballos. |
+| inventario/colormatch.yml | Botones join, leave, status, stats y top de ColorMatch. |
+
+### Archivos y datos generados durante el funcionamiento
+
+Estos archivos no son plantillas de configuración equivalentes a los anteriores; el plugin los crea para guardar estados:
+
+- mine-boss-state.yml: estado persistente de jefes de minas si resume-after-restart está activado.
+- recovery.yml y colormatch-player-recovery.yml: datos de recuperación de jugadores.
+- events/colormatch-arenas/<perfil>.yml: perfiles de arena guardados mediante /evento colormatch arena save.
+- event-tops.db: base SQLite de clasificación.
+- audit.log: auditoría de comandos administrativos.
+- backups/: copias de seguridad de textos al restaurar o actualizar.
+
+## Cómo aplicar cambios
+
+- /evento reload: recarga configuración global, eventos, mapas, menús y textos. Un Boss ya activo aplica ciertos cambios en el siguiente inicio.
+- /evento colormatch reload: vuelve a leer ColorMatch solo cuando no hay una partida activa.
+- /airdrop reload: vuelve a leer la configuración de AirDrop.
+- /evento validate y /airdrop validate: valida opciones antes de activar eventos.
+- Cambiar coordenadas en juego con los comandos /evento set* es más seguro que introducir ubicaciones manualmente.
+- Después de modificar configuraciones, revisa la consola y ejecuta pruebas en un mundo de ensayo antes de habilitar el mapa para jugadores.
+
+## Ejemplos reales
+
 ### Ejemplo real: config.yml
 
 Este bloque corresponde al archivo de recursos del repositorio. Cambia únicamente los valores que necesites; conserva la estructura y la indentación.
@@ -94,98 +189,6 @@ abilities:
 ```
 
 **Cómo funciona:** `pvp.enabled` activa el combate; `elimination` decide eliminación y espectador; `min-players/max-players/countdown-seconds` controlan el inicio; `rewards` define premios por puesto; `kit` fija el equipo; `abilities` configura el rastro y objetos especiales. Las demás claves de este archivo (mensajes del menú, efectos y habilidades) se explican en la tabla de arriba.
-
-## Archivos YAML — referencia de configuración
-
-Ruta base: plugins/ApoloEvent/. Los archivos de esta página son recursos configurables del proyecto; no incluye plugin.yml. Haz una copia antes de editar. YAML depende de la indentación: usa espacios, no tabuladores.
-
-### Configuración global y registro de eventos
-
-| Archivo | Secciones y claves que debes conocer |
-|---|---|
-| config.yml | language define el idioma base de mensajes; lobby.enabled/world/x/y/z/yaw/pitch define el lobby opcional; defaults.max-players/countdown-seconds/min-players son valores por defecto para sesiones; restore.return-to-previous-location devuelve al jugador a su ubicación previa; debug activa diagnósticos; integrations.ultimateclans.enabled/same-clan/allies controla el friendly-fire entre miembros y aliados de clan en Backroom; tops.rewards.weekly.enabled/announcement/commands define premios y anuncio de los primeros tres puestos semanales por categoría; auto-update-texts permite añadir/actualizar textos no personalizados; audit.enabled registra acciones administrativas en audit.log. |
-| events.yml | events.backroom, events.caballos y events.eclipse: enabled, max-players, min-players y map. Controla si cada sesión se ofrece y sus límites de participantes. |
-| maps.yml | maps.<evento>.type/enabled/world registra el mapa. Spawns, puntos múltiples de jugador, meta, esquinas de meta, checkpoints y puntos específicos se guardan aquí al ejecutar comandos /evento set*. Las coordenadas deben pertenecer al mundo indicado. |
-| messages.yml | prefix, mensajes generales, sección game, sección staff, líneas help-player y help-staff, textos de tops y anuncios. Los mensajes admiten códigos de color Bukkit con &; los tokens como {player} son reemplazos de cada mensaje. |
-| legacy-texts.yml | Archivo interno que conserva valores antiguos para detectar textos sin personalizar durante la actualización. No editar manualmente. |
-
-### Archivos por evento
-
-| Archivo | Opciones configurables |
-|---|---|
-| events/backroom.yml | PvP: pvp.enabled y block-indirect-damage-when-disabled; eliminación y espectadores: elimination.void-and-death/spectator-mode; cuenta atrás, mínimo/máximo de jugadores y avisos; recompensas first/second/third.enabled/commands/experience/items; kit permite cambiar armadura, espada y slot; abilities.goal-trail define rastro de meta, espera, duración, espaciado y tamaño; abilities.items define cooldown y duración de efectos speed/strength y alcance, objetivos y revelado del tracker; winner-menu y spectator-items personalizan la GUI de salida/espectador. |
-| events/horse.yml | max-players, min-players, countdown-seconds, race-timeout-seconds, allow-own-horses; horse.type/speed/jump-strength/max-health/color/style/saddle/remove-on-finish; checkpoints.enabled; recompensas first/second/third; items.speed-slot/stun-slot/speed-multiplier/cooldown-seconds; menú final y objetos de espectador. |
-| events/eclipse.yml | enabled, max/min players, map, cuenta atrás; pvp.enabled; oleadas waves.enabled/interval-seconds/max-mobs/types; oscuridad darkness.enabled/time; kit inicial (armadura, espada, slot y comida); recompensas por puesto; habilidad abilities.tracker; winner-menu. |
-| events/colormatch.yml | En settings: activar/desactivar, mínimos/máximos, rondas, cuenta atrás, duración de ronda y descanso, límite de región, bloques construidos por tick, dificultad, modo de arena, avisos, limpieza de efectos, efectos y kits seleccionables; sonidos y volumen/tono; pagos y comandos del ganador; recompensas por puestos/participación y mínimo de jugadores; lista allowed-commands. titles configura títulos/subtítulos y messages define los textos de juego. |
-| events/boss.yml | max-players, duration-seconds, teleport-players-to-arena; region.enabled/world/id/check-interval-ticks registra participantes al entrar a WorldGuard; auto.enabled/interval-seconds programa apariciones; boss.selection elige tipo clásico, aleatorio o personalizado; boss.world/x/y/z/yaw/pitch configura coordenadas; bosses.<WARDEN|WITHER|RAVAGER|ZOMBIE|PIGLIN_BRUTE> permite ajustar nombre, vida, daño, casco, escala, armadura, arma, adornos y encantamientos; boss-kill-reward contiene chance general y tablas de objetos por tipo; además hay secciones para comandos, escalado de combate, agresividad, defensa, visuales, barra de Boss, ayudantes, fases, recompensas, mensajes y cinemática. Consulta los comentarios del propio archivo para los valores admitidos por cada acción. |
-
-### Recompensas de Boss integrado
-
-Dentro de events/boss.yml, boss-kill-reward.chance-percent es la probabilidad global de activar el sistema. bosses.<tipo>.item contiene los drops para ese tipo concreto: chance-percent, mensajes de drop/no-drop y una lista de objetos con material, cantidad, nombre, lore, trim y encantamientos. El código limita a un objeto por derrota y a una recompensa de comandos según la configuración. Los porcentajes individuales se interpretan como porcentaje, no como fracción decimal.
-
-### Bosses personalizados
-
-Los archivos están en bosses/; example.yml es la plantilla creada por /evento boss crear <id>.
-
-| Clave | Qué controla |
-|---|---|
-| id | Identificador del archivo. |
-| boss.entity/name/max-health/attack-damage | Tipo de entidad, nombre visible, vida y daño. |
-| boss.helmet/scale/armor-material/weapon | Casco, tamaño, material de armadura y arma. |
-| boss.armor-trim | Patrón template y material del adorno. |
-| boss.armor-enchantments, boss.weapon-enchantments | Encantamientos por pieza o arma. |
-| abilities.enabled, abilities.skills | Habilidades periódicas. La plantilla muestra acciones como partículas, sonido, efectos de poción cercanos, daño en área, rayo, explosión e invocación. Cada acción tiene parámetros propios. |
-| phases[] | Fases activadas al cruzar health-percent; cada fase puede llevar mensaje y lista de acciones. |
-
-Los archivos titan-apocalipsis.yml y creeper-infernal.yml muestran opciones adicionales de IA, velocidad, modo de selección de objetivo, reaparición y fases. No copies una sección de un jefe a otro sin verificar que el tipo de acción/entidad sea compatible.
-
-### Minas y recompensas de bosses automáticos
-
-| Archivo | Secciones y claves |
-|---|---|
-| mine-events.yml | Requiere WorldGuard. mine-events.enabled/scan-interval-ticks/resume-after-restart/regions controla el gestor y las regiones vigiladas; announcements.broadcast-enabled/message define el aviso; discord-webhook.enabled/url/username/avatar-url/message configura el webhook (mantén la URL privada); bosses.<id> permite habilitar cada jefe y fijar región, probabilidad, cooldown, duración, mundo/posición, tipo, nombre, vida, daño, agresividad, embestida, golpe asistido, defensa, escalado por tiempo/vida, nombre de mina, efectos, guardianes, armadura, animación, premios por daño y recompensa de otros participantes; time-rewards controla el premio por permanecer en la región; bounties controla recompensas por bajas/condición de activación y anti-farm. |
-| mine-boss-kill.yml | Configura objetos adicionales por jefe de mina: mensajes de drop/no-drop, bosses.<id>.enabled, mine-name, chance-percent, lista items y dentro de cada objeto la probabilidad individual, material, cantidad, nombre, lore y encantamientos. El archivo se puede editar mientras el servidor está encendido. |
-| bosses/*.yml | Definiciones YAML de jefes del evento Boss, no los bosses de minas. |
-
-### AirDrop
-
-| Archivo | Secciones y claves |
-|---|---|
-| airdrop.yml | airdrop.enabled/world/times controla activación, mundo y horarios; announce-before-minutes/message el aviso previo; timezone zona horaria; catch-up-minutes tolerancia tras lag/reinicio; despawn-minutes/announce caducidad; spawn.max-radius/min-radius-from-world-spawn/attempts/avoid-protected-regions/nether-min-y/retry-minutes/announce regula la búsqueda del punto; open-cooldown-seconds limita aperturas consecutivas; hologram.enabled/height/text, compass.enabled, fireworks.enabled/power/type/colors controlan la presentación; crates.<basic|rare|epic|legendary> permite habilitar cada rareza, nombre, bloque y peso relativo. |
-| airdrop-rewards.yml | Archivo generado para el contenido de objetos de cada rareza. Se gestiona con /airdrop rewards <rareza> o /airdrop edit <rareza>; el inventario se guarda al cerrarlo, conservando metadatos y encantamientos. |
-
-### Menús configurables
-
-Los archivos bajo inventario/ controlan título, tamaño, slots, material, nombre y lore de botones.
-
-| Archivo | Menú |
-|---|---|
-| inventario/evento.yml | Menú principal y accesos a Eclipse, Backroom, ColorMatch, Caballos y MiniGames. |
-| inventario/eventostaff.yml | Botones del panel de administración para iniciar/detener modalidades. |
-| inventario/backroom.yml | Menú informativo de Backroom. |
-| inventario/caballos.yml | Menú informativo de Carrera de caballos. |
-| inventario/colormatch.yml | Botones join, leave, status, stats y top de ColorMatch. |
-
-### Archivos y datos generados durante el funcionamiento
-
-Estos archivos no son plantillas de configuración equivalentes a los anteriores; el plugin los crea para guardar estados:
-
-- mine-boss-state.yml: estado persistente de jefes de minas si resume-after-restart está activado.
-- recovery.yml y colormatch-player-recovery.yml: datos de recuperación de jugadores.
-- events/colormatch-arenas/<perfil>.yml: perfiles de arena guardados mediante /evento colormatch arena save.
-- event-tops.db: base SQLite de clasificación.
-- audit.log: auditoría de comandos administrativos.
-- backups/: copias de seguridad de textos al restaurar o actualizar.
-
-### Cómo aplicar cambios
-
-- /evento reload: recarga configuración global, eventos, mapas, menús y textos. Un Boss ya activo aplica ciertos cambios en el siguiente inicio.
-- /evento colormatch reload: vuelve a leer ColorMatch solo cuando no hay una partida activa.
-- /airdrop reload: vuelve a leer la configuración de AirDrop.
-- /evento validate y /airdrop validate: valida opciones antes de activar eventos.
-- Cambiar coordenadas en juego con los comandos /evento set* es más seguro que introducir ubicaciones manualmente.
-- Después de modificar configuraciones, revisa la consola y ejecuta pruebas en un mundo de ensayo antes de habilitar el mapa para jugadores.
-
 
 
 ## Contenido íntegro de configuración: archivos restantes

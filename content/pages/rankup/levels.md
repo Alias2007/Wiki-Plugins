@@ -1,9 +1,9 @@
 <a id="levels"></a>
-## Niveles y ascensos
+# Niveles y ascensos
 
 El archivo `levels.yml` define la escalera en `levels.<número>`. Los números no tienen que ser consecutivos: el plugin busca el siguiente nivel numérico configurado por encima del actual.
 
-### Opciones por nivel
+## Opciones por nivel
 
 | Clave | Función |
 |---|---|
@@ -14,13 +14,13 @@ El archivo `levels.yml` define la escalera en `levels.<número>`. Los números n
 | `rewards` | Comandos ejecutados por consola al completar el ascenso. |
 | `reward-display` | Texto opcional mostrado en el menú en lugar de exponer los comandos internos. |
 
-### Requisitos
+## Requisitos
 
 Los requisitos se declaran dentro de `requirements` con una clave identificadora y un `type`. Se pueden combinar varias condiciones en el mismo nivel. Además del coste general y del formato antiguo `requirements.items`, hay 15 tipos: `vault`, `playtime`, `level`, `kills`, `deaths`, `blocks-broken`, `blocks-placed`, `mob-kills`, `items`, `permissions`, `luckperms-group`, `placeholder`, `statistic`, `quests` y `custom`.
 
 La referencia completa de campos, operadores, dependencias y ejemplos está en [Requisitos dinámicos](#requirements).
 
-### Ejemplo
+## Ejemplo
 
 ~~~yaml
 levels:

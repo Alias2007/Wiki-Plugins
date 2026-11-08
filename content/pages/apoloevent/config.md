@@ -1,5 +1,5 @@
 <a id="config"></a>
-## Configuración
+# Configuración
 
 | Archivo | Función |
 |---|---|
@@ -20,7 +20,7 @@
 | `event-tops.db` | Datos SQLite de clasificaciones. |
 | `audit.log` | Registro administrativo. |
 
-### Integraciones
+## Integraciones
 
 - **WorldGuard:** regiones del evento Boss; Backroom también debe permitir PvP en la región cuando lo requiera.
 - **UltimateClans:** reglas de combate entre miembros y aliados en Backroom.

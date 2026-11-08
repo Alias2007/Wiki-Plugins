@@ -1,5 +1,5 @@
 <a id="economy"></a>
-## Economía, clanes y misiones
+# Economía, clanes y misiones
 
 El core incluye saldo interno, pagos entre jugadores, sistema de clanes con chat privado y misiones diarias.
 

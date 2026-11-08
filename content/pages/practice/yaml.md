@@ -1,5 +1,65 @@
 <a id="yaml"></a>
 
+# Archivos YAML
+
+## Archivos YAML — referencia de configuración
+
+Ruta: plugins/ApoloPractice/. Esta referencia cubre los archivos de recursos editables y los archivos que se generan al crear arenas/kits o guardar perfiles. No incluye plugin.yml.
+
+### Archivos incluidos en el JAR
+
+| Archivo | Rutas / opciones |
+|---|---|
+| config.yml | language establece idioma base de mensajes; debug activa registros de diagnóstico; storage.type admite sqlite, mysql o yaml; storage.mysql contiene host/port/database/username/password/SSL y parámetros del pool; modules controla perfiles, kits, arenas, duelos, colas, ranked, parties, espectadores, estadísticas, training y compatibilidad; replay define intervalo de snapshots y duración máxima; scoreboard.enabled controla la sidebar; training.default-difficulty fija dificultad; rewards.money-per-win define pago opcional por victoria vía Vault; combat.countdown-seconds, duel-request-expiry-seconds, restore-player-state y boxing-hits-to-win controlan cuenta atrás, caducidad de solicitudes, restauración y condición de victoria de Boxing. |
+| compatibility.yml | global.enabled y límites min/max de versión del servidor; integration.via-version/via-backwards/via-rewind enabled/required; default-policy define qué hacer con clientes demasiado antiguos/nuevos/no admitidos; checks determina si validar al entrar, entrar a cola, iniciar duelo, entrar a arena o cambiar de modo; modes.<id> permite enabled, min/max, allow-older/allow-newer, listas de versiones incompatibles y mensaje de rechazo. |
+| messages.yml | prefix y mensajes generales como no-permission, usage, reloaded, status y diagnósticos de compatibilidad. Los textos admiten MiniMessage. |
+| permissions.yml | Descripción legible de apolopractice.use, apolopractice.admin y apolopractice.compatibility. El registro de nodos y valores por defecto se define en el descriptor del plugin y se resume en Comandos. |
+
+### Archivos generados / editables en la carpeta del plugin
+
+| Archivo/carpeta | Contenido y claves |
+|---|---|
+| kits.yml | Definiciones bajo kits.<id>. Cada kit permite display-name, enabled, ranked, mode, mínimo/máximo de versión de cliente, contents, armor, health, food y reglas de construcción. Se utiliza para modos estándar, Boxing, Spleef, Sumo y kits personalizados según el modo cargado. |
+| arenas.yml | Registro bajo arenas.<id>: enabled, world, spawn1 y spawn2; cada spawn guarda world, x, y, z, yaw y pitch. Los spawns se establecen con /practice arena setspawn <id> 1|2. |
+| profiles.db | SQLite cuando storage.type es sqlite. Conserva perfiles, rating, estadísticas y resultados. |
+| profiles.yml | Perfiles individuales cuando storage.type es yaml. La importación inicial puede migrar los registros YAML a SQL. |
+| replays/ | Archivos/snapshots visuales de las partidas. No es un log determinista de todos los paquetes/eventos de combate. |
+| cosmetics/ | Datos de cosméticos/effecto de kill por UUID. |
+| logs / archivos de recuperación | Diagnóstico y estados persistentes según el módulo activo; no editarlos manualmente salvo indicación de la documentación de esa versión. |
+
+### Esquema de kits
+
+Los kits se guardan en kits.yml bajo kits.<id>. Las claves importantes son:
+- display-name: texto mostrado en la GUI.
+- enabled: permite o desactiva ese kit.
+- ranked: define si puede aparecer en matchmaking clasificado.
+- mode: reglas de modo (estándar, boxing, spleef, sumo u otros compatibles).
+- minimum-client-version y maximum-client-version: límites de protocolo para ese kit.
+- contents y armor: inventario normal y armadura.
+- health y food: atributos iniciales.
+- build: permite reglas de construcción en modos que lo soportan.
+
+La estructura de objetos debe respetar el formato que genera la versión instalada. Copia una definición existente y cambia IDs/materiales en lugar de inventar atributos desconocidos.
+
+### Esquema de arenas
+
+Cada arena se registra en arenas.yml y puede incluir:
+- enabled: habilita o deshabilita la arena.
+- world: nombre exacto del mundo.
+- spawn1 y spawn2: ubicaciones de cada lado del duelo (world/x/y/z/yaw/pitch).
+
+Los comandos arena list y arena setspawn consultan/actualizan esta información. Para revisar un mapa, valida ambos spawns y el mundo cargado antes de habilitarlo para cola/duelo.
+
+## Cómo aplicar cambios
+
+- /practice reload guarda estadísticas antes de recargar los archivos.
+- /practice compatibility reload vuelve a leer los límites y reglas de compatibilidad.
+- Los cambios de backend storage.type requieren reinicio.
+- Cambios de kit/arena deben probarse con una partida privada antes de abrir colas ranked.
+- Los cambios de NMS/entrenamiento, replay y compatibilidad necesitan validación en un servidor Paper real; una compilación de Maven no verifica estas funciones en juego.
+
+## Ejemplos reales
+
 ### Ejemplo real: config.yml
 
 ```yaml
@@ -117,63 +177,6 @@ arenas:
 ```
 
 **Cómo funciona:** cada kit tiene ID, visibilidad, modalidad, límites de versión, inventario, armadura, salud, comida y construcción. Cada arena define mundo y dos ubicaciones completas. Los contenidos de inventario deben conservar el formato serializado que genera el plugin; usa la GUI/comandos del plugin para crear o editar cuando corresponda.
-
-## Archivos YAML — referencia de configuración
-
-Ruta: plugins/ApoloPractice/. Esta referencia cubre los archivos de recursos editables y los archivos que se generan al crear arenas/kits o guardar perfiles. No incluye plugin.yml.
-
-### Archivos incluidos en el JAR
-
-| Archivo | Rutas / opciones |
-|---|---|
-| config.yml | language establece idioma base de mensajes; debug activa registros de diagnóstico; storage.type admite sqlite, mysql o yaml; storage.mysql contiene host/port/database/username/password/SSL y parámetros del pool; modules controla perfiles, kits, arenas, duelos, colas, ranked, parties, espectadores, estadísticas, training y compatibilidad; replay define intervalo de snapshots y duración máxima; scoreboard.enabled controla la sidebar; training.default-difficulty fija dificultad; rewards.money-per-win define pago opcional por victoria vía Vault; combat.countdown-seconds, duel-request-expiry-seconds, restore-player-state y boxing-hits-to-win controlan cuenta atrás, caducidad de solicitudes, restauración y condición de victoria de Boxing. |
-| compatibility.yml | global.enabled y límites min/max de versión del servidor; integration.via-version/via-backwards/via-rewind enabled/required; default-policy define qué hacer con clientes demasiado antiguos/nuevos/no admitidos; checks determina si validar al entrar, entrar a cola, iniciar duelo, entrar a arena o cambiar de modo; modes.<id> permite enabled, min/max, allow-older/allow-newer, listas de versiones incompatibles y mensaje de rechazo. |
-| messages.yml | prefix y mensajes generales como no-permission, usage, reloaded, status y diagnósticos de compatibilidad. Los textos admiten MiniMessage. |
-| permissions.yml | Descripción legible de apolopractice.use, apolopractice.admin y apolopractice.compatibility. El registro de nodos y valores por defecto se define en el descriptor del plugin y se resume en Comandos. |
-
-### Archivos generados / editables en la carpeta del plugin
-
-| Archivo/carpeta | Contenido y claves |
-|---|---|
-| kits.yml | Definiciones bajo kits.<id>. Cada kit permite display-name, enabled, ranked, mode, mínimo/máximo de versión de cliente, contents, armor, health, food y reglas de construcción. Se utiliza para modos estándar, Boxing, Spleef, Sumo y kits personalizados según el modo cargado. |
-| arenas.yml | Registro bajo arenas.<id>: enabled, world, spawn1 y spawn2; cada spawn guarda world, x, y, z, yaw y pitch. Los spawns se establecen con /practice arena setspawn <id> 1|2. |
-| profiles.db | SQLite cuando storage.type es sqlite. Conserva perfiles, rating, estadísticas y resultados. |
-| profiles.yml | Perfiles individuales cuando storage.type es yaml. La importación inicial puede migrar los registros YAML a SQL. |
-| replays/ | Archivos/snapshots visuales de las partidas. No es un log determinista de todos los paquetes/eventos de combate. |
-| cosmetics/ | Datos de cosméticos/effecto de kill por UUID. |
-| logs / archivos de recuperación | Diagnóstico y estados persistentes según el módulo activo; no editarlos manualmente salvo indicación de la documentación de esa versión. |
-
-### Esquema de kits
-
-Los kits se guardan en kits.yml bajo kits.<id>. Las claves importantes son:
-- display-name: texto mostrado en la GUI.
-- enabled: permite o desactiva ese kit.
-- ranked: define si puede aparecer en matchmaking clasificado.
-- mode: reglas de modo (estándar, boxing, spleef, sumo u otros compatibles).
-- minimum-client-version y maximum-client-version: límites de protocolo para ese kit.
-- contents y armor: inventario normal y armadura.
-- health y food: atributos iniciales.
-- build: permite reglas de construcción en modos que lo soportan.
-
-La estructura de objetos debe respetar el formato que genera la versión instalada. Copia una definición existente y cambia IDs/materiales en lugar de inventar atributos desconocidos.
-
-### Esquema de arenas
-
-Cada arena se registra en arenas.yml y puede incluir:
-- enabled: habilita o deshabilita la arena.
-- world: nombre exacto del mundo.
-- spawn1 y spawn2: ubicaciones de cada lado del duelo (world/x/y/z/yaw/pitch).
-
-Los comandos arena list y arena setspawn consultan/actualizan esta información. Para revisar un mapa, valida ambos spawns y el mundo cargado antes de habilitarlo para cola/duelo.
-
-### Cómo aplicar cambios
-
-- /practice reload guarda estadísticas antes de recargar los archivos.
-- /practice compatibility reload vuelve a leer los límites y reglas de compatibilidad.
-- Los cambios de backend storage.type requieren reinicio.
-- Cambios de kit/arena deben probarse con una partida privada antes de abrir colas ranked.
-- Los cambios de NMS/entrenamiento, replay y compatibilidad necesitan validación en un servidor Paper real; una compilación de Maven no verifica estas funciones en juego.
-
 
 
 ## Contenido íntegro de los archivos YAML

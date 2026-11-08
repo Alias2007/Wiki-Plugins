@@ -1,5 +1,5 @@
 <a id="queues"></a>
-## Colas y ELO
+# Colas y ELO
 
 El matchmaking admite colas ranked y unranked. Solo las partidas ranked modifican el rating.
 

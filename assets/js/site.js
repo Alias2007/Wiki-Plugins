@@ -5,11 +5,11 @@ let navData=null,docCache={},currentRender=0,searchIndex=[];
 const root=$('#pageContent'),navRoot=$('#pluginNavigation'),search=$('#globalSearch'),results=$('#searchResults');
 const langs=['es','en','pt','fr','de'];
 const ui={
-es:{documentation:'DOCUMENTACIÓN',home:'Inicio',missing:'¿Falta información?',searchTip:'Busca por comando, permiso, variable o nombre de función.',suggest:'Enviar sugerencia ↗',hero:'Documentación de plugins',intro:'Encuentra funciones, comandos, variables y configuración de los cinco plugins de ApoloMC.',categories:'CATEGORÍAS DE PLUGINS',quick:'ACCESO RÁPIDO',searchPlaceholder:'Buscar comandos, variables o funciones…',noResults:'No encontramos una sección con ese término.',loading:'Cargando documentación…',rights:'Todos los derechos reservados.',open:'ABRIR DOCUMENTACIÓN →',copy:'Copiar',copied:'Copiado',copyFail:'No disponible',pluginCount:'PLUGINS',translationWait:'Traduciendo documentación…',translationDone:'Traducción automática aplicada. Los comandos, rutas YAML, permisos y variables se conservan exactamente.',translationFail:'No se pudo conectar al servicio de traducción. Se muestra el contenido original en español.',homeCrumb:'Inicio',categoriesLabel:'Categorías',theme:'Tema',language:'Idioma'},
-en:{documentation:'DOCUMENTATION',home:'Home',missing:'Missing information?',searchTip:'Search by command, permission, variable or feature name.',suggest:'Send a suggestion ↗',hero:'Plugin documentation',intro:'Find features, commands, variables and configuration for all five ApoloMC plugins.',categories:'PLUGIN CATEGORIES',quick:'QUICK ACCESS',searchPlaceholder:'Search commands, variables or features…',noResults:'No section matched that term.',loading:'Loading documentation…',rights:'All rights reserved.',open:'OPEN DOCUMENTATION →',copy:'Copy',copied:'Copied',copyFail:'Unavailable',pluginCount:'PLUGINS',translationWait:'Translating documentation…',translationDone:'Automatic translation applied. Commands, YAML paths, permissions and variables remain unchanged.',translationFail:'The translation service could not be reached. The original Spanish content is shown.',homeCrumb:'Home',categoriesLabel:'Categories',theme:'Theme',language:'Language'},
-pt:{documentation:'DOCUMENTAÇÃO',home:'Início',missing:'Falta alguma informação?',searchTip:'Pesquise por comando, permissão, variável ou nome da função.',suggest:'Enviar sugestão ↗',hero:'Documentação dos plugins',intro:'Encontre funções, comandos, variáveis e configurações dos cinco plugins ApoloMC.',categories:'CATEGORIAS DE PLUGINS',quick:'ACESSO RÁPIDO',searchPlaceholder:'Pesquisar comandos, variáveis ou funções…',noResults:'Nenhuma seção correspondeu ao termo.',loading:'Carregando documentação…',rights:'Todos os direitos reservados.',open:'ABRIR DOCUMENTAÇÃO →',copy:'Copiar',copied:'Copiado',copyFail:'Indisponível',pluginCount:'PLUGINS',translationWait:'Traduzindo documentação…',translationDone:'Tradução automática aplicada. Comandos, caminhos YAML, permissões e variáveis permanecem inalterados.',translationFail:'Não foi possível acessar o serviço de tradução. O conteúdo original em espanhol será exibido.',homeCrumb:'Início',categoriesLabel:'Categorias',theme:'Tema',language:'Idioma'},
-fr:{documentation:'DOCUMENTATION',home:'Accueil',missing:'Une information manque ?',searchTip:'Recherchez par commande, permission, variable ou nom de fonction.',suggest:'Envoyer une suggestion ↗',hero:'Documentation des plugins',intro:'Retrouvez les fonctions, commandes, variables et configurations des cinq plugins ApoloMC.',categories:'CATÉGORIES DE PLUGINS',quick:'ACCÈS RAPIDE',searchPlaceholder:'Rechercher des commandes, variables ou fonctions…',noResults:'Aucune section ne correspond à ce terme.',loading:'Chargement de la documentation…',rights:'Tous droits réservés.',open:'OUVRIR LA DOCUMENTATION →',copy:'Copier',copied:'Copié',copyFail:'Indisponible',pluginCount:'PLUGINS',translationWait:'Traduction de la documentation…',translationDone:'Traduction automatique appliquée. Les commandes, chemins YAML, permissions et variables sont conservés.',translationFail:'Le service de traduction est inaccessible. Le contenu espagnol d’origine est affiché.',homeCrumb:'Accueil',categoriesLabel:'Catégories',theme:'Thème',language:'Langue'},
-de:{documentation:'DOKUMENTATION',home:'Startseite',missing:'Fehlen Informationen?',searchTip:'Suche nach Befehl, Berechtigung, Variable oder Funktionsname.',suggest:'Vorschlag senden ↗',hero:'Plugin-Dokumentation',intro:'Finde Funktionen, Befehle, Variablen und Einstellungen aller fünf ApoloMC-Plugins.',categories:'PLUGIN-KATEGORIEN',quick:'SCHNELLZUGRIFF',searchPlaceholder:'Befehle, Variablen oder Funktionen suchen…',noResults:'Keine passende Sektion gefunden.',loading:'Dokumentation wird geladen…',rights:'Alle Rechte vorbehalten.',open:'DOKUMENTATION ÖFFNEN →',copy:'Kopieren',copied:'Kopiert',copyFail:'Nicht verfügbar',pluginCount:'PLUGINS',translationWait:'Dokumentation wird übersetzt…',translationDone:'Automatische Übersetzung angewendet. Befehle, YAML-Pfade, Berechtigungen und Variablen bleiben unverändert.',translationFail:'Der Übersetzungsdienst ist nicht erreichbar. Der spanische Originaltext wird angezeigt.',homeCrumb:'Startseite',categoriesLabel:'Kategorien',theme:'Design',language:'Sprache'}
+es:{documentation:'DOCUMENTACIÓN',home:'Inicio',missing:'¿Falta información?',searchTip:'Busca por comando, permiso, variable o nombre de función.',suggest:'Enviar sugerencia ↗',hero:'Documentación de plugins',intro:'Encuentra funciones, comandos, variables y configuración de los cinco plugins de ApoloMC.',categories:'CATEGORÍAS DE PLUGINS',quick:'ACCESO RÁPIDO',searchPlaceholder:'Buscar comandos, variables o funciones…',noResults:'No encontramos una sección con ese término.',loading:'Cargando documentación…',rights:'Todos los derechos reservados.',open:'ABRIR DOCUMENTACIÓN →',copy:'Copiar',copied:'Copiado',copyFail:'No disponible',pluginCount:'PLUGINS',translationWait:'Traduciendo documentación…',translationDone:'Traducción automática aplicada. Los comandos, rutas YAML, permisos y variables se conservan exactamente.',translationFail:'No se pudo conectar al servicio de traducción. Se muestra el contenido original en español.',homeCrumb:'Inicio',categoriesLabel:'Categorías',theme:'Tema',language:'Idioma',contents:'Contenido de la documentación'},
+en:{documentation:'DOCUMENTATION',home:'Home',missing:'Missing information?',searchTip:'Search by command, permission, variable or feature name.',suggest:'Send a suggestion ↗',hero:'Plugin documentation',intro:'Find features, commands, variables and configuration for all five ApoloMC plugins.',categories:'PLUGIN CATEGORIES',quick:'QUICK ACCESS',searchPlaceholder:'Search commands, variables or features…',noResults:'No section matched that term.',loading:'Loading documentation…',rights:'All rights reserved.',open:'OPEN DOCUMENTATION →',copy:'Copy',copied:'Copied',copyFail:'Unavailable',pluginCount:'PLUGINS',translationWait:'Translating documentation…',translationDone:'Automatic translation applied. Commands, YAML paths, permissions and variables remain unchanged.',translationFail:'The translation service could not be reached. The original Spanish content is shown.',homeCrumb:'Home',categoriesLabel:'Categories',theme:'Theme',language:'Language',contents:'Documentation contents'},
+pt:{documentation:'DOCUMENTAÇÃO',home:'Início',missing:'Falta alguma informação?',searchTip:'Pesquise por comando, permissão, variável ou nome da função.',suggest:'Enviar sugestão ↗',hero:'Documentação dos plugins',intro:'Encontre funções, comandos, variáveis e configurações dos cinco plugins ApoloMC.',categories:'CATEGORIAS DE PLUGINS',quick:'ACESSO RÁPIDO',searchPlaceholder:'Pesquisar comandos, variáveis ou funções…',noResults:'Nenhuma seção correspondeu ao termo.',loading:'Carregando documentação…',rights:'Todos os direitos reservados.',open:'ABRIR DOCUMENTAÇÃO →',copy:'Copiar',copied:'Copiado',copyFail:'Indisponível',pluginCount:'PLUGINS',translationWait:'Traduzindo documentação…',translationDone:'Tradução automática aplicada. Comandos, caminhos YAML, permissões e variáveis permanecem inalterados.',translationFail:'Não foi possível acessar o serviço de tradução. O conteúdo original em espanhol será exibido.',homeCrumb:'Início',categoriesLabel:'Categorias',theme:'Tema',language:'Idioma',contents:'Conteúdo da documentação'},
+fr:{documentation:'DOCUMENTATION',home:'Accueil',missing:'Une information manque ?',searchTip:'Recherchez par commande, permission, variable ou nom de fonction.',suggest:'Envoyer une suggestion ↗',hero:'Documentation des plugins',intro:'Retrouvez les fonctions, commandes, variables et configurations des cinq plugins ApoloMC.',categories:'CATÉGORIES DE PLUGINS',quick:'ACCÈS RAPIDE',searchPlaceholder:'Rechercher des commandes, variables ou fonctions…',noResults:'Aucune section ne correspond à ce terme.',loading:'Chargement de la documentation…',rights:'Tous droits réservés.',open:'OUVRIR LA DOCUMENTATION →',copy:'Copier',copied:'Copié',copyFail:'Indisponible',pluginCount:'PLUGINS',translationWait:'Traduction de la documentation…',translationDone:'Traduction automatique appliquée. Les commandes, chemins YAML, permissions et variables sont conservés.',translationFail:'Le service de traduction est inaccessible. Le contenu espagnol d’origine est affiché.',homeCrumb:'Accueil',categoriesLabel:'Catégories',theme:'Thème',language:'Langue',contents:'Contenu de la documentation'},
+de:{documentation:'DOKUMENTATION',home:'Startseite',missing:'Fehlen Informationen?',searchTip:'Suche nach Befehl, Berechtigung, Variable oder Funktionsname.',suggest:'Vorschlag senden ↗',hero:'Plugin-Dokumentation',intro:'Finde Funktionen, Befehle, Variablen und Einstellungen aller fünf ApoloMC-Plugins.',categories:'PLUGIN-KATEGORIEN',quick:'SCHNELLZUGRIFF',searchPlaceholder:'Befehle, Variablen oder Funktionen suchen…',noResults:'Keine passende Sektion gefunden.',loading:'Dokumentation wird geladen…',rights:'Alle Rechte vorbehalten.',open:'DOKUMENTATION ÖFFNEN →',copy:'Kopieren',copied:'Kopiert',copyFail:'Nicht verfügbar',pluginCount:'PLUGINS',translationWait:'Dokumentation wird übersetzt…',translationDone:'Automatische Übersetzung angewendet. Befehle, YAML-Pfade, Berechtigungen und Variablen bleiben unverändert.',translationFail:'Der Übersetzungsdienst ist nicht erreichbar. Der spanische Originaltext wird angezeigt.',homeCrumb:'Startseite',categoriesLabel:'Kategorien',theme:'Design',language:'Sprache',contents:'Inhalt der Dokumentation'}
 };
 const themes=['purple','midnight','ocean','forest','rose','white','black'];
 const pageLabels={
@@ -54,6 +54,19 @@ rankup:{type:{es:'Progresión',en:'Progression',pt:'Progressão',fr:'Progression
 apolorr:{type:{es:'Minijuegos',en:'Minigames',pt:'Minijogos',fr:'Mini-jeux',de:'Minispiele'},description:{es:'Minijuegos e interfaces de entretenimiento.',en:'Minigames and entertainment interfaces.',pt:'Minijogos e interfaces de entretenimento.',fr:'Mini-jeux et interfaces de divertissement.',de:'Minispiele und Unterhaltungsoberflächen.'}},
 practice:{type:{es:'Practice PvP',en:'Practice PvP',pt:'Practice PvP',fr:'Practice PvP',de:'Practice PvP'},description:{es:'Duelos, colas, parties, entrenamiento y replays.',en:'Duels, queues, parties, training and replays.',pt:'Duelos, filas, grupos, treino e replays.',fr:'Duels, files, groupes, entraînement et replays.',de:'Duelle, Warteschlangen, Gruppen, Training und Replays.'}}
 };
+const groupLabels={
+intro:{es:'Introducción',en:'Introduction',pt:'Introdução',fr:'Introduction',de:'Einführung'},
+features:{es:'Funciones',en:'Features',pt:'Funcionalidades',fr:'Fonctionnalités',de:'Funktionen'},
+events:{es:'Eventos',en:'Events',pt:'Eventos',fr:'Événements',de:'Events'},
+bosses:{es:'Bosses',en:'Bosses',pt:'Chefes',fr:'Boss',de:'Bosse'},
+reference:{es:'Referencia',en:'Reference',pt:'Referência',fr:'Référence',de:'Referenz'},
+settings:{es:'Ajustes',en:'Settings',pt:'Ajustes',fr:'Paramètres',de:'Einstellungen'},
+info:{es:'Información',en:'Information',pt:'Informações',fr:'Informations',de:'Informationen'}
+};
+const pluginPageLabels={
+'apoloevent/rewards':{es:'Recompensas BossMina',en:'BossMina rewards',pt:'Recompensas do BossMina',fr:'Récompenses BossMina',de:'BossMina-Belohnungen'},
+'practice/kits':{es:'Kits y modos',en:'Kits and modes',pt:'Kits e modos',fr:'Kits et modes',de:'Kits und Modi'}
+};
 function lang(){const saved=localStorage.getItem('apolo-language');if(!saved){localStorage.setItem('apolo-language','es');return 'es';}return langs.includes(saved)?saved:'es';}
 function tr(key){return (ui[lang()]&&ui[lang()][key])||ui.es[key]||key;}
 function translatedLabel(map,key,fallback){return map&&map[key]&&(map[key][lang()]||map[key].es)||fallback;}
@@ -68,7 +81,8 @@ function applyPreferences(){
 function route(){const raw=location.hash.replace(/^#/,'');if(!raw||raw==='home')return{home:true};const [plugin,page='overview']=raw.split('/');return{plugin,page};}
 function esc(value){return String(value??'').replace(/[&<>"']/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));}
 function pluginById(id){return navData.plugins.find(p=>p.id===id);}
-function pageTitle(p,page){return translatedLabel(pageLabels,page.id,page.title);}
+function pageTitle(p,page){const own=pluginPageLabels[p.id+'/'+page.id];return own?(own[lang()]||own.es):translatedLabel(pageLabels,page.id,page.title);}
+function groupLabel(id){return translatedLabel(groupLabels,id,id);}
 function renderNavigation(){
  navRoot.innerHTML='';
  navData.plugins.forEach(plugin=>{
@@ -77,7 +91,10 @@ function renderNavigation(){
   button.innerHTML='<i class="plugin-dot"></i><span>'+esc(plugin.name)+'</span><span class="plugin-chevron">▾</span>';
   group.classList.add('collapsed');button.setAttribute('aria-expanded','false');button.addEventListener('click',()=>{const collapsed=group.classList.toggle('collapsed');button.setAttribute('aria-expanded',String(!collapsed));});
   const pages=document.createElement('div');pages.className='plugin-pages';
-  plugin.pages.forEach(page=>{const a=document.createElement('a');a.className='plugin-page';a.href='#'+plugin.id+'/'+page.id;a.textContent=pageTitle(plugin,page);a.dataset.route=plugin.id+'/'+page.id;pages.appendChild(a);});
+  let lastGroup=null;
+  plugin.pages.forEach(page=>{
+   if(page.group&&page.group!==lastGroup){lastGroup=page.group;const label=document.createElement('div');label.className='plugin-page-group';label.textContent=groupLabel(page.group);pages.appendChild(label);}
+   const a=document.createElement('a');a.className='plugin-page';a.href='#'+plugin.id+'/'+page.id;a.textContent=pageTitle(plugin,page);a.dataset.route=plugin.id+'/'+page.id;pages.appendChild(a);});
   group.append(button,pages);navRoot.appendChild(group);
  });
  $('#pluginCount').textContent=navData.plugins.length+' '+tr('pluginCount');
@@ -86,7 +103,17 @@ function homeHtml(){
  const cards=navData.plugins.map(p=>'<a class="plugin-card" href="#'+p.id+'/overview"><div class="plugin-card-head"><span class="plugin-type">'+esc(translatedLabel(pluginLabels[p.id]?.type,'',p.type))+'</span><span>↗</span></div><h2>'+esc(p.name)+'</h2><p>'+esc(translatedLabel(pluginLabels[p.id]?.description,'',p.description))+'</p><small>'+p.pages.length+' '+(lang()==='es'?'secciones':lang()==='pt'?'seções':lang()==='fr'?'sections':lang()==='de'?'Abschnitte':'sections')+'</small><div class="card-link">'+tr('open')+'</div></a>').join('');
  return '<section class="home-hero"><div class="eyebrow">APOLOMC · DEDICATOR NETWORK</div><h1>'+tr('hero')+'</h1><p>'+tr('intro')+'</p></section><div class="section-label">'+tr('categories')+'</div><div class="plugin-grid">'+cards+'</div><div class="section-label">'+tr('quick')+'</div><div class="doc-nav">'+navData.plugins.map(p=>'<a href="#'+p.id+'/overview">'+esc(p.name)+'</a>').join('')+'</div>';
 }
-async function getDoc(plugin,page){const key=plugin+'/'+page;if(docCache[key])return docCache[key];const path='content/pages/'+plugin+'/'+page+'.md';const response=await fetch(path+'?v=8');if(!response.ok)throw new Error('No se pudo cargar '+path+' ('+response.status+')');return docCache[key]=await response.text();}
+function indexHtml(plugin){
+ let out='<h2 class="notranslate">'+esc(tr('contents'))+'</h2>',current=null;
+ plugin.pages.forEach(page=>{
+  if(page.id==='overview')return;
+  const g=page.group||'';
+  if(g!==current){if(current!==null)out+='</ul>';current=g;if(g)out+='<h3 class="notranslate">'+esc(groupLabel(g))+'</h3>';out+='<ul>';}
+  out+='<li><a class="notranslate" href="#'+plugin.id+'/'+page.id+'">'+esc(pageTitle(plugin,page))+'</a> — '+esc(page.description)+'</li>';
+ });
+ return out+(current!==null?'</ul>':'');
+}
+async function getDoc(plugin,page){const key=plugin+'/'+page;if(docCache[key])return docCache[key];const path='content/pages/'+plugin+'/'+page+'.md';const response=await fetch(path+'?v=9');if(!response.ok)throw new Error('No se pudo cargar '+path+' ('+response.status+')');return docCache[key]=await response.text();}
 function activeNav(plugin,page){
  document.querySelectorAll('.plugin-page').forEach(a=>a.classList.toggle('active',a.dataset.route===plugin+'/'+page));
  document.querySelectorAll('.plugin-group').forEach(g=>{const expanded=!!plugin&&g.dataset.plugin===plugin;g.classList.toggle('collapsed',!expanded);const b=g.querySelector('.plugin-heading');if(b)b.setAttribute('aria-expanded',String(expanded));});
@@ -149,7 +176,7 @@ function addCopyButtons(){
 }
 async function showRoute(){
  const renderId=++currentRender,r=route(),language=lang();
- if(r.home){activeNav('','');$('#breadcrumbs').innerHTML='<span>ApoloMC</span><span>/</span><b>'+tr('homeCrumb')+'</b>';root.innerHTML=homeHtml();return;}
+ if(r.home){activeNav('','');$('#breadcrumbs').innerHTML='<span>ApoloMC</span><span>/</span><b>'+tr('homeCrumb')+'</b>';root.innerHTML=homeHtml();window.scrollTo(0,0);return;}
  const plugin=pluginById(r.plugin);if(!plugin){location.hash='#home';return;}
  const page=plugin.pages.find(x=>x.id===r.page)||plugin.pages[0];
  activeNav(plugin.id,page.id);
@@ -158,10 +185,10 @@ async function showRoute(){
  try{
   const md=await getDoc(plugin.id,page.id);if(renderId!==currentRender)return;
   root.innerHTML=marked.parse(md);
+  if(page.id==='overview')root.insertAdjacentHTML('beforeend',indexHtml(plugin));
+  window.scrollTo(0,0);
   addCopyButtons();
   if(language!=='es')await translateRenderedContent(language,renderId);
-  if(renderId!==currentRender)return;
-  const target=root.querySelector('#'+CSS.escape(page.id));if(target)target.scrollIntoView({block:'start',behavior:'smooth'});
  }catch(e){if(renderId===currentRender)root.innerHTML='<h1>Error</h1><p>'+esc(e.message)+'</p>';}
 }
 function sectionIndex(plugin,page,md){
@@ -173,7 +200,7 @@ async function buildSearch(){
  if(!search.dataset.bound){search.addEventListener('input',()=>show(search.value));search.addEventListener('keydown',e=>{if(e.key==='Escape'){results.hidden=true;search.blur();}if(e.key==='Enter'){const first=results.querySelector('a');if(first)location.hash=first.getAttribute('href').slice(1);results.hidden=true;}});document.addEventListener('click',e=>{if(!e.target.closest('.top-search'))results.hidden=true;});document.addEventListener('keydown',e=>{if((e.ctrlKey||e.metaKey)&&e.key.toLowerCase()==='k'){e.preventDefault();search.focus();}});search.dataset.bound='1';}
 }
 async function init(){
- try{const r=await fetch('data/navigation.json?v=8');if(!r.ok)throw new Error('No se pudo cargar el índice.');navData=await r.json();renderNavigation();applyPreferences();await showRoute();await buildSearch();window.addEventListener('hashchange',showRoute);}
+ try{const r=await fetch('data/navigation.json?v=9');if(!r.ok)throw new Error('No se pudo cargar el índice.');navData=await r.json();renderNavigation();applyPreferences();await showRoute();await buildSearch();window.addEventListener('hashchange',showRoute);}
  catch(e){root.innerHTML='<h1>Error al cargar documentación</h1><p>'+esc(e.message)+'</p>';}
 }
 $('#languageSelect').addEventListener('change',async e=>{localStorage.setItem('apolo-language',e.target.value);applyPreferences();renderNavigation();await showRoute();});

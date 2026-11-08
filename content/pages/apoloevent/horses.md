@@ -1,5 +1,5 @@
 <a id="horses"></a>
-## Carrera de caballos
+# Carrera de caballos
 
 Carrera con monturas, checkpoints secuenciales, tiempo límite, objetos especiales y recompensas por posición.
 

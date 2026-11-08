@@ -1,7 +1,7 @@
 <a id="variables"></a>
-## Variables y placeholders
+# Variables y placeholders
 
-### Placeholders internos de ScorebordLs
+## Placeholders internos de ScorebordLs
 
 Los siguientes placeholders se usan con porcentaje a cada lado, por ejemplo %player%.
 
@@ -14,7 +14,7 @@ Los siguientes placeholders se usan con porcentaje a cada lado, por ejemplo %pla
 | Clan | %clan%, %clan_tag%, %clan_rank%. |
 | Servidor | %online%, %online_world%, %max_players%, %staff_online%, %server_name%, %tps%, %tps_color%, %mspt%, %memory_used%, %memory_max%, %memory_percent%, %time%, %date%. |
 
-### Placeholders personalizados de ScorebordLs
+## Placeholders personalizados de ScorebordLs
 
 - %custom:nombre% obtiene una entrada declarada bajo custom en ScorebordLs/placeholders.yml.
 - %condition:nombre% evalúa una condición con salidas if-true e if-false.
@@ -23,7 +23,7 @@ Los siguientes placeholders se usan con porcentaje a cada lado, por ejemplo %pla
 
 Las condiciones pueden consultar permission:nodo, world:nombre, comparar placeholders con =, !=, >, >=, < o <=, comprobar contenido con <-, comparar con cualquiera de varios valores mediante |= y negar una condición con !.
 
-### PlaceholderAPI — expansión propia kitpvp
+## PlaceholderAPI — expansión propia kitpvp
 
 El identificador de expansión es kitpvp. Los placeholders principales publicados por el README son:
 
@@ -43,7 +43,7 @@ El identificador de expansión es kitpvp. Los placeholders principales publicado
 
 La expansión también contiene valores de perfil como assists, max_streak, balance, xp, required_xp, clan_tag, clan_rank, clan_members, clan_online, clan_leader, clan_allies, tag, tag_id y combat_status. Su respuesta depende de que exista un perfil o de que el jugador tenga datos de clan/tag.
 
-### Variables de mensajes y sistemas configurables
+## Variables de mensajes y sistemas configurables
 
 | Contexto | Variables |
 |---|---|

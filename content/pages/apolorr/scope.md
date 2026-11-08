@@ -1,5 +1,5 @@
 <a id="scope"></a>
-## Alcance de esta documentación
+# Alcance de esta documentación
 
 Esta categoría se limita a una descripción general y a notas de interfaz y compatibilidad. No contiene:
 - Comandos para apostar o iniciar partidas con apuestas.

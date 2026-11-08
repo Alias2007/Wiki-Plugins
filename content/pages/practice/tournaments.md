@@ -1,5 +1,5 @@
 <a id="tournaments"></a>
-## Torneos
+# Torneos
 
 Torneos eliminatorios de hasta 32 participantes. El sistema elimina correctamente a participantes que se desconectan.
 

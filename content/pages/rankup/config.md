@@ -1,5 +1,5 @@
 <a id="config"></a>
-## Configuración y datos
+# Configuración y datos
 
 La carpeta de trabajo es `plugins/ApoloRankUp/`. El plugin requiere Paper 1.21.4 y Java 21. Vault se utiliza cuando un nivel cobra dinero, LuckPerms es opcional para sincronizar grupos y WorldGuard para bloqueos de región.
 
@@ -15,7 +15,7 @@ La carpeta de trabajo es `plugins/ApoloRankUp/`. El plugin requiere Paper 1.21.4
 | `players.yml` | Persistencia YAML cuando `storage.type: yaml`. |
 | `block-placements.yml` | Contador persistente de bloques colocados utilizado por requisitos dinámicos. |
 
-### Integraciones y comportamiento
+## Integraciones y comportamiento
 
 - **Vault:** se consulta para los costes y requisitos económicos. Si no hay un proveedor compatible y el nivel cuesta dinero, el ascenso no se procesa.
 - **LuckPerms:** es opcional. ApoloRankUp no crea ni modifica grupos o Tracks. Los grupos se crean manualmente en LuckPerms, se asignan con `luckperms-group` en cada nivel y se validan con `/rankup luckperms check`.

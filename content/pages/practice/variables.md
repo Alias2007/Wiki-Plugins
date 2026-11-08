@@ -1,7 +1,7 @@
 <a id="variables"></a>
-## Variables y placeholders
+# Variables y placeholders
 
-### PlaceholderAPI
+## PlaceholderAPI
 
 La expansión se registra con el identificador apolopractice. Los placeholders son:
 

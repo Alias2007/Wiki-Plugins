@@ -1,9 +1,9 @@
 <a id="commands"></a>
-## Comandos y permisos
+# Comandos y permisos
 
 Esta referencia separa comandos de jugador, administración y sistemas auxiliares. Los alias se muestran junto al comando original. Los permisos de las operaciones administrativas aparecen en la tabla de permisos al final de esta sección.
 
-### Entrada, perfil y economía
+## Entrada, perfil y economía
 
 | Comando | Argumentos / comportamiento |
 |---|---|
@@ -18,7 +18,7 @@ Esta referencia separa comandos de jugador, administración y sistemas auxiliare
 | /top <kills|deaths|coins|level|koth> | Top 10 en chat; koth consulta victorias KOTH. |
 | /tops [kills|deaths|money|level|koth] | Abre el menú de clasificaciones. |
 
-### Kits
+## Kits
 
 ~~~text
 /kit
@@ -36,7 +36,7 @@ Esta referencia separa comandos de jugador, administración y sistemas auxiliare
 
 create crea el archivo del kit. Si lo ejecuta un jugador con objetos en su inventario, el core puede usar ese inventario como base; de lo contrario abre el editor. edit abre el editor visual. setinv/saveinv guarda inventario, armadura y mano secundaria con sus metadatos. delete requiere escribir confirm. El cooldown admite de 0 a 604800 segundos. La administración requiere kitpvp.admin.kits; reclamar requiere kitpvp.kit.
 
-### Habilidades
+## Habilidades
 
 ~~~text
 /ability list
@@ -47,7 +47,7 @@ create crea el archivo del kit. Si lo ejecuta un jugador con objetos en su inven
 
 list muestra IDs cargados. El uso directo por ID es útil para pruebas; los objetos marcados se activan con clic derecho. give/reload requieren kitpvp.admin.abilities.
 
-### Arenas y spawns
+## Arenas y spawns
 
 ~~~text
 /arena list
@@ -76,7 +76,7 @@ list muestra IDs cargados. El uso directo por ID es útil para pruebas; los obje
 
 Las esquinas pos1/pos2 delimitan el área de la arena. addspawn agrega un punto de aparición aleatorio adicional; clearspawns elimina los adicionales. setspawna y setspawnb son los dos puntos de duelo. setrule acepta las cinco reglas mostradas y un booleano. La gestión de arenas requiere kitpvp.admin.arenas; la de spawns, kitpvp.admin.spawns. list y join son accesos de consulta/entrada; random es para jugadores.
 
-### NPCs y hologramas
+## NPCs y hologramas
 
 ~~~text
 /npc create <id> <kit> [arena]
@@ -100,7 +100,7 @@ Las esquinas pos1/pos2 delimitan el área de la arena. addspawn agrega un punto 
 
 Los NPCs admiten entidades vivas de Bukkit y no requieren Citizens. La gestión de NPCs requiere kitpvp.admin.npc; la de hologramas, kitpvp.admin.holograms. El alias de hologram es /holo.
 
-### Duelos, eventos, torneos y clanes
+## Duelos, eventos, torneos y clanes
 
 ~~~text
 /duel challenge <jugador> <arena>
@@ -143,7 +143,7 @@ Los NPCs admiten entidades vivas de Bukkit y no requieren Citizens. La gestión 
 
 Los eventos automáticos incluyen LMS y KOTH. start requiere tipo y arena; setpoint toma la ubicación actual y admite radio opcional. El staff controla la guerra de clanes mediante /guerra; su permiso es kitpvp.war.admin. Los comandos de torneo create/start/resume/stop necesitan kitpvp.admin.tournaments; los de eventos start/begin/stop/setpoint necesitan kitpvp.admin.events. Duelos y clanes aplican validaciones de líder, invitación, disponibilidad y estado de los jugadores.
 
-### Misiones, recompensas y zonas AFK
+## Misiones, recompensas y zonas AFK
 
 ~~~text
 /mission status
@@ -168,7 +168,7 @@ Los eventos automáticos incluyen LMS y KOTH. start requiere tipo y arena; setpo
 
 /afkzone wand permite marcar las dos esquinas mediante clic izquierdo y derecho. Las zonas se guardan individualmente en afk-zones/. La administración requiere kitpvp.admin.afkzones. Para recompensas, reset y forceopen son acciones administrativas; revisa kitpvp.admin.rewards y los permisos rewards.open.* para menús individuales.
 
-### Cosméticos, tops y scoreboard
+## Cosméticos, tops y scoreboard
 
 ~~~text
 /cosmetics
@@ -195,7 +195,7 @@ Los eventos automáticos incluyen LMS y KOTH. start requiere tipo y arena; setpo
 
 /leaderboards también tiene el alias /leaderboard. /scoreboard usa el alias /sb. La recarga de cosméticos requiere kitpvp.admin.cosmetics; la administración visual de scoreboard/tablist requiere kitpvp.admin.visual; el toggle personal requiere kitpvp.scoreboard.toggle.
 
-### Mensajes, chat y comunicación
+## Mensajes, chat y comunicación
 
 ~~~text
 /channel <global|world|local>
@@ -216,7 +216,7 @@ Los eventos automáticos incluyen LMS y KOTH. start requiere tipo y arena; setpo
 
 Aliases: /channel también /c; /msg también /message; /reply también /r; /broadcast también /announce; /clearchat también /chatclear; /mention también /mentions. Los canales requieren los permisos kitpvp.channels.*. Las acciones de moderación de chat usan kitpvp.chat.admin, kitpvp.chat.broadcast, kitpvp.chat.clear, kitpvp.chat.socialspy y nodos relacionados.
 
-### Reportes, inventario, objetos y filtros
+## Reportes, inventario, objetos y filtros
 
 ~~~text
 /report
@@ -237,7 +237,7 @@ Aliases: /channel también /c; /msg también /message; /reply también /r; /broa
 
 /report inicia el flujo de reporte de jugador o bug. /deathmessages admite los alias /deathmsg y /deathmessage. /commandfilter también es /cmdfilter. /ir tiene alias /inventoryrollback e /invrollback. /conditionalevents tiene alias /cevents y /ce. /itemedit puede usar alias /ie. Las operaciones de inventario tienen nodos separados para ver, editar, exención y bypass; consulta la tabla de permisos. Las herramientas ItemEdit usan kitpvp.itemedit.use/kitpvp.itemedit.admin.
 
-### Permisos registrados
+## Permisos registrados
 
 | Permiso | Uso |
 |---|---|

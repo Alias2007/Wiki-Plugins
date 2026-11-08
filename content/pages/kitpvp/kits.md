@@ -1,5 +1,5 @@
 <a id="kits"></a>
-## Kits y selector
+# Kits y selector
 
 El selector de kits es una GUI paginada. Los kits se definen individualmente en YAML. Los cooldowns se guardan en `kit-cooldowns.yml` y persisten tras reinicios.
 

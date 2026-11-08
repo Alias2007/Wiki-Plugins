@@ -1,7 +1,7 @@
 <a id="rewards"></a>
-## Recompensas y zonas AFK
+# Recompensas y zonas AFK
 
-### Recompensas diarias y semanales
+## Recompensas diarias y semanales
 
 Los menús se encuentran en `rewards/menus/`; las reclamaciones se guardan en `reward-claims.yml`.
 
@@ -15,7 +15,7 @@ Los menús se encuentran en `rewards/menus/`; las reclamaciones se guardan en `r
 
 Admiten cooldown individual, permisos, objetos, monedas internas y comandos de consola.
 
-### Zonas AFK
+## Zonas AFK
 
 Cada zona se guarda en `afk-zones/<nombre>.yml`. Puede configurar tiempo, tiradas, probabilidades, permisos, comandos, objetos, título, actionbar y bossbar.
 

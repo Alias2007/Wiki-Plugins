@@ -1,5 +1,5 @@
 <a id="unlocks"></a>
-## Desbloqueos por nivel
+# Desbloqueos por nivel
 
 unlocks.yml determina las acciones bloqueadas hasta que el jugador alcance el nivel requerido.
 
@@ -49,7 +49,7 @@ En comandos se escribe el nombre sin /; el plugin también reconoce alias y la f
 
 Una regla completa puede incluir `level`, `name` y `message`; `name` y `message` son opcionales. Para los mensajes propios se admiten `%level%`, `%level_name%`, `%player_level%`, `%target%` y `%player%`. Los mensajes generales de bloqueo se personalizan en `messages.yml`.
 
-### Comportamientos adicionales
+## Comportamientos adicionales
 
 - La configuración global `enabled` permite activar o desactivar el sistema de bloqueos.
 - Los comandos bloqueados también contemplan alias y la forma `plugin:comando`; `locks.hide-locked-commands` controla si se ocultan del autocompletado.
