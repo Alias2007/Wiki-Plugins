@@ -12,7 +12,8 @@
 | `events/colormatch.yml` | ColorMatch. |
 | `events/eclipse.yml` | Eclipse de Sangre. |
 | `bosses/*.yml` | Bosses personalizados. |
-| `mine-events.yml` | Bosses de minas. |
+| `mine-events.yml` | Bosses de minas: aparición, regiones, comportamiento y configuración del evento. |
+| `BossMina/rewards.yml` | Objetos adicionales, probabilidades y mensajes de recompensa por boss. |
 | `mine-boss-state.yml` | Persistencia de bosses. |
 | `airdrop.yml` | Horarios y recompensas de AirDrop. |
 | `recovery.yml` | Recuperación de datos. |
